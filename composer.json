@@ -1,0 +1,33 @@
+{
+    "name": "meema/meema-api",
+    "description": "A minimal implementation of Meema API",
+    "keywords": [
+        "meema",
+        "cion",
+        "api",
+        "meema-api"
+    ],
+    "homepage": "https://github.com/meemalabs/meema-api",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Chris Breuer",
+            "email": "chris@cion.agency",
+            "homepage": "https://cion.agency",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "guzzlehttp/guzzle": "^7.2"
+    },
+    "autoload": {
+        "psr-4": {
+            "Meema\\MeemaApi\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Meema\\MeemaApi\\Test\\": "tests"
+        }
+    }
+}
