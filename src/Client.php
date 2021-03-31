@@ -17,7 +17,6 @@ class Client
      */
     public $folders;
 
-
     /**
      * @var string
      */
@@ -70,7 +69,7 @@ class Client
     }
 
     /**
-     * Get the access key
+     * Get the access key.
      *
      * @return string
      */
@@ -80,7 +79,7 @@ class Client
     }
 
     /**
-     * Initialize the folder model
+     * Initialize the folder model.
      *
      * @return Meema\MeemaApi\Models\Folder
      */

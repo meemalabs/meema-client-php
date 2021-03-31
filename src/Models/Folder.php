@@ -5,14 +5,14 @@ namespace Meema\MeemaApi\Models;
 use Meema\MeemaApi\Client;
 
 class Folder
-{   
+{
     /**
      * @var Meema\MeemaApi\Client
      */
     public $client;
 
     /**
-     * @var int $id
+     * @var int
      */
     public $id;
 
@@ -42,7 +42,7 @@ class Folder
      * Create folder.
      *
      * @param  string $name
-     * 
+     *
      * @return array
      */
     public function create($name): array
@@ -55,7 +55,7 @@ class Folder
      *
      * @param int $id
      * @param string $name
-     * 
+     *
      * @return array
      */
     public function update($name): array
@@ -67,7 +67,7 @@ class Folder
      * Delete a folder.
      *
      * @param int|array $id
-     * 
+     *
      * @return array
      */
     public function delete(): array
