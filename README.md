@@ -37,12 +37,12 @@ composer require meema/meema-client-php
 Then, wip
 
 ```php
-$client->folders()->get();
-$client->folders(1, 2, 3)->delete();
+$client->folders()->get([1, 2, 3]);
+$client->folders()->delete(1, 2, 3);
 $client->folders(1)->update(['name' = 'New Folder Name']);
 $client->folders([1, 2, 3])->media()->get();
 $client->tags()->get();
-$client->tags(1, 2, 3)->delete();
+$client->tags()->delete(1, 2, 3);
 $client->tags(1)->update(['name' = 'New Tag Name']);
 $client->tags([1, 2, 3])->media()->get();
 // need to the same for following resources
