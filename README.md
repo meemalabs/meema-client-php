@@ -52,6 +52,7 @@ $client->teams()->get();
 
 $client->media()->get(); 
 $client->media()->search($q);
+$client->media()->metadata()->get();
 
 $client->folders()->get(); 
 $client->folders()->search($q); 
