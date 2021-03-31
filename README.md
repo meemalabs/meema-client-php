@@ -21,7 +21,7 @@
     <a href="https://meema.io/support" target="_blank">Support</a>
 </p>
 
-## ✨ Features
+## 🐑 Features
 
 - Thin & minimal low-level HTTP client to interact with Meema's API
 - Supports php `^5.*`.
