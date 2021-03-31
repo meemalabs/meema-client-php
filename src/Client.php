@@ -32,8 +32,8 @@ class Client
     /**
      * Handle the API request.
      *
-     * @param  string $method
-     * @param  string $path
+     * @param string $method
+     * @param string $path
      *
      * @return array
      */
@@ -73,7 +73,8 @@ class Client
     /**
      * Create folder.
      *
-     * @param  string $name
+     * @param string $name
+     *
      * @return array
      */
     public function createFolder($name)
