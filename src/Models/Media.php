@@ -3,27 +3,43 @@
 namespace Meema\MeemaApi\Models;
 
 use Meema\MeemaApi\Client;
+use Meema\MeemaApi\Response\Response;
+use Meema\MeemaApi\Traits\SerializesResponse;
 
 class Media
 {
+    use SerializesResponse;
+
     /**
      * @var Meema\MeemaApi\Client
      */
-    public $client;
+    protected $client;
 
     /**
      * @var int
      */
-    public $id;
+    protected $id;
+
+    /**
+     * @var int
+     */
+    protected $folderId;
+
+    /**
+     * @var array
+     */
+    protected $content;
 
     /**
      * Construct media model.
      *
      * @param Meema\MeemaApi\Client $client
      */
-    public function __construct(Client $client)
+    public function __construct(Client $client, $folderId = null)
     {
         $this->client = $client;
+
+        $this->folderId = $folderId;
     }
 
     /**
@@ -43,6 +59,10 @@ class Media
      */
     public function get($id = null)
     {
+        if ($this->folderId) {
+            return $this->fetchMediaForFolder($this->folderId);
+        }
+
         if (! $id) {
             return $this->all();
         }
@@ -53,9 +73,26 @@ class Media
     }
 
     /**
+     * Get specific folders.
+     *
+     * @param int $id
+     *
+     * @return array
+     */
+    public function find($id)
+    {
+        $response = $this->client->request('GET', "folders/${id}");
+
+        $this->content = $response;
+        $this->id = $response['data']['id'];
+
+        return new Response($this, $response);
+    }
+
+    /**
      * Create media.
      *
-     * @param  string $name
+     * @param string $name
      *
      * @return array
      */
@@ -74,8 +111,10 @@ class Media
      *
      * @return array
      */
-    public function update($id, $name): array
+    public function update($name, $id = null): array
     {
+        $id = $this->id ?? $id;
+
         $name = is_array($name) ? $name : compact('name');
 
         return $this->client->request('PATCH', "media/{$id}/file-name", $name);
@@ -84,62 +123,108 @@ class Media
     /**
      * Delete a media.
      *
-     * @param int|array $id
+     * @param int $id
      *
      * @return null
      */
-    public function delete($id)
+    public function delete($id = null)
     {
+        $id = $this->id ?? $id;
+
         return $this->client->request('DELETE', "media/{$id}", ['media_id' => $id]);
     }
 
     /**
      * Archive a media.
      *
+     * @param int $id
+     *
      * @return array
      */
-    public function archive($id): array
+    public function archive($id = null): array
     {
+        $id = $this->id ?? $id;
+
         return $this->client->request('POST', "media/{$id}/archive");
     }
 
     /**
      * Unarchive a media.
      *
+     * @param int $id
+     *
      * @return array
      */
-    public function unarchive($id): array
+    public function unarchive($id = null): array
     {
+        $id = $this->id ?? $id;
+
         return $this->client->request('POST', "media/{$id}/unarchive");
     }
 
     /**
      * Make a media private.
      *
+     * @param int $id
+     *
      * @return array
      */
-    public function makePrivate($id): array
+    public function makePrivate($id = null): array
     {
+        $id = $this->id ?? $id;
+
         return $this->client->request('PATCH', "media/{$id}/make-private");
     }
 
     /**
      * Make a media public.
      *
+     * @param int $id
+     *
      * @return array
      */
-    public function makePublic($id): array
+    public function makePublic($id = null): array
     {
+        $id = $this->id ?? $id;
+
         return $this->client->request('PATCH', "media/{$id}/make-public");
     }
 
     /**
      * Duplicate a media.
      *
+     * @param int $id
+     *
      * @return array
      */
-    public function duplicate($id): array
+    public function duplicate($id = null): array
     {
+        $id = $this->id ?? $id;
+
         return $this->client->request('POST', "media/{$id}/duplicate");
+    }
+
+    /**
+     * Initialize the folder model.
+     *
+     * @return Meema\MeemaApi\Models\Folder
+     */
+    public function folders(): Folder
+    {
+        $client = new Client($this->client->getAccessKey());
+
+        return new Folder($client, $this->id);
+    }
+
+    /**
+     * Fetch the media for the folder.
+     *
+     * @param int $id
+     *
+     * @return array
+     */
+    public function fetchMediaForFolder($id): array
+    {
+        return $this->client->request('GET', "folders/{$id}/media");
     }
 }
