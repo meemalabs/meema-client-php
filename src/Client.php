@@ -39,7 +39,7 @@ class Client
         ]);
     }
 
-     /**
+    /**
      * Initialize env variables.
      *
      * @return void
@@ -55,7 +55,6 @@ class Client
      *
      * @param string $method
      * @param string $path
-     *
      */
     public function request($method, $path, $data = null)
     {
