@@ -21,11 +21,9 @@ class Folder
      *
      * @param Meema\MeemaApi\Client $client
      */
-    public function __construct(Client $client, $id)
+    public function __construct(Client $client)
     {
         $this->client = $client;
-
-        $this->id = $id;
     }
 
     /**
@@ -39,6 +37,22 @@ class Folder
     }
 
     /**
+     * Get specific folders.
+     *
+     * @return array
+     */
+    public function get($id = null)
+    {
+        if (! $id) {
+            return $this->all();
+        }
+
+        $ids = is_array($id) ? $id : func_get_args();
+
+        return $this->client->request('GET', 'folders/show', ['folder_ids' => $ids]);
+    }
+
+    /**
      * Create folder.
      *
      * @param  string $name
@@ -47,7 +61,9 @@ class Folder
      */
     public function create($name): array
     {
-        return $this->client->request('POST', "folders/{$this->client->getAccessKey()}", compact('name'));
+        $name = is_array($name) ? $name : compact('name');
+
+        return $this->client->request('POST', "folders/{$this->client->getAccessKey()}", $name);
     }
 
     /**
@@ -58,9 +74,11 @@ class Folder
      *
      * @return array
      */
-    public function update($name): array
+    public function update($id, $name): array
     {
-        return $this->client->request('PATCH', "folders/{$this->id}", compact('name'));
+        $name = is_array($name) ? $name : compact('name');
+
+        return $this->client->request('PATCH', "folders/{$id}", $name);
     }
 
     /**
@@ -68,11 +86,11 @@ class Folder
      *
      * @param int|array $id
      *
-     * @return array
+     * @return null
      */
-    public function delete(): array
+    public function delete($id)
     {
-        return $this->client->request('DELETE', "folders/{$this->id}");
+        return $this->client->request('DELETE', "folders/{$id}");
     }
 
     /**
@@ -80,9 +98,9 @@ class Folder
      *
      * @return array
      */
-    public function archive(): array
+    public function archive($id): array
     {
-        return $this->client->request('POST', "folders/{$this->id}/archive");
+        return $this->client->request('POST', "folders/{$id}/archive");
     }
 
     /**
@@ -90,9 +108,9 @@ class Folder
      *
      * @return array
      */
-    public function unarchive(): array
+    public function unarchive($id): array
     {
-        return $this->client->request('POST', "folders/{$this->id}/unarchive");
+        return $this->client->request('POST', "folders/{$id}/unarchive");
     }
 
     /**
@@ -100,8 +118,8 @@ class Folder
      *
      * @return array
      */
-    public function duplicate(): array
+    public function duplicate($id): array
     {
-        return $this->client->request('POST', "folders/{$this->id}/duplicate");
+        return $this->client->request('POST', "folders/{$id}/duplicate");
     }
 }

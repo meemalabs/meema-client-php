@@ -83,8 +83,8 @@ class Client
      *
      * @return Meema\MeemaApi\Models\Folder
      */
-    public function folders($id = null): Folder
+    public function folders(): Folder
     {
-        return new Folder($this, $id);
+        return new Folder($this);
     }
 }
