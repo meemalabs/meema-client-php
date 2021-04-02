@@ -14,11 +14,6 @@ class Client
     protected $client;
 
     /**
-     * @var Meema\MeemaApi\Models\Folder
-     */
-    public $folders;
-
-    /**
      * @var string
      */
     protected $accessKey;
@@ -34,7 +29,7 @@ class Client
 
         $this->accessKey = $accessKey;
         $this->client = new GuzzleClient([
-            'base_uri' => $_ENV['BASE_URL'],
+            'base_uri' => $_ENV['BASE_URL'] ?? 'https://api.mee.ma',
         ]);
     }
 
