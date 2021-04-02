@@ -5,6 +5,7 @@ namespace Meema\MeemaApi;
 use Dotenv\Dotenv;
 use GuzzleHttp\Client as GuzzleClient;
 use Meema\MeemaApi\Models\Folder;
+use Meema\MeemaApi\Models\Media;
 
 class Client
 {
@@ -99,5 +100,15 @@ class Client
     public function folders(): Folder
     {
         return new Folder($this);
+    }
+
+    /**
+     * Initialize the media model.
+     *
+     * @return Meema\MeemaApi\Models\Media
+     */
+    public function media(): Media
+    {
+        return new Media($this);
     }
 }
