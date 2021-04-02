@@ -2,7 +2,9 @@
 
 namespace Meema\MeemaApi;
 
+use Dotenv\Dotenv;
 use GuzzleHttp\Client as GuzzleClient;
+use Meema\MeemaApi\Models\Folder;
 
 class Client
 {
@@ -23,10 +25,23 @@ class Client
      */
     public function __construct($accessKey)
     {
+        $this->initializeEnv();
+
         $this->accessKey = $accessKey;
         $this->client = new GuzzleClient([
-            'base_uri' => 'http://127.0.0.1:8000/api/',
+            'base_uri' => $_ENV['BASE_URL'] ?? 'https://api.mee.ma',
         ]);
+    }
+
+    /**
+     * Initialize env variables.
+     *
+     * @return void
+     */
+    public function initializeEnv(): void
+    {
+        $dotenv = Dotenv::createImmutable(dirname(__DIR__));
+        $dotenv->load();
     }
 
     /**
@@ -34,8 +49,6 @@ class Client
      *
      * @param string $method
      * @param string $path
-     *
-     * @return array
      */
     public function request($method, $path, $data = null)
     {
@@ -45,7 +58,9 @@ class Client
                 'Content-Type'  => 'application/json',
                 'Authorization' => "Bearer {$this->accessKey}",
             ],
-        ])->getBody()->getContents();
+        ])
+        ->getBody()
+        ->getContents();
 
         return json_decode($content, true);
     }
@@ -61,24 +76,22 @@ class Client
     }
 
     /**
-     * List folders.
+     * Get the access key.
      *
-     * @return array
+     * @return string
      */
-    public function listFolders()
+    public function getAccessKey(): string
     {
-        return $this->request('GET', 'folders');
+        return $this->accessKey;
     }
 
     /**
-     * Create folder.
+     * Initialize the folder model.
      *
-     * @param string $name
-     *
-     * @return array
+     * @return Meema\MeemaApi\Models\Folder
      */
-    public function createFolder($name)
+    public function folders(): Folder
     {
-        return $this->request('POST', 'folders', compact('name'));
+        return new Folder($this);
     }
 }
