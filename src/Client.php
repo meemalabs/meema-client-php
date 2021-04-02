@@ -2,6 +2,7 @@
 
 namespace Meema\MeemaApi;
 
+use Dotenv\Dotenv;
 use GuzzleHttp\Client as GuzzleClient;
 use Meema\MeemaApi\Models\Folder;
 
@@ -29,10 +30,23 @@ class Client
      */
     public function __construct($accessKey)
     {
+        $this->initializeEnv();
+
         $this->accessKey = $accessKey;
         $this->client = new GuzzleClient([
-            'base_uri' => 'http://meema-api.test/api/',
+            'base_uri' => $_ENV['BASE_URL'],
         ]);
+    }
+
+     /**
+     * Initialize env variables.
+     *
+     * @return void
+     */
+    public function initializeEnv(): void
+    {
+        $dotenv = Dotenv::createImmutable(dirname(__DIR__));
+        $dotenv->load();
     }
 
     /**
@@ -41,7 +55,6 @@ class Client
      * @param string $method
      * @param string $path
      *
-     * @return array
      */
     public function request($method, $path, $data = null)
     {
