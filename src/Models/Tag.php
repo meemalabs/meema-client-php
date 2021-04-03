@@ -134,7 +134,6 @@ class Tag
         return $this->client->request('DELETE', "tags/{$id}");
     }
 
-
     /**
      * Initialize the media model.
      *
