@@ -4,6 +4,7 @@ namespace Meema\MeemaApi;
 
 use Dotenv\Dotenv;
 use GuzzleHttp\Client as GuzzleClient;
+use Meema\MeemaApi\Models\Favorite;
 use Meema\MeemaApi\Models\Folder;
 use Meema\MeemaApi\Models\Media;
 
@@ -104,5 +105,15 @@ class Client
     public function media(): Media
     {
         return new Media($this);
+    }
+
+    /**
+     * Initialize the favorite model.
+     *
+     * @return Meema\MeemaApi\Models\Media
+     */
+    public function favorites(): Favorite
+    {
+        return new Favorite($this);
     }
 }
