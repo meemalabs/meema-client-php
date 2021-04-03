@@ -5,7 +5,7 @@ namespace Meema\MeemaApi\Traits;
 trait SerializesResponse
 {
     /**
-     * Convert the response to array
+     * Convert the response to array.
      *
      * @return array
      */

@@ -14,6 +14,7 @@ class Response
     {
         $this->api = $api;
     }
+
     /**
      * Dynamically handle calls into the query instance.
      *
