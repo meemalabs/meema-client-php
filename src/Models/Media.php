@@ -50,7 +50,7 @@ class Media
     public function get($id = null)
     {
         if ($this->model) {
-            return $this->fetchMediaForFolder($this->model->getId());
+            return $this->fetchForModel();
         }
 
         if (! $id) {
@@ -190,18 +190,6 @@ class Media
     }
 
     /**
-     * Fetch the media for the folder.
-     *
-     * @param int $id
-     *
-     * @return array
-     */
-    public function fetchMediaForFolder($id): array
-    {
-        return $this->client->request('GET', "folders/{$id}/media");
-    }
-
-    /**
      * Initialize media model.
      *
      * @param Meema\MeemaApi\Models\Folder $folder
@@ -224,4 +212,5 @@ class Media
     {
         return $this->id;
     }
+
 }

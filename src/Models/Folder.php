@@ -15,7 +15,7 @@ class Folder
     /**
      * @var int
      */
-    protected $id;
+    public $id;
 
     /**
      * @var object
@@ -176,15 +176,16 @@ class Folder
     }
 
     /**
-     * Add folder to media.
+     * Delete folder from media.
      *
      * @param int $id
+     * @param int $folderId
      *
      * @return null
      */
-    public function deleteFolderFromMedia($mediaId, $folderId)
+    public function deleteFolderFromMedia($id, $folderId)
     {
-        return $this->client->request('DELETE', "media/{$mediaId}/folders/{$folderId}");
+        return $this->client->request('DELETE', "media/{$id}/folders/{$folderId}");
     }
 
     /**
@@ -221,5 +222,17 @@ class Folder
         $this->id = $id;
 
         return (new Media($this->client))->setFolder($this);
+    }
+
+    /**
+     * Initialize the tags model.
+     *
+     * @return Meema\MeemaApi\Models\Tag
+     */
+    public function tags(): Tag
+    {
+        $client = new Client($this->client->getAccessKey());
+
+        return (new Tag($client))->setFolder($this);
     }
 }
