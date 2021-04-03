@@ -6,6 +6,7 @@ use Dotenv\Dotenv;
 use GuzzleHttp\Client as GuzzleClient;
 use Meema\MeemaApi\Models\Folder;
 use Meema\MeemaApi\Models\Media;
+use Meema\MeemaApi\Models\Tag;
 
 class Client
 {
@@ -104,5 +105,15 @@ class Client
     public function media(): Media
     {
         return new Media($this);
+    }
+
+    /**
+     * Initialize the media model.
+     *
+     * @return Meema\MeemaApi\Models\Tag
+     */
+    public function tags(): Tag
+    {
+        return new Tag($this);
     }
 }

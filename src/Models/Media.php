@@ -21,9 +21,9 @@ class Media
     protected $id;
 
     /**
-     * @var int
+     * @var object
      */
-    protected $folderId;
+    protected $model;
 
     /**
      * @var array
@@ -35,11 +35,11 @@ class Media
      *
      * @param Meema\MeemaApi\Client $client
      */
-    public function __construct(Client $client, $folderId = null)
+    public function __construct(Client $client, $model = null)
     {
         $this->client = $client;
 
-        $this->folderId = $folderId;
+        $this->model = $model;
     }
 
     /**
@@ -59,8 +59,8 @@ class Media
      */
     public function get($id = null)
     {
-        if ($this->folderId) {
-            return $this->fetchMediaForFolder($this->folderId);
+        if ($this->model) {
+            return $this->fetchForModel();
         }
 
         if (! $id) {
@@ -213,7 +213,19 @@ class Media
     {
         $client = new Client($this->client->getAccessKey());
 
-        return new Folder($client, $this->id);
+        return new Folder($client, $this);
+    }
+
+    /**
+     * Initialize the folder model.
+     *
+     * @return Meema\MeemaApi\Models\Tags
+     */
+    public function tags(): Tag
+    {
+        $client = new Client($this->client->getAccessKey());
+
+        return new Tag($client, $this->id);
     }
 
     /**
@@ -226,5 +238,34 @@ class Media
     public function fetchMediaForFolder($id): array
     {
         return $this->client->request('GET', "folders/{$id}/media");
+    }
+
+    /**
+     * Fetch the media for tags.
+     *
+     * @param int $id
+     *
+     * @return array
+     */
+    public function fetchMediaForTag($id): array
+    {
+        return $this->client->request('GET', "tags/{$id}/media");
+    }
+
+    /**
+     * Fetch child relations for this instance.
+     *
+     * @return array
+     */
+    public function fetchForModel()
+    {
+        switch (get_class($this->model)) {
+            case Folder::class:
+                return $this->fetchMediaForFolder($this->model->id);
+            case Tag::class:
+                return $this->fetchMediaForTag($this->model->id);
+            default:
+                break;
+        }
     }
 }

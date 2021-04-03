@@ -6,7 +6,7 @@ use Meema\MeemaApi\Client;
 use Meema\MeemaApi\Response\Response;
 use Meema\MeemaApi\Traits\SerializesResponse;
 
-class Folder
+class Tag
 {
     use SerializesResponse;
 
@@ -43,17 +43,17 @@ class Folder
     }
 
     /**
-     * List all folders.
+     * List all tags.
      *
      * @return array
      */
     public function all(): array
     {
-        return $this->client->request('GET', 'folders');
+        return $this->client->request('GET', 'tags');
     }
 
     /**
-     * Get specific folders.
+     * Get specific tags.
      *
      * @param int $id
      *
@@ -61,17 +61,21 @@ class Folder
      */
     public function get($id = null)
     {
+        if ($this->model) {
+            return $this->fetchForModel();
+        }
+
         if (! $id) {
             return $this->all();
         }
 
         $ids = is_array($id) ? $id : func_get_args();
 
-        return $this->client->request('GET', 'folders', ['folder_ids' => $ids]);
+        return $this->client->request('GET', 'tags', ['tag_ids' => $ids]);
     }
 
     /**
-     * Get specific folders.
+     * Get specific tags.
      *
      * @param int $id
      *
@@ -79,7 +83,7 @@ class Folder
      */
     public function find($id)
     {
-        $response = $this->client->request('GET', "folders/${id}");
+        $response = $this->client->request('GET', "tags/${id}");
 
         $this->content = $response;
         $this->id = $response['data']['id'];
@@ -98,13 +102,7 @@ class Folder
     {
         $name = is_array($name) ? $name : compact('name');
 
-        if ($this->model) {
-            $folderName = ['folder_name' => $name['name']];
-
-            return $this->addFolderToMedia($this->model, $folderName);
-        }
-
-        return $this->client->request('POST', "folders/{$this->client->getAccessKey()}", $name);
+        return $this->client->request('POST', "tags/{$this->client->getAccessKey()}", $name);
     }
 
     /**
@@ -115,13 +113,11 @@ class Folder
      *
      * @return array
      */
-    public function update($name, $id = null): array
+    public function update($data, $id = null): array
     {
         $id = $this->id ?? $id;
 
-        $name = is_array($name) ? $name : compact('name');
-
-        return $this->client->request('PATCH', "folders/{$id}", $name);
+        return $this->client->request('PATCH', 'tags/color', $data);
     }
 
     /**
@@ -133,56 +129,11 @@ class Folder
      */
     public function delete($id = null)
     {
-        if ($this->model) {
-            return $this->deleteFolderFromMedia($this->model->id, $id);
-        }
-
         $id = $this->id ?? $id;
 
-        return $this->client->request('DELETE', "folders/{$id}");
+        return $this->client->request('DELETE', "tags/{$id}");
     }
 
-    /**
-     * Archive a folder.
-     *
-     * @param int $id
-     *
-     * @return array
-     */
-    public function archive($id = null): array
-    {
-        $id = $this->id ?? $id;
-
-        return $this->client->request('POST', "folders/{$id}/archive");
-    }
-
-    /**
-     * Unarchive a folder.
-     *
-     * @param int $id
-     *
-     * @return array
-     */
-    public function unarchive($id = null): array
-    {
-        $id = $this->id ?? $id;
-
-        return $this->client->request('POST', "folders/{$id}/unarchive");
-    }
-
-    /**
-     * Duplicate a folder.
-     *
-     * @param int $id
-     *
-     * @return array
-     */
-    public function duplicate($id = null): array
-    {
-        $id = $this->id ?? $id;
-
-        return $this->client->request('POST', "folders/{$id}/duplicate");
-    }
 
     /**
      * Initialize the media model.
@@ -197,39 +148,57 @@ class Folder
     }
 
     /**
-     * Initialize the tags model.
+     * Initialize the folder model.
      *
-     * @return Meema\MeemaApi\Models\Tag
+     * @return Meema\MeemaApi\Models\Folder
      */
-    public function tags(): Tag
+    public function folders(): Folder
     {
         $client = new Client($this->client->getAccessKey());
 
-        return new Tag($client, $this);
+        return new Folder($client, $this);
     }
 
     /**
-     * Add folder to media.
+     * Fetch the tags for media.
      *
      * @param int $id
      *
      * @return array
      */
-    public function addFolderToMedia($id, $name)
+    public function fetchTagsForMedia($id): array
     {
-        return $this->client->request('POST', "media/{$id}/folders", $name);
+        return $this->client->request('GET', "media/{$id}/tags");
     }
 
     /**
-     * Delete folder from media.
+     * Fetch the tags for folders.
      *
      * @param int $id
-     * @param int $folderId
      *
      * @return array
      */
-    public function deleteFolderFromMedia($id, $folderId)
+    public function fetchTagsForFolder($id): array
     {
-        return $this->client->request('DELETE', "media/{$id}/folders/{$folderId}");
+        return $this->client->request('GET', "folders/{$id}/tags");
+    }
+
+    /**
+     * Fetch child relations for this instance.
+     *
+     * @return array
+     */
+    public function fetchForModel(): array
+    {
+        switch (get_class($this->model)) {
+            case Folder::class:
+                return $this->fetchTagsForFolder($this->model->id);
+            case Media::class:
+                return $this->fetchTagsForMedia($this->model->id);
+            default:
+               return [];
+        }
+
+        return [];
     }
 }
