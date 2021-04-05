@@ -4,12 +4,9 @@ namespace Meema\MeemaApi\Models;
 
 use Meema\MeemaApi\Client;
 use Meema\MeemaApi\Response\Response;
-use Meema\MeemaApi\Traits\SerializesResponse;
 
 class Media
 {
-    use SerializesResponse;
-
     /**
      * @var Meema\MeemaApi\Client
      */
@@ -83,7 +80,6 @@ class Media
     {
         $response = $this->client->request('GET', "folders/${id}");
 
-        $this->content = $response;
         $this->id = $response['data']['id'];
 
         return new Response($this, $response);
@@ -111,10 +107,8 @@ class Media
      *
      * @return array
      */
-    public function update($name, $id = null): array
+    public function update($id, $name): array
     {
-        $id = $this->id ?? $id;
-
         $name = is_array($name) ? $name : compact('name');
 
         return $this->client->request('PATCH', "media/{$id}/file-name", $name);
@@ -129,8 +123,6 @@ class Media
      */
     public function delete($id = null)
     {
-        $id = $this->id ?? $id;
-
         return $this->client->request('DELETE', "media/{$id}", ['media_id' => $id]);
     }
 
@@ -143,8 +135,6 @@ class Media
      */
     public function archive($id = null): array
     {
-        $id = $this->id ?? $id;
-
         return $this->client->request('POST', "media/{$id}/archive");
     }
 
@@ -155,10 +145,8 @@ class Media
      *
      * @return array
      */
-    public function unarchive($id = null): array
+    public function unarchive($id): array
     {
-        $id = $this->id ?? $id;
-
         return $this->client->request('POST', "media/{$id}/unarchive");
     }
 
@@ -169,10 +157,8 @@ class Media
      *
      * @return array
      */
-    public function makePrivate($id = null): array
+    public function makePrivate($id): array
     {
-        $id = $this->id ?? $id;
-
         return $this->client->request('PATCH', "media/{$id}/make-private");
     }
 
@@ -183,10 +169,8 @@ class Media
      *
      * @return array
      */
-    public function makePublic($id = null): array
+    public function makePublic($id): array
     {
-        $id = $this->id ?? $id;
-
         return $this->client->request('PATCH', "media/{$id}/make-public");
     }
 
@@ -197,10 +181,8 @@ class Media
      *
      * @return array
      */
-    public function duplicate($id = null): array
+    public function duplicate($id): array
     {
-        $id = $this->id ?? $id;
-
         return $this->client->request('POST', "media/{$id}/duplicate");
     }
 
@@ -209,11 +191,12 @@ class Media
      *
      * @return Meema\MeemaApi\Models\Folder
      */
-    public function folders(): Folder
+    public function folders()
     {
         $client = new Client($this->client->getAccessKey());
 
-        return new Folder($client, $this->id);
+        return (new Folder($client))
+            ->setMedia($this);
     }
 
     /**
@@ -226,5 +209,10 @@ class Media
     public function fetchMediaForFolder($id): array
     {
         return $this->client->request('GET', "folders/{$id}/media");
+    }
+
+    public function getId()
+    {
+        return $this->id;
     }
 }

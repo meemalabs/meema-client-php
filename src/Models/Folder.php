@@ -21,9 +21,9 @@ class Folder
     protected $id;
 
     /**
-     * @var int
+     * @var object
      */
-    protected $mediaId;
+    protected $model;
 
     /**
      * @var array
@@ -35,11 +35,9 @@ class Folder
      *
      * @param Meema\MeemaApi\Client $client
      */
-    public function __construct(Client $client, $mediaId = null)
+    public function __construct(Client $client)
     {
         $this->client = $client;
-
-        $this->mediaId = $mediaId;
     }
 
     /**
@@ -98,10 +96,10 @@ class Folder
     {
         $name = is_array($name) ? $name : compact('name');
 
-        if ($this->mediaId) {
+        if ($this->model) {
             $folderName = ['folder_name' => $name['name']];
 
-            return $this->addFolderToMedia($this->mediaId, $folderName);
+            return $this->addFolderToMedia($this->model->getId(), $folderName);
         }
 
         return $this->client->request('POST', "folders/{$this->client->getAccessKey()}", $name);
@@ -133,8 +131,8 @@ class Folder
      */
     public function delete($id = null)
     {
-        if ($this->mediaId) {
-            return $this->deleteFolderFromMedia($this->mediaId, $id);
+        if ($this->model) {
+            return $this->deleteFolderFromMedia($this->model->getId(), $id);
         }
 
         $id = $this->id ?? $id;
@@ -218,5 +216,19 @@ class Folder
     public function deleteFolderFromMedia($mediaId, $folderId)
     {
         return $this->client->request('DELETE', "media/{$mediaId}/folders/{$folderId}");
+    }
+
+    /**
+     * Initialize media model
+     *
+     * @param Meema\MeemaApi\Models\Media $media
+     *
+     * @return void
+     */
+    public function setMedia($media): self
+    {
+        $this->model = $media;
+
+        return $this;
     }
 }
