@@ -219,7 +219,7 @@ class Folder
     }
 
     /**
-     * Initialize media model
+     * Initialize media model.
      *
      * @param Meema\MeemaApi\Models\Media $media
      *
