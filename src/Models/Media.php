@@ -18,9 +18,9 @@ class Media
     protected $id;
 
     /**
-     * @var int
+     * @var object
      */
-    protected $folderId;
+    protected $model;
 
     /**
      * @var array
@@ -32,11 +32,9 @@ class Media
      *
      * @param Meema\MeemaApi\Client $client
      */
-    public function __construct(Client $client, $folderId = null)
+    public function __construct(Client $client)
     {
         $this->client = $client;
-
-        $this->folderId = $folderId;
     }
 
     /**
@@ -56,8 +54,8 @@ class Media
      */
     public function get($id = null)
     {
-        if ($this->folderId) {
-            return $this->fetchMediaForFolder($this->folderId);
+        if ($this->model) {
+            return $this->fetchMediaForFolder($this->model->getId());
         }
 
         if (! $id) {
@@ -195,8 +193,7 @@ class Media
     {
         $client = new Client($this->client->getAccessKey());
 
-        return (new Folder($client))
-            ->setMedia($this);
+        return (new Folder($client))->setMedia($this);
     }
 
     /**
@@ -211,6 +208,25 @@ class Media
         return $this->client->request('GET', "folders/{$id}/media");
     }
 
+    /**
+     * Initialize media model.
+     *
+     * @param Meema\MeemaApi\Models\Folder $folder
+     *
+     * @return self
+     */
+    public function setFolder($folder): self
+    {
+        $this->model = $folder;
+
+        return $this;
+    }
+
+    /**
+     * Get the protected id
+     *
+     * @return int
+     */
     public function getId()
     {
         return $this->id;

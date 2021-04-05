@@ -4,12 +4,9 @@ namespace Meema\MeemaApi\Models;
 
 use Meema\MeemaApi\Client;
 use Meema\MeemaApi\Response\Response;
-use Meema\MeemaApi\Traits\SerializesResponse;
 
 class Folder
 {
-    use SerializesResponse;
-
     /**
      * @var Meema\MeemaApi\Client
      */
@@ -183,18 +180,6 @@ class Folder
     }
 
     /**
-     * Initialize the media model.
-     *
-     * @return Meema\MeemaApi\Models\Media
-     */
-    public function media(): Media
-    {
-        $client = new Client($this->client->getAccessKey());
-
-        return new Media($client, $this->id);
-    }
-
-    /**
      * Add folder to media.
      *
      * @param int $id
@@ -223,12 +208,34 @@ class Folder
      *
      * @param Meema\MeemaApi\Models\Media $media
      *
-     * @return void
+     * @return self
      */
     public function setMedia($media): self
     {
         $this->model = $media;
 
         return $this;
+    }
+
+    /**
+     * Get the protected id
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Initialize the media model.
+     *
+     * @return Meema\MeemaApi\Models\Media
+     */
+    public function media(): Media
+    {
+        $client = new Client($this->client->getAccessKey());
+
+        return (new Media($client))->setFolder($this);
     }
 }
