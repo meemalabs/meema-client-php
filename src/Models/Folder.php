@@ -216,8 +216,10 @@ class Folder
      *
      * @return Meema\MeemaApi\Models\Media
      */
-    public function media(): Media
+    public function media($id = null): Media
     {
+        $this->id = $id;
+
         return (new Media($this->client))->setFolder($this);
     }
 }
