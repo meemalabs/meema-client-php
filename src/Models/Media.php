@@ -223,7 +223,7 @@ class Media
     }
 
     /**
-     * Get the protected id
+     * Get the protected id.
      *
      * @return int
      */
