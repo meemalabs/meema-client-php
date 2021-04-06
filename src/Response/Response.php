@@ -94,6 +94,6 @@ class Response
      */
     public function toArray()
     {
-       return $this->getContent();
+        return $this->getContent();
     }
 }
