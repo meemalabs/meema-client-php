@@ -4,12 +4,9 @@ namespace Meema\MeemaApi\Models;
 
 use Meema\MeemaApi\Client;
 use Meema\MeemaApi\Response\Response;
-use Meema\MeemaApi\Traits\SerializesResponse;
 
 class Team
 {
-    use SerializesResponse;
-
     /**
      * @var Meema\MeemaApi\Client
      */
