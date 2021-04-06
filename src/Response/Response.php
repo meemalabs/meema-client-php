@@ -57,7 +57,7 @@ class Response
      */
     public function getKey()
     {
-        return $this->getData($this->getKeyName());
+        return $this->getData($this->getKeyName()) ?: $this->getContent($this->getKeyName());
     }
 
     /**
