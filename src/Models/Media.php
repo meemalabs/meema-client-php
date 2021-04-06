@@ -189,10 +189,11 @@ class Media
         return (new Folder($this->client))->setMedia($this);
     }
 
+
     /**
-     * Initialize media model.
+     * Fetch the media for the folder.
      *
-     * @param Meema\MeemaApi\Models\Folder $folder
+     * @param int $id
      *
      * @return self
      */
