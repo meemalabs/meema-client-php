@@ -194,11 +194,11 @@ class Media
      *
      * @return Meema\MeemaApi\Models\Tag
      */
-    public function tags(): Tag
+    public function tags($id = null): Tag
     {
-        $client = new Client($this->client->getAccessKey());
+        $this->id = $id;
 
-        return (new Tag($client))->setMedia($this);
+        return (new Tag($this->client))->setMedia($this);
     }
 
     /**

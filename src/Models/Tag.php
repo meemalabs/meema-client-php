@@ -8,14 +8,14 @@ use Meema\MeemaApi\Response\Response;
 class Tag
 {
     /**
-     * @var Meema\MeemaApi\Client
+     * @var \Meema\MeemaApi\Client
      */
     protected $client;
 
     /**
      * @var int
      */
-    public $id;
+    protected $id;
 
     /**
      * @var object
@@ -49,7 +49,7 @@ class Tag
      *
      * @return array
      */
-    public function get($id = null)
+    public function get($id = null): array
     {
         if ($this->model) {
             return $this->fetchForModel();
@@ -69,13 +69,11 @@ class Tag
      *
      * @param int $id
      *
-     * @return array
+     * @return Response
      */
-    public function find($id)
+    public function find($id): Response
     {
         $response = $this->client->request('GET', "tags/${id}");
-
-        $this->id = $response['data']['id'];
 
         return new Response($this, $response);
     }
@@ -83,11 +81,11 @@ class Tag
     /**
      * Create folder.
      *
-     * @param  string $name
+     * @param string $name
      *
      * @return array
      */
-    public function create($name)
+    public function create($name): array
     {
         $name = is_array($name) ? $name : compact('name');
 
@@ -112,7 +110,7 @@ class Tag
      *
      * @param int $id
      *
-     * @return null
+     * @return Response
      */
     public function delete($id)
     {
@@ -124,11 +122,11 @@ class Tag
      *
      * @return Meema\MeemaApi\Models\Media
      */
-    public function media(): Media
+    public function media($id = null): Media
     {
-        $client = new Client($this->client->getAccessKey());
+        $this->id = $id;
 
-        return (new Media($client))->setTag($this);
+        return (new Media($this->client))->setTag($this);
     }
 
     /**
@@ -136,11 +134,11 @@ class Tag
      *
      * @return Meema\MeemaApi\Models\Folder
      */
-    public function folders(): Folder
+    public function folders($id = null): Folder
     {
-        $client = new Client($this->client->getAccessKey());
+        $this->id = $id;
 
-        return new Folder($client, $this);
+        return (new Folder($this->client))->setTag($this);
     }
 
     /**
@@ -193,6 +191,16 @@ class Tag
         $this->model = $media;
 
         return $this;
+    }
+
+    /**
+     * Get the protected id.
+     *
+     * @return int
+     */
+    public function getId()
+    {
+        return $this->id;
     }
 
     /**

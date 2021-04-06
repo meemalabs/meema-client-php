@@ -15,7 +15,7 @@ class Folder
     /**
      * @var int
      */
-    public $id;
+    protected $id;
 
     /**
      * @var object
@@ -70,8 +70,6 @@ class Folder
     public function find($id): Response
     {
         $response = $this->client->request('GET', "folders/${id}");
-
-        $this->id = $response['data']['id'];
 
         return new Response($this, $response);
     }
@@ -203,6 +201,20 @@ class Folder
     }
 
     /**
+     * Initialize media model.
+     *
+     * @param Meema\MeemaApi\Models\Folder $folder
+     *
+     * @return self
+     */
+    public function setTag($tag): self
+    {
+        $this->model = $tag;
+
+        return $this;
+    }
+
+    /**
      * Get the protected id.
      *
      * @return int
@@ -229,11 +241,11 @@ class Folder
      *
      * @return Meema\MeemaApi\Models\Tag
      */
-    public function tags(): Tag
+    public function tags($id = null): Tag
     {
-        $client = new Client($this->client->getAccessKey());
+        $this->id = $id;
 
-        return (new Tag($client))->setFolder($this);
+        return (new Tag($this->client))->setFolder($this);
     }
 
     /**
