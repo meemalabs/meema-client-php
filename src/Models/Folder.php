@@ -26,11 +26,6 @@ class Folder
     protected $model;
 
     /**
-     * @var array
-     */
-    protected $content;
-
-    /**
      * Construct Folder model.
      *
      * @param Meema\MeemaApi\Client $client
@@ -81,7 +76,6 @@ class Folder
     {
         $response = $this->client->request('GET', "folders/${id}");
 
-        $this->content = $response;
         $this->id = $response['data']['id'];
 
         return new Response($this, $response);
@@ -115,10 +109,8 @@ class Folder
      *
      * @return array
      */
-    public function update($name, $id = null): array
+    public function update($id, $name): array
     {
-        $id = $this->id ?? $id;
-
         $name = is_array($name) ? $name : compact('name');
 
         return $this->client->request('PATCH', "folders/{$id}", $name);
@@ -131,13 +123,11 @@ class Folder
      *
      * @return null
      */
-    public function delete($id = null)
+    public function delete($id)
     {
         if ($this->model) {
             return $this->deleteFolderFromMedia($this->model->id, $id);
         }
-
-        $id = $this->id ?? $id;
 
         return $this->client->request('DELETE', "folders/{$id}");
     }
@@ -149,10 +139,8 @@ class Folder
      *
      * @return array
      */
-    public function archive($id = null): array
+    public function archive($id): array
     {
-        $id = $this->id ?? $id;
-
         return $this->client->request('POST', "folders/{$id}/archive");
     }
 
@@ -163,10 +151,8 @@ class Folder
      *
      * @return array
      */
-    public function unarchive($id = null): array
+    public function unarchive($id): array
     {
-        $id = $this->id ?? $id;
-
         return $this->client->request('POST', "folders/{$id}/unarchive");
     }
 
@@ -177,10 +163,8 @@ class Folder
      *
      * @return array
      */
-    public function duplicate($id = null): array
+    public function duplicate($id): array
     {
-        $id = $this->id ?? $id;
-
         return $this->client->request('POST', "folders/{$id}/duplicate");
     }
 
@@ -231,5 +215,17 @@ class Folder
     public function deleteFolderFromMedia($id, $folderId)
     {
         return $this->client->request('DELETE', "media/{$id}/folders/{$folderId}");
+    }
+
+    /**
+     * Initialize the tags model.
+     *
+     * @return Meema\MeemaApi\Models\Tag
+     */
+    public function tags(): Tag
+    {
+        $client = new Client($this->client->getAccessKey());
+
+        return (new Tag($client))->setFolder($this);
     }
 }

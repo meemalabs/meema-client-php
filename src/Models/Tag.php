@@ -26,20 +26,13 @@ class Tag
     protected $model;
 
     /**
-     * @var array
-     */
-    protected $content;
-
-    /**
      * Construct Folder model.
      *
      * @param Meema\MeemaApi\Client $client
      */
-    public function __construct(Client $client, $model = null)
+    public function __construct(Client $client)
     {
         $this->client = $client;
-
-        $this->model = $model;
     }
 
     /**
@@ -85,7 +78,6 @@ class Tag
     {
         $response = $this->client->request('GET', "tags/${id}");
 
-        $this->content = $response;
         $this->id = $response['data']['id'];
 
         return new Response($this, $response);
@@ -113,10 +105,8 @@ class Tag
      *
      * @return array
      */
-    public function update($data, $id = null): array
+    public function update($id, $data): array
     {
-        $id = $this->id ?? $id;
-
         return $this->client->request('PATCH', 'tags/color', $data);
     }
 
@@ -127,10 +117,8 @@ class Tag
      *
      * @return null
      */
-    public function delete($id = null)
+    public function delete($id)
     {
-        $id = $this->id ?? $id;
-
         return $this->client->request('DELETE', "tags/{$id}");
     }
 
@@ -143,7 +131,7 @@ class Tag
     {
         $client = new Client($this->client->getAccessKey());
 
-        return new Media($client, $this);
+        return (new Media($client))->setTag($this);
     }
 
     /**
@@ -183,21 +171,53 @@ class Tag
     }
 
     /**
+     * Initialize media model.
+     *
+     * @param Meema\MeemaApi\Models\Folder $folder
+     *
+     * @return self
+     */
+    public function setFolder($folder): self
+    {
+        $this->model = $folder;
+
+        return $this;
+    }
+
+    /**
+     * Initialize media model.
+     *
+     * @param Meema\MeemaApi\Models\Media $media
+     *
+     * @return self
+     */
+    public function setMedia($media): self
+    {
+        $this->model = $media;
+
+        return $this;
+    }
+
+    /**
      * Fetch child relations for this instance.
      *
      * @return array
      */
     public function fetchForModel(): array
     {
+        $data = [];
+
         switch (get_class($this->model)) {
             case Folder::class:
-                return $this->fetchTagsForFolder($this->model->id);
+                $data =  $this->fetchTagsForFolder($this->model->getId());
+                break;
             case Media::class:
-                return $this->fetchTagsForMedia($this->model->id);
+                $data = $this->fetchTagsForMedia($this->model->getId());
+                break;
             default:
-               return [];
+               $data = [];
         }
 
-        return [];
+        return $data;
     }
 }

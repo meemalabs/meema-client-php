@@ -216,17 +216,6 @@ class Media
         return new Folder($client, $this);
     }
 
-    /**
-     * Initialize the folder model.
-     *
-     * @return Meema\MeemaApi\Models\Tags
-     */
-    public function tags(): Tag
-    {
-        $client = new Client($this->client->getAccessKey());
-
-        return new Tag($client, $this->id);
-    }
 
     /**
      * Fetch the media for the folder.
@@ -238,6 +227,32 @@ class Media
     public function fetchMediaForFolder($id): array
     {
         return $this->client->request('GET', "folders/{$id}/media");
+    }
+
+    /**
+     * Initialize media model.
+     *
+     * @param Meema\MeemaApi\Models\Folder $folder
+     *
+     * @return self
+     */
+    public function setTag($tag): self
+    {
+        $this->model = $tag;
+
+        return $this;
+    }
+
+    /**
+     * Initialize the tags model.
+     *
+     * @return Meema\MeemaApi\Models\Tag
+     */
+    public function tags(): Tag
+    {
+        $client = new Client($this->client->getAccessKey());
+
+        return (new Tag($client))->setMedia($this);
     }
 
     /**
@@ -259,13 +274,20 @@ class Media
      */
     public function fetchForModel()
     {
+        $data = [];
+
         switch (get_class($this->model)) {
             case Folder::class:
-                return $this->fetchMediaForFolder($this->model->id);
+                $data = $this->fetchMediaForFolder($this->model->getId());
+                break;
             case Tag::class:
-                return $this->fetchMediaForTag($this->model->id);
+                $data = $this->fetchMediaForTag($this->model->getId());
+                break;
             default:
+                $data = [];
                 break;
         }
+
+        return $data;
     }
 }
