@@ -31,5 +31,8 @@
         "psr-4": {
             "Meema\\MeemaApi\\Test\\": "tests"
         }
+    },
+    "require-dev": {
+        "pestphp/pest": "^1.0"
     }
 }
