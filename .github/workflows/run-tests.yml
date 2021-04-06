@@ -33,8 +33,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          composer require "orchestra/testbench:${{ matrix.testbench }}" --no-interaction --no-update
-          composer update --${{ matrix.dependency-version }} --prefer-dist --no-interaction --no-suggest
+          composer require "orchestra/testbench" --no-interaction --no-update
 
       - name: Execute tests
         run: vendor/bin/pest
