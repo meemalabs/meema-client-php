@@ -8,7 +8,7 @@ use Meema\MeemaApi\Response\Response;
 class Media
 {
     /**
-     * @var Meema\MeemaApi\Client
+     * @var \Meema\MeemaApi\Client
      */
     protected $client;
 
@@ -21,11 +21,6 @@ class Media
      * @var object
      */
     protected $model;
-
-    /**
-     * @var array
-     */
-    protected $content;
 
     /**
      * Construct media model.
@@ -77,8 +72,6 @@ class Media
     public function find($id)
     {
         $response = $this->client->request('GET', "folders/${id}");
-
-        $this->id = $response['data']['id'];
 
         return new Response($this, $response);
     }
@@ -189,11 +182,11 @@ class Media
      *
      * @return Meema\MeemaApi\Models\Folder
      */
-    public function folders()
+    public function folders($id = null)
     {
-        $client = new Client($this->client->getAccessKey());
+        $this->id = $id;
 
-        return (new Folder($client))->setMedia($this);
+        return (new Folder($this->client))->setMedia($this);
     }
 
     /**

@@ -8,7 +8,7 @@ use Meema\MeemaApi\Response\Response;
 class Folder
 {
     /**
-     * @var Meema\MeemaApi\Client
+     * @var \Meema\MeemaApi\Client
      */
     protected $client;
 
@@ -21,11 +21,6 @@ class Folder
      * @var object
      */
     protected $model;
-
-    /**
-     * @var array
-     */
-    protected $content;
 
     /**
      * Construct Folder model.
@@ -70,13 +65,12 @@ class Folder
      *
      * @param int $id
      *
-     * @return array
+     * @return Response
      */
-    public function find($id)
+    public function find($id): Response
     {
         $response = $this->client->request('GET', "folders/${id}");
 
-        $this->content = $response;
         $this->id = $response['data']['id'];
 
         return new Response($this, $response);
@@ -89,7 +83,7 @@ class Folder
      *
      * @return array
      */
-    public function create($name)
+    public function create($name): array
     {
         $name = is_array($name) ? $name : compact('name');
 
@@ -110,10 +104,8 @@ class Folder
      *
      * @return array
      */
-    public function update($name, $id = null): array
+    public function update($id, $name): array
     {
-        $id = $this->id ?? $id;
-
         $name = is_array($name) ? $name : compact('name');
 
         return $this->client->request('PATCH', "folders/{$id}", $name);
@@ -126,13 +118,11 @@ class Folder
      *
      * @return null
      */
-    public function delete($id = null)
+    public function delete($id)
     {
         if ($this->model) {
             return $this->deleteFolderFromMedia($this->model->getId(), $id);
         }
-
-        $id = $this->id ?? $id;
 
         return $this->client->request('DELETE', "folders/{$id}");
     }
@@ -144,10 +134,8 @@ class Folder
      *
      * @return array
      */
-    public function archive($id = null): array
+    public function archive($id): array
     {
-        $id = $this->id ?? $id;
-
         return $this->client->request('POST', "folders/{$id}/archive");
     }
 
@@ -158,10 +146,8 @@ class Folder
      *
      * @return array
      */
-    public function unarchive($id = null): array
+    public function unarchive($id): array
     {
-        $id = $this->id ?? $id;
-
         return $this->client->request('POST', "folders/{$id}/unarchive");
     }
 
@@ -172,10 +158,8 @@ class Folder
      *
      * @return array
      */
-    public function duplicate($id = null): array
+    public function duplicate($id): array
     {
-        $id = $this->id ?? $id;
-
         return $this->client->request('POST', "folders/{$id}/duplicate");
     }
 
@@ -186,7 +170,7 @@ class Folder
      *
      * @return array
      */
-    public function addFolderToMedia($id, $name)
+    public function addFolderToMedia($id, $name): array
     {
         return $this->client->request('POST', "media/{$id}/folders", $name);
     }
@@ -196,7 +180,7 @@ class Folder
      *
      * @param int $id
      *
-     * @return array
+     * @return null
      */
     public function deleteFolderFromMedia($mediaId, $folderId)
     {
@@ -222,7 +206,7 @@ class Folder
      *
      * @return int
      */
-    public function getId()
+    public function getId(): int
     {
         return $this->id;
     }
@@ -234,8 +218,6 @@ class Folder
      */
     public function media(): Media
     {
-        $client = new Client($this->client->getAccessKey());
-
-        return (new Media($client))->setFolder($this);
+        return (new Media($this->client))->setFolder($this);
     }
 }
