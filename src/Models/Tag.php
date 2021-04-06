@@ -119,8 +119,6 @@ class Tag
      */
     public function delete($id)
     {
-        $id = $this->id ?? $id;
-
         return $this->client->request('DELETE', "tags/{$id}");
     }
 
@@ -133,7 +131,7 @@ class Tag
     {
         $client = new Client($this->client->getAccessKey());
 
-        return new Media($client, $this);
+        return (new Media($client))->setTag($this);
     }
 
     /**
@@ -187,21 +185,39 @@ class Tag
     }
 
     /**
+     * Initialize media model.
+     *
+     * @param Meema\MeemaApi\Models\Media $media
+     *
+     * @return self
+     */
+    public function setMedia($media): self
+    {
+        $this->model = $media;
+
+        return $this;
+    }
+
+    /**
      * Fetch child relations for this instance.
      *
      * @return array
      */
     public function fetchForModel(): array
     {
+        $data = [];
+
         switch (get_class($this->model)) {
             case Folder::class:
-                return $this->fetchTagsForFolder($this->model->id);
+                $data =  $this->fetchTagsForFolder($this->model->getId());
+                break;
             case Media::class:
-                return $this->fetchTagsForMedia($this->model->id);
+                $data = $this->fetchTagsForMedia($this->model->getId());
+                break;
             default:
-               return [];
+               $data = [];
         }
 
-        return [];
+        return $data;
     }
 }
