@@ -3,18 +3,24 @@
 namespace Meema\MeemaApi\Models;
 
 use Meema\MeemaApi\Client;
+use Meema\MeemaApi\Response\Response;
 
 class Folder
 {
     /**
-     * @var Meema\MeemaApi\Client
+     * @var \Meema\MeemaApi\Client
      */
-    public $client;
+    protected $client;
 
     /**
      * @var int
      */
-    public $id;
+    protected $id;
+
+    /**
+     * @var object
+     */
+    protected $model;
 
     /**
      * Construct Folder model.
@@ -39,6 +45,8 @@ class Folder
     /**
      * Get specific folders.
      *
+     * @param int $id
+     *
      * @return array
      */
     public function get($id = null)
@@ -49,7 +57,23 @@ class Folder
 
         $ids = is_array($id) ? $id : func_get_args();
 
-        return $this->client->request('GET', 'folders/show', ['folder_ids' => $ids]);
+        return $this->client->request('GET', 'folders', ['folder_ids' => $ids]);
+    }
+
+    /**
+     * Get specific folders.
+     *
+     * @param int $id
+     *
+     * @return Response
+     */
+    public function find($id): Response
+    {
+        $response = $this->client->request('GET', "folders/${id}");
+
+        $this->id = $response['data']['id'];
+
+        return new Response($this, $response);
     }
 
     /**
@@ -63,14 +87,20 @@ class Folder
     {
         $name = is_array($name) ? $name : compact('name');
 
+        if ($this->model) {
+            $folderName = ['folder_name' => $name['name']];
+
+            return $this->addFolderToMedia($this->model->getId(), $folderName);
+        }
+
         return $this->client->request('POST', "folders/{$this->client->getAccessKey()}", $name);
     }
 
     /**
      * Update folder.
      *
-     * @param int $id
      * @param string $name
+     * @param int $id
      *
      * @return array
      */
@@ -84,17 +114,23 @@ class Folder
     /**
      * Delete a folder.
      *
-     * @param int|array $id
+     * @param int $id
      *
      * @return null
      */
     public function delete($id)
     {
+        if ($this->model) {
+            return $this->deleteFolderFromMedia($this->model->getId(), $id);
+        }
+
         return $this->client->request('DELETE', "folders/{$id}");
     }
 
     /**
      * Archive a folder.
+     *
+     * @param int $id
      *
      * @return array
      */
@@ -106,6 +142,8 @@ class Folder
     /**
      * Unarchive a folder.
      *
+     * @param int $id
+     *
      * @return array
      */
     public function unarchive($id): array
@@ -116,10 +154,72 @@ class Folder
     /**
      * Duplicate a folder.
      *
+     * @param int $id
+     *
      * @return array
      */
     public function duplicate($id): array
     {
         return $this->client->request('POST', "folders/{$id}/duplicate");
+    }
+
+    /**
+     * Add folder to media.
+     *
+     * @param int $id
+     *
+     * @return array
+     */
+    public function addFolderToMedia($id, $name): array
+    {
+        return $this->client->request('POST', "media/{$id}/folders", $name);
+    }
+
+    /**
+     * Add folder to media.
+     *
+     * @param int $id
+     *
+     * @return null
+     */
+    public function deleteFolderFromMedia($mediaId, $folderId)
+    {
+        return $this->client->request('DELETE', "media/{$mediaId}/folders/{$folderId}");
+    }
+
+    /**
+     * Initialize media model.
+     *
+     * @param Meema\MeemaApi\Models\Media $media
+     *
+     * @return self
+     */
+    public function setMedia($media): self
+    {
+        $this->model = $media;
+
+        return $this;
+    }
+
+    /**
+     * Get the protected id.
+     *
+     * @return int
+     */
+    public function getId(): int
+    {
+        return $this->id;
+    }
+
+    /**
+     * Initialize the media model.
+     *
+     * @return Meema\MeemaApi\Models\Media
+     */
+    public function media($id = null): Media
+    {
+        $this->id = $id;
+
+        return (new Media($this->client))->setFolder($this);
     }
 }
