@@ -96,7 +96,7 @@ class Team
      */
     public function create($data)
     {
-        return $this->client->request('POST', "teams", $data);
+        return $this->client->request('POST', 'teams', $data);
     }
 
     /**
