@@ -4,5 +4,4 @@ namespace Meema\MeemaApi\Exceptions;
 
 class InvalidFormatException
 {
-
 }
