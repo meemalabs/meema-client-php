@@ -16,30 +16,14 @@ class Team
     protected $client;
 
     /**
-     * @var int
-     */
-    protected $id;
-
-    /**
-     * @var int
-     */
-    protected $teamId;
-
-    /**
-     * @var array
-     */
-    protected $content;
-
-    /**
      * Construct Folder model.
      *
      * @param Meema\MeemaApi\Client $client
+     * @param int $teamId
      */
-    public function __construct(Client $client, $teamId = null)
+    public function __construct(Client $client)
     {
         $this->client = $client;
-
-        $this->teamId = $teamId;
     }
 
     /**
@@ -81,9 +65,6 @@ class Team
     {
         $response = $this->client->request('GET', "teams/${id}");
 
-        $this->content = $response;
-        $this->id = $response['id'];
-
         return new Response($this, $response);
     }
 
@@ -107,10 +88,8 @@ class Team
      *
      * @return array
      */
-    public function update($name, $id = null): array
+    public function update($id, $name): array
     {
-        $id = $this->id ?? $id;
-
         $name = is_array($name) ? $name : compact('name');
 
         return $this->client->request('PATCH', "teams/{$id}", $name);
@@ -123,10 +102,8 @@ class Team
      *
      * @return null
      */
-    public function delete($id = null)
+    public function delete($id)
     {
-        $id = $this->id ?? $id;
-
         return $this->client->request('DELETE', "teams/{$id}");
     }
 
@@ -137,10 +114,8 @@ class Team
      *
      * @return null
      */
-    public function toggleMediaRecognition($id = null)
+    public function toggleMediaRecognition($id, $status)
     {
-        $id = $this->id ?? $id;
-
-        return $this->client->request('POST', "teams/{$id}/toggle-media-recognition");
+        return $this->client->request('POST', "teams/{$id}/toggle-media-recognition", compact('status'));
     }
 }
