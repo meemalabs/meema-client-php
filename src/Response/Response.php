@@ -85,4 +85,16 @@ class Response
 
         return $this->content;
     }
+
+    /**
+     * Get response content to array.
+     *
+     * @param  mixed $key
+     *
+     * @return array
+     */
+    public function toArray()
+    {
+       return $this->getContent();
+    }
 }

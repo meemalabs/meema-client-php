@@ -4,12 +4,9 @@ namespace Meema\MeemaApi\Models;
 
 use Meema\MeemaApi\Client;
 use Meema\MeemaApi\Response\Response;
-use Meema\MeemaApi\Traits\SerializesResponse;
 
 class Favorite
 {
-    use SerializesResponse;
-
     /**
      * @var Meema\MeemaApi\Client
      */
@@ -21,25 +18,13 @@ class Favorite
     protected $id;
 
     /**
-     * @var int
-     */
-    protected $favoriteId;
-
-    /**
-     * @var array
-     */
-    protected $content;
-
-    /**
      * Construct Favorite model.
      *
      * @param Meema\MeemaApi\Client $client
      */
-    public function __construct(Client $client, $favoriteId = null)
+    public function __construct(Client $client)
     {
         $this->client = $client;
-
-        $this->favoriteId = $favoriteId;
     }
 
     /**
@@ -81,9 +66,6 @@ class Favorite
     {
         $response = $this->client->request('GET', "favorites/${id}");
 
-        $this->content = $response;
-        $this->id = $response['data']['id'];
-
         return new Response($this, $response);
     }
 
@@ -107,10 +89,8 @@ class Favorite
      *
      * @return array
      */
-    public function update($data, $id = null): array
+    public function update($id, $data): array
     {
-        $id = $this->id ?? $id;
-
         return $this->client->request('PATCH', "favorites/{$id}", $data);
     }
 
@@ -121,10 +101,8 @@ class Favorite
      *
      * @return null
      */
-    public function delete($id = null)
+    public function delete($id)
     {
-        $id = $this->id ?? $id;
-
         return $this->client->request('DELETE', "favorites/{$id}");
     }
 }
