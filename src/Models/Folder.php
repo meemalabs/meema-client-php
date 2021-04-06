@@ -126,6 +126,18 @@ class Folder
     }
 
     /**
+     * Get specific folders.
+     *
+     * @param string $query
+     *
+     * @return array
+     */
+    public function search($query)
+    {
+        return $this->client->request('POST', 'folders/search', compact('query'));
+    }
+
+    /**
      * Archive a folder.
      *
      * @param int $id
