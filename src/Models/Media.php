@@ -50,7 +50,7 @@ class Media
     public function get($id = null)
     {
         if ($this->model) {
-            return $this->fetchMediaForFolder($this->model->getId());
+            return $this->fetchForModel();
         }
 
         if (! $id) {
@@ -190,15 +190,29 @@ class Media
     }
 
     /**
+     * Initialize the tags model.
+     *
+     * @return Meema\MeemaApi\Models\Tag
+     */
+    public function tags($id = null): Tag
+    {
+        $this->id = $id;
+
+        return (new Tag($this->client))->setMedia($this);
+    }
+
+    /**
      * Fetch the media for the folder.
      *
      * @param int $id
      *
-     * @return array
+     * @return self
      */
-    public function fetchMediaForFolder($id): array
+    public function setFolder($folder): self
     {
-        return $this->client->request('GET', "folders/{$id}/media");
+        $this->model = $folder;
+
+        return $this;
     }
 
     /**
@@ -208,9 +222,9 @@ class Media
      *
      * @return self
      */
-    public function setFolder($folder): self
+    public function setTag($tag): self
     {
-        $this->model = $folder;
+        $this->model = $tag;
 
         return $this;
     }
@@ -223,5 +237,53 @@ class Media
     public function getId()
     {
         return $this->id;
+    }
+
+    /**
+     * Fetch the media for the folder.
+     *
+     * @param int $id
+     *
+     * @return array
+     */
+    public function fetchMediaForFolder($id): array
+    {
+        return $this->client->request('GET', "folders/{$id}/media");
+    }
+
+    /**
+     * Fetch the media for tags.
+     *
+     * @param int $id
+     *
+     * @return array
+     */
+    public function fetchMediaForTag($id): array
+    {
+        return $this->client->request('GET', "tags/{$id}/media");
+    }
+
+    /**
+     * Fetch child relations for this instance.
+     *
+     * @return array
+     */
+    public function fetchForModel()
+    {
+        $data = [];
+
+        switch (get_class($this->model)) {
+            case Folder::class:
+                $data = $this->fetchMediaForFolder($this->model->getId());
+                break;
+            case Tag::class:
+                $data = $this->fetchMediaForTag($this->model->getId());
+                break;
+            default:
+                $data = [];
+                break;
+        }
+
+        return $data;
     }
 }

@@ -71,8 +71,6 @@ class Folder
     {
         $response = $this->client->request('GET', "folders/${id}");
 
-        $this->id = $response['data']['id'];
-
         return new Response($this, $response);
     }
 
@@ -176,15 +174,16 @@ class Folder
     }
 
     /**
-     * Add folder to media.
+     * Delete folder from media.
      *
      * @param int $id
+     * @param int $folderId
      *
      * @return null
      */
-    public function deleteFolderFromMedia($mediaId, $folderId)
+    public function deleteFolderFromMedia($id, $folderId)
     {
-        return $this->client->request('DELETE', "media/{$mediaId}/folders/{$folderId}");
+        return $this->client->request('DELETE', "media/{$id}/folders/{$folderId}");
     }
 
     /**
@@ -197,6 +196,20 @@ class Folder
     public function setMedia($media): self
     {
         $this->model = $media;
+
+        return $this;
+    }
+
+    /**
+     * Initialize media model.
+     *
+     * @param Meema\MeemaApi\Models\Folder $folder
+     *
+     * @return self
+     */
+    public function setTag($tag): self
+    {
+        $this->model = $tag;
 
         return $this;
     }
@@ -221,5 +234,17 @@ class Folder
         $this->id = $id;
 
         return (new Media($this->client))->setFolder($this);
+    }
+
+    /**
+     * Initialize the tags model.
+     *
+     * @return Meema\MeemaApi\Models\Tag
+     */
+    public function tags($id = null): Tag
+    {
+        $this->id = $id;
+
+        return (new Tag($this->client))->setFolder($this);
     }
 }

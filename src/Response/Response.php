@@ -45,7 +45,7 @@ class Response
      *
      * @return string
      */
-    public function getKeyName()
+    public function getKeyName(): string
     {
         return 'id';
     }
@@ -74,6 +74,7 @@ class Response
      * Get response content.
      *
      * @param  mixed $key
+     *
      * @return array
      */
     public function getContent($key = null)
