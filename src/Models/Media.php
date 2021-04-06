@@ -216,7 +216,6 @@ class Media
         return new Folder($client, $this);
     }
 
-
     /**
      * Fetch the media for the folder.
      *
