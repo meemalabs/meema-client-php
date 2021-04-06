@@ -209,7 +209,7 @@ class Tag
 
         switch (get_class($this->model)) {
             case Folder::class:
-                $data =  $this->fetchTagsForFolder($this->model->getId());
+                $data = $this->fetchTagsForFolder($this->model->getId());
                 break;
             case Media::class:
                 $data = $this->fetchTagsForMedia($this->model->getId());
