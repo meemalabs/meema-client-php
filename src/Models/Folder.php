@@ -247,16 +247,4 @@ class Folder
 
         return (new Tag($client))->setFolder($this);
     }
-
-    /**
-     * Initialize the tags model.
-     *
-     * @return Meema\MeemaApi\Models\Tag
-     */
-    public function tags(): Tag
-    {
-        $client = new Client($this->client->getAccessKey());
-
-        return (new Tag($client))->setFolder($this);
-    }
 }

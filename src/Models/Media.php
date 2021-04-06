@@ -201,7 +201,6 @@ class Media
         return (new Tag($client))->setMedia($this);
     }
 
-
     /**
      * Fetch the media for the folder.
      *
