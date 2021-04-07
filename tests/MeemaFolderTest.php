@@ -7,7 +7,6 @@ beforeEach(function () {
     $this->initializeClient();
 });
 
-
 it('can be fetch all folders', function () {
     $folders = $this->client->folders()->get();
 
@@ -16,7 +15,7 @@ it('can be fetch all folders', function () {
 });
 
 it('can be fetch specific group of folders', function () {
-    $ids = [1,2,3];
+    $ids = [1, 2, 3];
 
     $folders = $this->client->folders()->get($ids);
 
