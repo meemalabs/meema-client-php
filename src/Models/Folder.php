@@ -3,6 +3,7 @@
 namespace Meema\MeemaApi\Models;
 
 use Meema\MeemaApi\Client;
+use Meema\MeemaApi\Exceptions\InvalidFormatException;
 use Meema\MeemaApi\Response\Response;
 
 class Folder
@@ -47,7 +48,9 @@ class Folder
      *
      * @param int $id
      *
-     * @return array
+     * @return mixed
+     *
+     * @throws InvalidFormatException
      */
     public function get($id = null)
     {
@@ -55,7 +58,15 @@ class Folder
             return $this->all();
         }
 
-        $ids = is_array($id) ? $id : func_get_args();
+        try {
+            if (! is_int($id)) {
+                throw new InvalidFormatException();
+            }
+
+            $ids = is_array($id) ? $id : func_get_args();
+        } catch (InvalidFormatException $e) {
+            return $e->errorMessage();
+        }
 
         return $this->client->request('GET', 'folders', ['folder_ids' => $ids]);
     }
@@ -66,10 +77,21 @@ class Folder
      * @param int $id
      *
      * @return Response
+     *
+     * @throws InvalidFormatException
      */
-    public function find($id): Response
+    public function find($id)
     {
-        $response = $this->client->request('GET', "folders/${id}");
+        try {
+            if (! is_int($id)) {
+                throw new InvalidFormatException();
+            }
+
+            $response = $this->client->request('GET', "folders/${id}");
+
+        } catch (InvalidFormatException $e) {
+            return $e->errorMessage();
+        }
 
         return new Response($this, $response);
     }
@@ -97,14 +119,22 @@ class Folder
     /**
      * Update folder.
      *
-     * @param string $name
      * @param int $id
+     * @param string $name
      *
      * @return array
      */
     public function update($id, $name): array
     {
-        $name = is_array($name) ? $name : compact('name');
+        try {
+            if (! is_int($id)) {
+                throw new InvalidFormatException();
+            }
+
+            $name = is_array($name) ? $name : compact('name');
+        } catch (InvalidFormatException $e) {
+            return $e->errorMessage();
+        }
 
         return $this->client->request('PATCH', "folders/{$id}", $name);
     }
@@ -115,11 +145,21 @@ class Folder
      * @param int $id
      *
      * @return null
+     *
+     * @throws InvalidFormatException
      */
     public function delete($id)
     {
-        if ($this->model) {
-            return $this->deleteFolderFromMedia($this->model->getId(), $id);
+        try {
+            if (! is_int($id)) {
+                throw new InvalidFormatException();
+            }
+
+            if ($this->model) {
+                return $this->deleteFolderFromMedia($this->model->getId(), $id);
+            }
+        } catch (InvalidFormatException $e) {
+            return $e->errorMessage();
         }
 
         return $this->client->request('DELETE', "folders/{$id}");
@@ -143,10 +183,20 @@ class Folder
      * @param int $id
      *
      * @return array
+     *
+     * @throws InvalidFormatException
      */
-    public function archive($id): array
+    public function archive($id)
     {
-        return $this->client->request('POST', "folders/{$id}/archive");
+        try {
+            if (! is_int($id)) {
+                throw new InvalidFormatException();
+            }
+
+            return $this->client->request('POST', "folders/{$id}/archive");
+        } catch (InvalidFormatException $e) {
+            return $e->errorMessage();
+        }
     }
 
     /**
@@ -155,10 +205,20 @@ class Folder
      * @param int $id
      *
      * @return array
+     *
+     * @throws InvalidFormatException
      */
-    public function unarchive($id): array
+    public function unarchive($id)
     {
-        return $this->client->request('POST', "folders/{$id}/unarchive");
+        try {
+            if (! is_int($id)) {
+                throw new InvalidFormatException();
+            }
+
+            return $this->client->request('POST', "folders/{$id}/unarchive");
+        } catch (InvalidFormatException $e) {
+            return $e->errorMessage();
+        }
     }
 
     /**
@@ -167,10 +227,20 @@ class Folder
      * @param int $id
      *
      * @return array
+     *
+     * @throws InvalidFormatException
      */
     public function duplicate($id): array
     {
-        return $this->client->request('POST', "folders/{$id}/duplicate");
+        try {
+            if (! is_int($id)) {
+                throw new InvalidFormatException();
+            }
+
+            return $this->client->request('POST', "folders/{$id}/duplicate");
+        } catch (InvalidFormatException $e) {
+            return $e->errorMessage();
+        }
     }
 
     /**
@@ -179,10 +249,20 @@ class Folder
      * @param int $id
      *
      * @return array
+     *
+     * @throws InvalidFormatException
      */
     public function addFolderToMedia($id, $name): array
     {
-        return $this->client->request('POST', "media/{$id}/folders", $name);
+        try {
+            if (! is_int($id)) {
+                throw new InvalidFormatException();
+            }
+
+            return $this->client->request('POST', "media/{$id}/folders", $name);
+        } catch (InvalidFormatException $e) {
+            return $e->errorMessage();
+        }
     }
 
     /**
@@ -192,10 +272,20 @@ class Folder
      * @param int $folderId
      *
      * @return null
+     *
+     * @throws InvalidFormatException
      */
     public function deleteFolderFromMedia($id, $folderId)
     {
-        return $this->client->request('DELETE', "media/{$id}/folders/{$folderId}");
+        try {
+            if (! is_int($id) || ! is_int($folderId)) {
+                throw new InvalidFormatException();
+            }
+
+            return $this->client->request('DELETE', "media/{$id}/folders/{$folderId}");
+        } catch (InvalidFormatException $e) {
+            return $e->errorMessage();
+        }
     }
 
     /**
