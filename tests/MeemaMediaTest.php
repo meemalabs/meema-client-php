@@ -7,7 +7,6 @@ beforeEach(function () {
     $this->initializeClient();
 });
 
-
 // it('can be fetch all media', function () {
 //     $media = $this->client->media()->get();
 
