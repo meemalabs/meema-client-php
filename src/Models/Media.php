@@ -67,7 +67,7 @@ class Media
 
             $ids = is_array($id) ? $id : func_get_args();
         } catch (InvalidFormatException $e) {
-            return $e->errorMessage();
+            return $e->getMessage();
         }
 
         return $this->client->request('GET', 'media/show', ['media_ids' => $ids]);
@@ -91,7 +91,7 @@ class Media
 
             $response = $this->client->request('GET', "media/${id}");
         } catch (InvalidFormatException $e) {
-            return $e->errorMessage();
+            return $e->getMessage();
         }
 
         return new Response($this, $response);
@@ -132,7 +132,7 @@ class Media
 
             return $this->client->request('PATCH', "media/{$id}/file-name", $name);
         } catch (InvalidFormatException $e) {
-            return $e->errorMessage();
+            return $e->getMessage();
         }
     }
 
@@ -154,7 +154,7 @@ class Media
 
             return $this->client->request('DELETE', "media/{$id}", ['media_id' => $id]);
         } catch (InvalidFormatException $e) {
-            return $e->errorMessage();
+            return $e->getMessage();
         }
     }
 
@@ -188,7 +188,7 @@ class Media
 
             return $this->client->request('POST', "media/{$id}/archive");
         } catch (InvalidFormatException $e) {
-            return $e->errorMessage();
+            return $e->getMessage();
         }
     }
 
@@ -210,7 +210,7 @@ class Media
 
             return $this->client->request('POST', "media/{$id}/unarchive");
         } catch (InvalidFormatException $e) {
-            return $e->errorMessage();
+            return $e->getMessage();
         }
     }
 
@@ -232,7 +232,7 @@ class Media
 
             return $this->client->request('PATCH', "media/{$id}/make-private");
         } catch (InvalidFormatException $e) {
-            return $e->errorMessage();
+            return $e->getMessage();
         }
     }
 
@@ -254,7 +254,7 @@ class Media
 
             return $this->client->request('PATCH', "media/{$id}/make-public");
         } catch (InvalidFormatException $e) {
-            return $e->errorMessage();
+            return $e->getMessage();
         }
     }
 
@@ -276,7 +276,7 @@ class Media
 
             return $this->client->request('POST', "media/{$id}/duplicate");
         } catch (InvalidFormatException $e) {
-            return $e->errorMessage();
+            return $e->getMessage();
         }
     }
 

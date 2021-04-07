@@ -7,15 +7,13 @@ use Exception;
 class InvalidFormatException extends Exception
 {
     /**
-     * Render the exception as an HTTP response.
+     * Construct exception.
      *
-     * @return string
+     * @param string $message
      */
-    public function errorMessage(): string
+    public function __construct(string $message = null)
     {
-        $errorMsg = 'Error on line '.$this->getLine().' in '.$this->getFile()
-        .' ID is not a valid integer';
-
-        return $errorMsg;
+        parent::__construct($message ?? 'Error on line '.$this->getLine().' in '.$this->getFile()
+        .' ID is not a valid integer');
     }
 }

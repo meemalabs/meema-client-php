@@ -65,7 +65,7 @@ class Folder
 
             $ids = is_array($id) ? $id : func_get_args();
         } catch (InvalidFormatException $e) {
-            return $e->errorMessage();
+            return $e->getMessage();
         }
 
         return $this->client->request('GET', 'folders', ['folder_ids' => $ids]);
@@ -89,7 +89,7 @@ class Folder
 
             $response = $this->client->request('GET', "folders/${id}");
         } catch (InvalidFormatException $e) {
-            return $e->errorMessage();
+            return $e->getMessage();
         }
 
         return new Response($this, $response);
@@ -132,7 +132,7 @@ class Folder
 
             $name = is_array($name) ? $name : compact('name');
         } catch (InvalidFormatException $e) {
-            return $e->errorMessage();
+            return $e->getMessage();
         }
 
         return $this->client->request('PATCH', "folders/{$id}", $name);
@@ -158,7 +158,7 @@ class Folder
                 return $this->deleteFolderFromMedia($this->model->getId(), $id);
             }
         } catch (InvalidFormatException $e) {
-            return $e->errorMessage();
+            return $e->getMessage();
         }
 
         return $this->client->request('DELETE', "folders/{$id}");
@@ -194,7 +194,7 @@ class Folder
 
             return $this->client->request('POST', "folders/{$id}/archive");
         } catch (InvalidFormatException $e) {
-            return $e->errorMessage();
+            return $e->getMessage();
         }
     }
 
@@ -216,7 +216,7 @@ class Folder
 
             return $this->client->request('POST', "folders/{$id}/unarchive");
         } catch (InvalidFormatException $e) {
-            return $e->errorMessage();
+            return $e->getMessage();
         }
     }
 
@@ -238,7 +238,7 @@ class Folder
 
             return $this->client->request('POST', "folders/{$id}/duplicate");
         } catch (InvalidFormatException $e) {
-            return $e->errorMessage();
+            return $e->getMessage();
         }
     }
 
@@ -260,7 +260,7 @@ class Folder
 
             return $this->client->request('POST', "media/{$id}/folders", $name);
         } catch (InvalidFormatException $e) {
-            return $e->errorMessage();
+            return $e->getMessage();
         }
     }
 
@@ -283,7 +283,7 @@ class Folder
 
             return $this->client->request('DELETE', "media/{$id}/folders/{$folderId}");
         } catch (InvalidFormatException $e) {
-            return $e->errorMessage();
+            return $e->getMessage();
         }
     }
 
