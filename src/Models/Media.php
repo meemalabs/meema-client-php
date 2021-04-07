@@ -70,7 +70,7 @@ class Media
             return $e->getMessage();
         }
 
-        return $this->client->request('GET', 'media/show', ['media_ids' => $ids]);
+        return $this->client->request('GET', 'media', ['media_ids' => $ids]);
     }
 
     /**
