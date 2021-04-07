@@ -88,7 +88,6 @@ class Folder
             }
 
             $response = $this->client->request('GET', "folders/${id}");
-
         } catch (InvalidFormatException $e) {
             return $e->errorMessage();
         }
