@@ -223,7 +223,7 @@ class Media
      *
      * @throws InvalidFormatException
      */
-    public function makePrivate($id): array
+    public function makePrivate($id)
     {
         try {
             if (! is_int($id)) {
@@ -267,7 +267,7 @@ class Media
      *
      * @throws InvalidFormatException
      */
-    public function duplicate($id): array
+    public function duplicate($id)
     {
         try {
             if (! is_int($id)) {
