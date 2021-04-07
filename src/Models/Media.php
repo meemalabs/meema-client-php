@@ -59,7 +59,7 @@ class Media
 
         $ids = is_array($id) ? $id : func_get_args();
 
-        return $this->client->request('GET', 'media/show', ['media_ids' => $ids]);
+        return $this->client->request('GET', 'media', ['media_ids' => $ids]);
     }
 
     /**
