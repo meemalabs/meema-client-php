@@ -149,19 +149,31 @@ class Folder
      */
     public function delete($id)
     {
+        $ids = is_array($id) ? $id : func_get_args();
+
         try {
-            if (! is_int($id)) {
-                throw new InvalidFormatException();
+            foreach ($ids as $id) {
+                if (! is_int($id)) {
+                    throw new InvalidFormatException();
+                }
+
+                if ($this->model) {
+                    return $this->deleteFolderFromMedia($this->model->getId(), $id);
+                }
             }
 
-            if ($this->model) {
-                return $this->deleteFolderFromMedia($this->model->getId(), $id);
+            if (count($ids) > 1) {
+                return $this->client->request('POST', 'bulk/folders/delete', ['folder_ids' => $ids]);
             }
+
+            // If count is equal to 1 get the first element
+            $id = $ids[0];
+
+            return $this->client->request('DELETE', "folders/{$id}");
+
         } catch (InvalidFormatException $e) {
             return $e->getMessage();
         }
-
-        return $this->client->request('DELETE', "folders/{$id}");
     }
 
     /**
@@ -187,10 +199,21 @@ class Folder
      */
     public function archive($id)
     {
+        $ids = is_array($id) ? $id : func_get_args();
+
         try {
-            if (! is_int($id)) {
-                throw new InvalidFormatException();
+            foreach ($ids as $id) {
+                if (! is_int($id)) {
+                    throw new InvalidFormatException();
+                }
             }
+
+            if (count($ids) > 1) {
+                return $this->client->request('POST', 'bulk/folders/archive', ['folder_ids' => $ids]);
+            }
+
+            // If count is equal to 1 get the first element
+            $id = $ids[0];
 
             return $this->client->request('POST', "folders/{$id}/archive");
         } catch (InvalidFormatException $e) {
@@ -209,10 +232,21 @@ class Folder
      */
     public function unarchive($id)
     {
+        $ids = is_array($id) ? $id : func_get_args();
+
         try {
-            if (! is_int($id)) {
-                throw new InvalidFormatException();
+            foreach ($ids as $id) {
+                if (! is_int($id)) {
+                    throw new InvalidFormatException();
+                }
             }
+
+            if (count($ids) > 1) {
+                return $this->client->request('POST', 'bulk/folders/unarchive', ['folder_ids' => $ids]);
+            }
+
+            // If count is equal to 1 get the first element
+            $id = $ids[0];
 
             return $this->client->request('POST', "folders/{$id}/unarchive");
         } catch (InvalidFormatException $e) {
@@ -231,10 +265,21 @@ class Folder
      */
     public function duplicate($id): array
     {
+        $ids = is_array($id) ? $id : func_get_args();
+
         try {
-            if (! is_int($id)) {
-                throw new InvalidFormatException();
+            foreach ($ids as $id) {
+                if (! is_int($id)) {
+                    throw new InvalidFormatException();
+                }
             }
+
+            if (count($ids) > 1) {
+                return $this->client->request('POST', 'bulk/folders/duplicate', ['folder_ids' => $ids]);
+            }
+
+            // If count is equal to 1 get the first element
+            $id = $ids[0];
 
             return $this->client->request('POST', "folders/{$id}/duplicate");
         } catch (InvalidFormatException $e) {
