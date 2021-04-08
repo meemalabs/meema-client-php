@@ -157,7 +157,6 @@ class Folder
         $id = $ids[0];
 
         return $this->client->request('DELETE', "folders/{$id}");
-
     }
 
     /**
