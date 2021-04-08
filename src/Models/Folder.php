@@ -116,7 +116,7 @@ class Folder
      * @return array
      */
     public function update($id, $name): array
-{
+    {
         if (! is_int($id)) {
             throw new InvalidFormatException();
         }
@@ -170,7 +170,7 @@ class Folder
      * @throws InvalidFormatException
      */
     public function archive($id)
-{
+    {
         if (! is_int($id)) {
             throw new InvalidFormatException();
         }
