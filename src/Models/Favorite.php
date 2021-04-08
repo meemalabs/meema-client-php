@@ -3,6 +3,7 @@
 namespace Meema\MeemaApi\Models;
 
 use Meema\MeemaApi\Client;
+use Meema\MeemaApi\Exceptions\InvalidFormatException;
 use Meema\MeemaApi\Response\Response;
 
 class Favorite
@@ -50,6 +51,10 @@ class Favorite
             return $this->all();
         }
 
+        if (! is_int($id)) {
+            throw new InvalidFormatException();
+        }
+
         $ids = is_array($id) ? $id : func_get_args();
 
         return $this->client->request('GET', 'favorites', ['favorite_ids' => $ids]);
@@ -64,6 +69,10 @@ class Favorite
      */
     public function find($id)
     {
+        if (! is_int($id)) {
+            throw new InvalidFormatException();
+        }
+
         $response = $this->client->request('GET', "favorites/${id}");
 
         return new Response($this, $response);
@@ -91,6 +100,10 @@ class Favorite
      */
     public function update($id, $data): array
     {
+        if (! is_int($id)) {
+            throw new InvalidFormatException();
+        }
+
         return $this->client->request('PATCH', "favorites/{$id}", $data);
     }
 
@@ -103,6 +116,10 @@ class Favorite
      */
     public function delete($id)
     {
+        if (! is_int($id)) {
+            throw new InvalidFormatException();
+        }
+
         return $this->client->request('DELETE', "favorites/{$id}");
     }
 }

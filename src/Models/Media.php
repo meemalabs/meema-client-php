@@ -60,15 +60,11 @@ class Media
             return $this->all();
         }
 
-        try {
-            if (! is_int($id)) {
-                throw new InvalidFormatException();
-            }
-
-            $ids = is_array($id) ? $id : func_get_args();
-        } catch (InvalidFormatException $e) {
-            return $e->getMessage();
+        if (! is_int($id)) {
+            throw new InvalidFormatException();
         }
+
+        $ids = is_array($id) ? $id : func_get_args();
 
         return $this->client->request('GET', 'media', ['media_ids' => $ids]);
     }
@@ -84,15 +80,11 @@ class Media
      */
     public function find($id)
     {
-        try {
-            if (! is_int($id)) {
-                throw new InvalidFormatException();
-            }
-
-            $response = $this->client->request('GET', "media/${id}");
-        } catch (InvalidFormatException $e) {
-            return $e->getMessage();
+        if (! is_int($id)) {
+            throw new InvalidFormatException();
         }
+
+        $response = $this->client->request('GET', "media/${id}");
 
         return new Response($this, $response);
     }
@@ -123,17 +115,13 @@ class Media
      */
     public function update($id, $name)
     {
-        try {
-            if (! is_int($id)) {
-                throw new InvalidFormatException();
-            }
-
-            $name = is_array($name) ? $name : compact('name');
-
-            return $this->client->request('PATCH', "media/{$id}/file-name", $name);
-        } catch (InvalidFormatException $e) {
-            return $e->getMessage();
+        if (! is_int($id)) {
+            throw new InvalidFormatException();
         }
+
+        $name = is_array($name) ? $name : compact('name');
+
+        return $this->client->request('PATCH', "media/{$id}/file-name", $name);
     }
 
     /**
@@ -147,15 +135,11 @@ class Media
      */
     public function delete($id)
     {
-        try {
-            if (! is_int($id)) {
-                throw new InvalidFormatException();
-            }
-
-            return $this->client->request('DELETE', "media/{$id}", ['media_id' => $id]);
-        } catch (InvalidFormatException $e) {
-            return $e->getMessage();
+        if (! is_int($id)) {
+            throw new InvalidFormatException();
         }
+
+        return $this->client->request('DELETE', "media/{$id}", ['media_id' => $id]);
     }
 
     /**
@@ -181,15 +165,11 @@ class Media
      */
     public function archive($id)
     {
-        try {
-            if (! is_int($id)) {
-                throw new InvalidFormatException();
-            }
-
-            return $this->client->request('POST', "media/{$id}/archive");
-        } catch (InvalidFormatException $e) {
-            return $e->getMessage();
+        if (! is_int($id)) {
+            throw new InvalidFormatException();
         }
+
+        return $this->client->request('POST', "media/{$id}/archive");
     }
 
     /**
@@ -203,15 +183,11 @@ class Media
      */
     public function unarchive($id)
     {
-        try {
-            if (! is_int($id)) {
-                throw new InvalidFormatException();
-            }
-
-            return $this->client->request('POST', "media/{$id}/unarchive");
-        } catch (InvalidFormatException $e) {
-            return $e->getMessage();
+        if (! is_int($id)) {
+            throw new InvalidFormatException();
         }
+
+        return $this->client->request('POST', "media/{$id}/unarchive");
     }
 
     /**
@@ -225,15 +201,11 @@ class Media
      */
     public function makePrivate($id)
     {
-        try {
-            if (! is_int($id)) {
-                throw new InvalidFormatException();
-            }
-
-            return $this->client->request('PATCH', "media/{$id}/make-private");
-        } catch (InvalidFormatException $e) {
-            return $e->getMessage();
+        if (! is_int($id)) {
+            throw new InvalidFormatException();
         }
+
+        return $this->client->request('PATCH', "media/{$id}/make-private");
     }
 
     /**
@@ -247,15 +219,11 @@ class Media
      */
     public function makePublic($id)
     {
-        try {
-            if (! is_int($id)) {
-                throw new InvalidFormatException();
-            }
-
-            return $this->client->request('PATCH', "media/{$id}/make-public");
-        } catch (InvalidFormatException $e) {
-            return $e->getMessage();
+        if (! is_int($id)) {
+            throw new InvalidFormatException();
         }
+
+        return $this->client->request('PATCH', "media/{$id}/make-public");
     }
 
     /**
@@ -269,15 +237,11 @@ class Media
      */
     public function duplicate($id)
     {
-        try {
-            if (! is_int($id)) {
-                throw new InvalidFormatException();
-            }
-
-            return $this->client->request('POST', "media/{$id}/duplicate");
-        } catch (InvalidFormatException $e) {
-            return $e->getMessage();
+        if (! is_int($id)) {
+            throw new InvalidFormatException();
         }
+
+        return $this->client->request('POST', "media/{$id}/duplicate");
     }
 
     /**
