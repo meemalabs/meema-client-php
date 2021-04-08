@@ -147,10 +147,21 @@ class Media
      */
     public function delete($id)
     {
+        $ids = is_array($id) ? $id : func_get_args();
+
         try {
-            if (! is_int($id)) {
-                throw new InvalidFormatException();
+            foreach ($ids as $id) {
+                if (! is_int($id)) {
+                    throw new InvalidFormatException();
+                }
             }
+
+            if (count($ids) > 1) {
+                return $this->client->request('POST', 'bulk/media/delete', ['media_ids' => $ids]);
+            }
+
+            // If count is equal to 1 get the first element
+            $id = $ids[0];
 
             return $this->client->request('DELETE', "media/{$id}", ['media_id' => $id]);
         } catch (InvalidFormatException $e) {
@@ -181,10 +192,21 @@ class Media
      */
     public function archive($id)
     {
+        $ids = is_array($id) ? $id : func_get_args();
+
         try {
-            if (! is_int($id)) {
-                throw new InvalidFormatException();
+            foreach ($ids as $id) {
+                if (! is_int($id)) {
+                    throw new InvalidFormatException();
+                }
             }
+
+            if (count($ids) > 1) {
+                return $this->client->request('POST', 'bulk/media/archive', ['media_ids' => $ids]);
+            }
+
+            // If count is equal to 1 get the first element
+            $id = $ids[0];
 
             return $this->client->request('POST', "media/{$id}/archive");
         } catch (InvalidFormatException $e) {
@@ -203,10 +225,21 @@ class Media
      */
     public function unarchive($id)
     {
+        $ids = is_array($id) ? $id : func_get_args();
+
         try {
-            if (! is_int($id)) {
-                throw new InvalidFormatException();
+            foreach ($ids as $id) {
+                if (! is_int($id)) {
+                    throw new InvalidFormatException();
+                }
             }
+
+            if (count($ids) > 1) {
+                return $this->client->request('POST', 'bulk/media/unarchive', ['media_ids' => $ids]);
+            }
+
+            // If count is equal to 1 get the first element
+            $id = $ids[0];
 
             return $this->client->request('POST', "media/{$id}/unarchive");
         } catch (InvalidFormatException $e) {
@@ -225,10 +258,21 @@ class Media
      */
     public function makePrivate($id)
     {
+        $ids = is_array($id) ? $id : func_get_args();
+
         try {
-            if (! is_int($id)) {
-                throw new InvalidFormatException();
+            foreach ($ids as $id) {
+                if (! is_int($id)) {
+                    throw new InvalidFormatException();
+                }
             }
+
+            if (count($ids) > 1) {
+                return $this->client->request('POST', 'bulk/media/make-private', ['media_ids' => $ids]);
+            }
+
+            // If count is equal to 1 get the first element
+            $id = $ids[0];
 
             return $this->client->request('PATCH', "media/{$id}/make-private");
         } catch (InvalidFormatException $e) {
@@ -247,10 +291,21 @@ class Media
      */
     public function makePublic($id)
     {
+        $ids = is_array($id) ? $id : func_get_args();
+
         try {
-            if (! is_int($id)) {
-                throw new InvalidFormatException();
+            foreach ($ids as $id) {
+                if (! is_int($id)) {
+                    throw new InvalidFormatException();
+                }
             }
+
+            if (count($ids) > 1) {
+                return $this->client->request('POST', 'bulk/media/make-public', ['media_ids' => $ids]);
+            }
+
+            // If count is equal to 1 get the first element
+            $id = $ids[0];
 
             return $this->client->request('PATCH', "media/{$id}/make-public");
         } catch (InvalidFormatException $e) {
@@ -269,10 +324,21 @@ class Media
      */
     public function duplicate($id)
     {
+        $ids = is_array($id) ? $id : func_get_args();
+
         try {
-            if (! is_int($id)) {
-                throw new InvalidFormatException();
+            foreach ($ids as $id) {
+                if (! is_int($id)) {
+                    throw new InvalidFormatException();
+                }
             }
+
+            if (count($ids) > 1) {
+                return $this->client->request('POST', 'bulk/media/duplicate', ['media_ids' => $ids]);
+            }
+
+            // If count is equal to 1 get the first element
+            $id = $ids[0];
 
             return $this->client->request('POST', "media/{$id}/duplicate");
         } catch (InvalidFormatException $e) {
