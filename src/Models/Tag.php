@@ -3,6 +3,7 @@
 namespace Meema\MeemaApi\Models;
 
 use Meema\MeemaApi\Client;
+use Meema\MeemaApi\Exceptions\InvalidFormatException;
 use Meema\MeemaApi\Response\Response;
 
 class Tag
@@ -59,6 +60,10 @@ class Tag
             return $this->all();
         }
 
+        if (! is_int($id)) {
+            throw new InvalidFormatException();
+        }
+
         $ids = is_array($id) ? $id : func_get_args();
 
         return $this->client->request('GET', 'tags', ['tag_ids' => $ids]);
@@ -73,6 +78,10 @@ class Tag
      */
     public function find($id): Response
     {
+        if (! is_int($id)) {
+            throw new InvalidFormatException();
+        }
+
         $response = $this->client->request('GET', "tags/${id}");
 
         return new Response($this, $response);
@@ -102,6 +111,10 @@ class Tag
      */
     public function update($id, $data): array
     {
+        if (! is_int($id)) {
+            throw new InvalidFormatException();
+        }
+
         return $this->client->request('PATCH', 'tags/color', $data);
     }
 
@@ -114,6 +127,10 @@ class Tag
      */
     public function delete($id)
     {
+        if (! is_int($id)) {
+            throw new InvalidFormatException();
+        }
+
         return $this->client->request('DELETE', "tags/{$id}");
     }
 

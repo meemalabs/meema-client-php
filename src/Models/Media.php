@@ -3,6 +3,7 @@
 namespace Meema\MeemaApi\Models;
 
 use Meema\MeemaApi\Client;
+use Meema\MeemaApi\Exceptions\InvalidFormatException;
 use Meema\MeemaApi\Response\Response;
 
 class Media
@@ -46,6 +47,8 @@ class Media
      * Get specific media.
      *
      * @return array
+     *
+     * @throws InvalidFormatException
      */
     public function get($id = null)
     {
@@ -55,6 +58,10 @@ class Media
 
         if (! $id) {
             return $this->all();
+        }
+
+        if (! is_int($id)) {
+            throw new InvalidFormatException();
         }
 
         $ids = is_array($id) ? $id : func_get_args();
@@ -68,9 +75,15 @@ class Media
      * @param int $id
      *
      * @return array
+     *
+     * @throws InvalidFormatException
      */
     public function find($id)
     {
+        if (! is_int($id)) {
+            throw new InvalidFormatException();
+        }
+
         $response = $this->client->request('GET', "media/${id}");
 
         return new Response($this, $response);
@@ -97,9 +110,15 @@ class Media
      * @param string $name
      *
      * @return array
+     *
+     * @throws InvalidFormatException
      */
-    public function update($id, $name): array
+    public function update($id, $name)
     {
+        if (! is_int($id)) {
+            throw new InvalidFormatException();
+        }
+
         $name = is_array($name) ? $name : compact('name');
 
         return $this->client->request('PATCH', "media/{$id}/file-name", $name);
@@ -111,9 +130,15 @@ class Media
      * @param int $id
      *
      * @return null
+     *
+     * @throws InvalidFormatException
      */
-    public function delete($id = null)
+    public function delete($id)
     {
+        if (! is_int($id)) {
+            throw new InvalidFormatException();
+        }
+
         return $this->client->request('DELETE', "media/{$id}", ['media_id' => $id]);
     }
 
@@ -135,9 +160,15 @@ class Media
      * @param int $id
      *
      * @return array
+     *
+     * @throws InvalidFormatException
      */
-    public function archive($id = null): array
+    public function archive($id)
     {
+        if (! is_int($id)) {
+            throw new InvalidFormatException();
+        }
+
         return $this->client->request('POST', "media/{$id}/archive");
     }
 
@@ -147,9 +178,15 @@ class Media
      * @param int $id
      *
      * @return array
+     *
+     * @throws InvalidFormatException
      */
-    public function unarchive($id): array
+    public function unarchive($id)
     {
+        if (! is_int($id)) {
+            throw new InvalidFormatException();
+        }
+
         return $this->client->request('POST', "media/{$id}/unarchive");
     }
 
@@ -159,9 +196,15 @@ class Media
      * @param int $id
      *
      * @return array
+     *
+     * @throws InvalidFormatException
      */
-    public function makePrivate($id): array
+    public function makePrivate($id)
     {
+        if (! is_int($id)) {
+            throw new InvalidFormatException();
+        }
+
         return $this->client->request('PATCH', "media/{$id}/make-private");
     }
 
@@ -171,9 +214,15 @@ class Media
      * @param int $id
      *
      * @return array
+     *
+     * @throws InvalidFormatException
      */
-    public function makePublic($id): array
+    public function makePublic($id)
     {
+        if (! is_int($id)) {
+            throw new InvalidFormatException();
+        }
+
         return $this->client->request('PATCH', "media/{$id}/make-public");
     }
 
@@ -183,9 +232,15 @@ class Media
      * @param int $id
      *
      * @return array
+     *
+     * @throws InvalidFormatException
      */
-    public function duplicate($id): array
+    public function duplicate($id)
     {
+        if (! is_int($id)) {
+            throw new InvalidFormatException();
+        }
+
         return $this->client->request('POST', "media/{$id}/duplicate");
     }
 
