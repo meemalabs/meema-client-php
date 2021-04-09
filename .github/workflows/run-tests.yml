@@ -33,10 +33,13 @@ jobs:
 
       - name: Install dependencies
         run: |
-          composer install && cp .env.example .env
+          composer install
+      - name: Make envfile
+        uses: SpicyPizza/create-envfile@v1
+        with:
+          envkey_BASE_URL: "http://meema-api.test/api/"
+          envkey_BASE_URL_TEST: "https://test-api.mee.ma/api/"
+          envkey_PUBLISHABLE_KEY: ${{ secrets.PUBLISHABLE_KEY }}
+          file_name: .env
       - name: Execute tests
         run: vendor/bin/pest
-        env:
-          BASE_URL: ${{ secrets.BASE_URL }}
-          BASE_URL_TEST: ${{ secrets.BASE_URL_TEST }}
-          PUBLISHABLE_KEY: ${{ secrets.PUBLISHABLE_KEY }}
