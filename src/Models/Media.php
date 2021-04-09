@@ -60,11 +60,13 @@ class Media
             return $this->all();
         }
 
-        if (! is_int($id)) {
-            throw new InvalidFormatException();
-        }
-
         $ids = is_array($id) ? $id : func_get_args();
+
+        foreach ($ids as $id) {
+            if (! is_int($id)) {
+                throw new InvalidFormatException();
+            }
+        }
 
         return $this->client->request('GET', 'media', ['media_ids' => $ids]);
     }

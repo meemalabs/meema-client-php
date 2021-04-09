@@ -33,4 +33,10 @@ jobs:
 
       - name: Install dependencies
         run: |
-          composer require "orchestra/testbench" --no-interaction --no-update
+          composer install
+      - name: Execute tests
+        run: vendor/bin/pest
+        env:
+          BASE_URL: ${{ secrets.BASE_URL }}
+          BASE_URL_TEST: ${{ secrets.BASE_URL_TEST }}
+          PUBLISHABLE_KEY: ${{ secrets.PUBLISHABLE_KEY }}

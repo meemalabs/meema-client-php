@@ -32,14 +32,14 @@ it('can find a single folder', function () {
     $this->assertTrue(count($folders) === 1);
 });
 
-// it('can create a folder', function () {
-//     $name = 'test folder';
+it('can create a folder', function () {
+    $name = 'test folder';
 
-//     $media = $this->client->folders()->create($name);
+    $media = $this->client->folders()->create($name);
 
-//     $this->assertTrue(is_array($media));
-//     $this->assertTrue($media['data']['name'] === $name);
-// });
+    $this->assertTrue(is_array($media));
+    $this->assertTrue($media['data']['name'] === $name);
+});
 
 it('can update a folder', function () {
     $name = 'test folder';
@@ -50,14 +50,14 @@ it('can update a folder', function () {
     $this->assertTrue($folders['data']['name'] === $name);
 });
 
-it('can search a folder', function () {
-    $query = 'Invoice';
+// it('can search a folder', function () {
+//     $query = 'Invoice';
 
-    $folders = $this->client->folders()->search($query);
+//     $folders = $this->client->folders()->search($query);
 
-    $this->assertTrue(is_array($folders));
-    $this->assertTrue(str_contains($folders['data'][0]['name'], $query));
-});
+//     $this->assertTrue(is_array($folders));
+//     $this->assertTrue(str_contains($folders['data'][0]['name'], $query));
+// });
 
 it('can archive a folder', function () {
     $folders = $this->client->folders()->archive(1);

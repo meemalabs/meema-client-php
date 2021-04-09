@@ -21,9 +21,9 @@ class ClientTest extends TestCase
 
     public function initializeClient()
     {
-        $teamId = 'pk_live|2|1|M3g6t5NxE5pdSWq833zG0BFf0LbBO2j9bX8FP4ft';
+        $teamId = $_ENV['PUBLISHABLE_KEY'];
 
-        $client = new Client($teamId);
+        $client = new Client($teamId, $_ENV['BASE_URL_TEST']);
 
         $this->client = $client;
 

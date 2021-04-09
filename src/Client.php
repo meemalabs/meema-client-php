@@ -26,13 +26,16 @@ class Client
      *
      * @param string $accessKey
      */
-    public function __construct($accessKey)
+    public function __construct($accessKey, $baseUrl = null)
     {
         $this->initializeEnv();
 
         $this->accessKey = $accessKey;
+
+        $url = $baseUrl ?? $_ENV['BASE_URL'];
+
         $this->client = new GuzzleClient([
-            'base_uri' => $_ENV['BASE_URL'] ?? 'https://api.mee.ma',
+            'base_uri' => $url ?? 'https://api.mee.ma',
         ]);
     }
 
@@ -56,7 +59,7 @@ class Client
     public function request($method, $path, $data = null)
     {
         $content = $this->client->request($method, $path, [
-            'json'    => $data,
+            'query'   => $data,
             'headers' => [
                 'Content-Type'  => 'application/json',
                 'Authorization' => "Bearer {$this->accessKey}",
