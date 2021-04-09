@@ -168,9 +168,30 @@ class Media
     }
 
     /**
+     * Upload a media file.
+     *
+     * @param string $path
+     *
+     * @return array
+     */
+    public function upload($path)
+    {
+        $file = fopen($path, 'r');
+
+        $fileName = basename($path);
+        $mimeType = mime_content_type($file);
+
+        $data = ['content_type' => $mimeType];
+
+        $signedUrl = $this->client->request('POST', 'vapor/signed-storage-url', $data);
+
+        return $signedUrl;
+    }
+
+    /**
      * Archive a media.
      *
-     * @param int $id
+     * @param int $ids
      *
      * @return array
      *
