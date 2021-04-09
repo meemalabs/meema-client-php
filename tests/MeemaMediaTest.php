@@ -15,7 +15,7 @@ it('can be fetch all media', function () {
 });
 
 it('can be fetch specific group of media', function () {
-    $ids = [1,2,3];
+    $ids = [1, 2, 3];
 
     $media = $this->client->media()->get($ids);
 
