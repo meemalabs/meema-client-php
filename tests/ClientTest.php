@@ -11,19 +11,19 @@ class ClientTest extends TestCase
 
     public function initializeDotEnv(): void
     {
-        if (! file_exists(__DIR__.'/../.env')) {
+        if (! file_exists(dirname(__DIR__))) {
             return;
         }
 
-        $dotenv = \Dotenv\Dotenv::createImmutable(dirname(__DIR__));
+        $dotenv = \Dotenv\Dotenv::createImmutable(dirname(dirname(__DIR__)));
         $dotenv->load();
     }
 
     public function initializeClient()
     {
-        $teamId = $_ENV['PUBLISHABLE_KEY'];
+        $teamId = env('PUBLISHABLE_KEY');
 
-        $client = new Client($teamId, $_ENV['BASE_URL_TEST']);
+        $client = new Client($teamId, env('BASE_URL_TEST'));
 
         $this->client = $client;
 
