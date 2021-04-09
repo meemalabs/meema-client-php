@@ -33,7 +33,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          composer install
+          composer install && cp .env.example .env
       - name: Execute tests
         run: vendor/bin/pest
         env:

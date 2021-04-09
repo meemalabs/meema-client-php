@@ -11,11 +11,11 @@ class ClientTest extends TestCase
 
     public function initializeDotEnv(): void
     {
-        if (! file_exists(dirname(__DIR__))) {
+        if (! file_exists(__DIR__.'/../.env')) {
             return;
         }
 
-        $dotenv = \Dotenv\Dotenv::createImmutable(dirname(dirname(__DIR__)));
+        $dotenv = \Dotenv\Dotenv::createImmutable(dirname(__DIR__));
         $dotenv->load();
     }
 
