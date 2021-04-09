@@ -2,6 +2,9 @@
 
 namespace Meema\MeemaApi\Models;
 
+use GuzzleHttp\Psr7;
+use GuzzleHttp\Psr7\Request;
+use GuzzleHttp\Client as GuzzleClient;
 use Meema\MeemaApi\Client;
 use Meema\MeemaApi\Exceptions\InvalidFormatException;
 use Meema\MeemaApi\Response\Response;
@@ -177,21 +180,63 @@ class Media
     public function upload($path)
     {
         $file = fopen($path, 'r');
+        $stream = Psr7\stream_for($file);
 
         $fileName = basename($path);
         $mimeType = mime_content_type($file);
 
-        $data = ['content_type' => $mimeType];
+        $vaporParams = ['content_type' => $mimeType];
 
-        $signedUrl = $this->client->request('POST', 'vapor/signed-storage-url', $data);
+        $signedUrl = $this->client->request('POST', 'vapor/signed-storage-url', $vaporParams);
 
-        return $signedUrl;
+        if (is_array($signedUrl) && $signedUrl['url']) {
+            $headers = $signedUrl['headers'];
+            unset($headers['Host']);
+
+            $this->uploadToS3($signedUrl, $headers, $fileName, $stream);
+
+            $uploadData = ['key' => $signedUrl['key'], 'file_name' => $fileName];
+
+            $response = $this->client->request('POST', 'upload', $uploadData);
+        }
+
+        return $response;
+    }
+
+    /**
+     * Upload the file stream to s3.
+     *
+     * @param array $signedUrl
+     * @param array $headers
+     * @param string $fileName
+     * @param GuzzleHttp\Psr7 $stream
+     *
+     * @return void
+     */
+    protected function uploadToS3($signedUrl, $headers, $fileName, $stream)
+    {
+        $client  = new GuzzleClient();
+        $request = new Request(
+            'PUT',
+            $signedUrl['url'],
+            ['headers' => json_encode($headers)],
+            new Psr7\MultipartStream(
+                [
+                    [
+                        'name' => $fileName,
+                        'contents' => $stream,
+                    ],
+                ]
+            )
+        );
+
+        $client->send($request);
     }
 
     /**
      * Archive a media.
      *
-     * @param int $ids
+     * @param array $id
      *
      * @return array
      *
@@ -220,7 +265,7 @@ class Media
     /**
      * Unarchive a media.
      *
-     * @param int $id
+     * @param array $id
      *
      * @return array
      *
@@ -249,7 +294,7 @@ class Media
     /**
      * Make a media private.
      *
-     * @param int $id
+     * @param array $id
      *
      * @return array
      *
