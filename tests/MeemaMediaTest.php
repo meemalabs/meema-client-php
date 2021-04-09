@@ -7,39 +7,39 @@ beforeEach(function () {
     $this->initializeClient();
 });
 
-// it('can be fetch all media', function () {
-//     $media = $this->client->media()->get();
+it('can be fetch all media', function () {
+    $media = $this->client->media()->get();
 
-//     $this->assertTrue(is_array($media));
-//     $this->assertTrue(count($media) > 0);
-// });
+    $this->assertTrue(is_array($media));
+    $this->assertTrue(count($media) > 0);
+});
 
-// it('can be fetch specific group of media', function () {
-//     $ids = [1,2,3];
+it('can be fetch specific group of media', function () {
+    $ids = [1, 2, 3];
 
-//     $media = $this->client->media()->get($ids);
+    $media = $this->client->media()->get($ids);
 
-//     $this->assertTrue(is_array($media));
-//     $this->assertTrue(count($media['data']) === count($ids));
-// });
+    $this->assertTrue(is_array($media));
+    $this->assertTrue(count($media['data']) === count($ids));
+});
 
-// it('can find a single media', function () {
-//     $id = 1;
+it('can find a single media', function () {
+    $id = 1;
 
-//     $media = $this->client->media()->find($id)->toArray();
+    $media = $this->client->media()->find($id)->toArray();
 
-//     $this->assertTrue(is_array($media));
-//     $this->assertTrue(count($media) === 1);
-// });
+    $this->assertTrue(is_array($media));
+    $this->assertTrue(count($media) === 1);
+});
 
-// it('can update a media', function () {
-//     $name = 'test media';
+it('can update a media', function () {
+    $name = 'test media';
 
-//     $media = $this->client->media()->update(1, $name);
+    $media = $this->client->media()->update(1, $name);
 
-//     $this->assertTrue(is_array($media));
-//     $this->assertTrue($media['data']['name'] === $name);
-// });
+    $this->assertTrue(is_array($media));
+    $this->assertTrue($media['data']['name'] === $name);
+});
 
 // it('can search a media', function () {
 //     $query = 'michael';
@@ -50,56 +50,56 @@ beforeEach(function () {
 //     $this->assertTrue(str_contains($media['data'][0]['name'], $query));
 // });
 
-// it('can archive a media', function () {
-//     $query = 'michael';
+it('can archive a media', function () {
+    $query = 'michael';
 
-//     $media = $this->client->media()->archive(1);
+    $media = $this->client->media()->archive(1);
 
-//     $this->assertTrue(is_array($media));
-//     $this->assertTrue((bool) $media['data']['is_archived']);
-// });
+    $this->assertTrue(is_array($media));
+    $this->assertTrue((bool) $media['data']['is_archived']);
+});
 
-// it('can unarchive a media', function () {
-//     $query = 'michael';
+it('can unarchive a media', function () {
+    $query = 'michael';
 
-//     $media = $this->client->media()->unarchive(1);
+    $media = $this->client->media()->unarchive(1);
 
-//     $this->assertTrue(is_array($media));
-//     $this->assertFalse((bool) $media['data']['is_archived']);
-// });
+    $this->assertTrue(is_array($media));
+    $this->assertFalse((bool) $media['data']['is_archived']);
+});
 
-// it('can make a media private', function () {
-//     $query = 'michael';
+it('can make a media private', function () {
+    $query = 'michael';
 
-//     $media = $this->client->media()->makePrivate(1);
+    $media = $this->client->media()->makePrivate(1);
 
-//     $this->assertTrue(is_array($media));
-//     $this->assertFalse((bool) $media['data']['is_public']);
-// });
+    $this->assertTrue(is_array($media));
+    $this->assertFalse((bool) $media['data']['is_public']);
+});
 
-// it('can make a media public', function () {
-//     $query = 'michael';
+it('can make a media public', function () {
+    $query = 'michael';
 
-//     $media = $this->client->media()->makePublic(1);
+    $media = $this->client->media()->makePublic(1);
 
-//     $this->assertTrue(is_array($media));
-//     $this->assertTrue((bool) $media['data']['is_public']);
-// });
+    $this->assertTrue(is_array($media));
+    $this->assertTrue((bool) $media['data']['is_public']);
+});
 
-// it('can duplicate a media', function () {
-//     $media = $this->client->media()->find(1);
+it('can duplicate a media', function () {
+    $media = $this->client->media()->find(1);
 
-//     $duplicated = $media->duplicate();
+    $duplicated = $this->client->media()->duplicate(1);
 
-//     $this->assertTrue(is_array($duplicated));
-//     $this->assertTrue($duplicated['data']['name'] === $media->toArray()['data']['name']);
-// });
+    $this->assertTrue(is_array($duplicated));
+    $this->assertTrue($duplicated['data']['name'] === $media->toArray()['data']['name']);
+});
 
-// it('can delete a media', function () {
-//     $media = $this->client->media()->get();
+it('can delete a media', function () {
+    $media = $this->client->media()->get();
 
-//     $media = array_reverse($media['data']);
-//     $response = $this->client->media()->delete($media[0]['id']);
+    $media = array_reverse($media['data']);
+    $response = $this->client->media()->delete((int) $media[0]['upload_id']);
 
-//     $this->assertTrue(is_null($response));
-// });
+    $this->assertTrue(is_null($response));
+});

@@ -1,7 +1,6 @@
 name: Run Tests
 
 on:
-  push:
   pull_request:
 
 jobs:
@@ -10,8 +9,8 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        php: [7.4, 8.0]
-        dependency-version: [prefer-lowest, prefer-stable]
+        php: [7.4]
+        dependency-version: [prefer-stable]
 
     name: P ${{ matrix.php }} - ${{ matrix.dependency-version }}
 
@@ -33,4 +32,13 @@ jobs:
 
       - name: Install dependencies
         run: |
-          composer require "orchestra/testbench" --no-interaction --no-update
+          composer install
+      - name: Make envfile
+        uses: SpicyPizza/create-envfile@v1
+        with:
+          envkey_BASE_URL: "http://meema-api.test/api/"
+          envkey_BASE_URL_TEST: "https://test-api.mee.ma/api/"
+          envkey_PUBLISHABLE_KEY: ${{ secrets.PUBLISHABLE_KEY }}
+          file_name: .env
+      - name: Execute tests
+        run: vendor/bin/pest
