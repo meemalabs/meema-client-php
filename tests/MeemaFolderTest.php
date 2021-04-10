@@ -50,14 +50,14 @@ it('can update a folder', function () {
     $this->assertTrue($folders['data']['name'] === $name);
 });
 
-// it('can search a folder', function () {
-//     $query = 'Invoice';
+it('can search a folder', function () {
+    $query = 'Invoice';
 
-//     $folders = $this->client->folders()->search($query);
+    $folders = $this->client->folders()->search($query);
 
-//     $this->assertTrue(is_array($folders));
-//     $this->assertTrue(str_contains($folders['data'][0]['name'], $query));
-// });
+    $this->assertTrue(is_array($folders));
+    $this->assertTrue(str_contains($folders['data'][0]['name'], $query));
+});
 
 it('can archive a folder', function () {
     $folders = $this->client->folders()->archive(1);

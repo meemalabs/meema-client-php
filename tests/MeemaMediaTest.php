@@ -41,14 +41,14 @@ it('can update a media', function () {
     $this->assertTrue($media['data']['name'] === $name);
 });
 
-// it('can search a media', function () {
-//     $query = 'michael';
+it('can search a media', function () {
+    $query = 'test media';
 
-//     $media = $this->client->media()->search($query);
+    $media = $this->client->media()->search($query);
 
-//     $this->assertTrue(is_array($media));
-//     $this->assertTrue(str_contains($media['data'][0]['name'], $query));
-// });
+    $this->assertTrue(is_array($media));
+    $this->assertTrue(str_contains($media['data'][0]['name'], $query));
+});
 
 it('can archive a media', function () {
     $query = 'michael';
@@ -99,7 +99,7 @@ it('can delete a media', function () {
     $media = $this->client->media()->get();
 
     $media = array_reverse($media['data']);
-    $response = $this->client->media()->delete((int) $media[0]['upload_id']);
+    $response = $this->client->media()->delete((int) $media[0]['media_id']);
 
     $this->assertTrue(is_null($response));
 });
