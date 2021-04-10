@@ -45,7 +45,7 @@ it('can delete a tag', function () {
     $tags = $this->client->tags()->get();
 
     $tags = array_reverse($tags['data']);
-    $response = $this->client->folders()->delete($tags[0]['id']);
+    $response = $this->client->tags()->delete($tags[0]['id']);
 
     $this->assertTrue(is_null($response));
 });

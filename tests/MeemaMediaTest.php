@@ -62,7 +62,8 @@ it('can update a media', function () {
 });
 
 it('can search a media', function () {
-    $query = 'butterfly';
+    $mediaName = $this->client->media()->find(1)->toArray();
+    $query = $mediaName['name'];
 
     $media = $this->client->media()->search($query);
 
