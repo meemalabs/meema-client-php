@@ -34,7 +34,6 @@ it('can be fetch all media for a folder', function () {
     $this->assertTrue(count($media) > 0);
 });
 
-
 it('can be fetch specific group of media', function () {
     $ids = [1, 2, 3];
 
