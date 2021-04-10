@@ -14,6 +14,26 @@ it('can be fetch all media', function () {
     $this->assertTrue(count($media) > 0);
 });
 
+it('can be fetch all media for a tag', function () {
+    // 8 is the tag id for images
+    $tag = $this->client->tags()->find(8);
+
+    $media = $tag->media()->get();
+
+    $this->assertTrue(is_array($media));
+    $this->assertTrue(count($media) > 0);
+});
+
+it('can be fetch all media for a folder', function () {
+    // 8 is the tag id for images
+    $folder = $this->client->folders()->find(1);
+
+    $media = $folder->media()->get();
+
+    $this->assertTrue(is_array($media));
+    $this->assertTrue(count($media) > 0);
+});
+
 it('can be fetch specific group of media', function () {
     $ids = [1, 2, 3];
 
@@ -42,7 +62,8 @@ it('can update a media', function () {
 });
 
 it('can search a media', function () {
-    $query = 'people';
+    $mediaName = $this->client->media()->find(1)->toArray();
+    $query = $mediaName['name'];
 
     $media = $this->client->media()->search($query);
 
