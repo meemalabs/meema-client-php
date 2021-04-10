@@ -60,11 +60,13 @@ class Tag
             return $this->all();
         }
 
-        if (! is_int($id)) {
-            throw new InvalidFormatException();
-        }
-
         $ids = is_array($id) ? $id : func_get_args();
+
+        foreach ($ids as $id) {
+            if (! is_int($id)) {
+                throw new InvalidFormatException();
+            }
+        }
 
         return $this->client->request('GET', 'tags', ['tag_ids' => $ids]);
     }
@@ -88,20 +90,6 @@ class Tag
     }
 
     /**
-     * Create folder.
-     *
-     * @param string $name
-     *
-     * @return array
-     */
-    public function create($name): array
-    {
-        $name = is_array($name) ? $name : compact('name');
-
-        return $this->client->request('POST', "tags/{$this->client->getAccessKey()}", $name);
-    }
-
-    /**
      * Update folder.
      *
      * @param string $name
@@ -109,11 +97,17 @@ class Tag
      *
      * @return array
      */
-    public function update($id, $data): array
+    public function update($id, $color): array
     {
         if (! is_int($id)) {
             throw new InvalidFormatException();
         }
+
+        $data = [
+            'color' => $color,
+            'tag_id' => $id,
+            'team_id' => 1,
+        ];
 
         return $this->client->request('PATCH', 'tags/color', $data);
     }

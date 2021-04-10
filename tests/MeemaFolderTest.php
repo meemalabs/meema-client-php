@@ -7,14 +7,14 @@ beforeEach(function () {
     $this->initializeClient();
 });
 
-it('can be fetch all folders', function () {
+it('can fetch all folders', function () {
     $folders = $this->client->folders()->get();
 
     $this->assertTrue(is_array($folders));
     $this->assertTrue(count($folders) > 0);
 });
 
-it('can be fetch specific group of folders', function () {
+it('can fetch specific group of folders', function () {
     $ids = [1, 2, 3];
 
     $folders = $this->client->folders()->get($ids);
