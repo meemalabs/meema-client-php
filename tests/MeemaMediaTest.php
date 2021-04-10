@@ -41,18 +41,16 @@ it('can update a media', function () {
     $this->assertTrue($media['data']['name'] === $name);
 });
 
-// it('can search a media', function () {
-//     $query = 'michael';
+it('can search a media', function () {
+    $query = 'people';
 
-//     $media = $this->client->media()->search($query);
+    $media = $this->client->media()->search($query);
 
-//     $this->assertTrue(is_array($media));
-//     $this->assertTrue(str_contains($media['data'][0]['name'], $query));
-// });
+    $this->assertTrue(is_array($media));
+    $this->assertTrue(str_contains($media['data'][0]['name'], $query));
+});
 
 it('can archive a media', function () {
-    $query = 'michael';
-
     $media = $this->client->media()->archive(1);
 
     $this->assertTrue(is_array($media));
@@ -60,8 +58,6 @@ it('can archive a media', function () {
 });
 
 it('can unarchive a media', function () {
-    $query = 'michael';
-
     $media = $this->client->media()->unarchive(1);
 
     $this->assertTrue(is_array($media));
@@ -69,8 +65,6 @@ it('can unarchive a media', function () {
 });
 
 it('can make a media private', function () {
-    $query = 'michael';
-
     $media = $this->client->media()->makePrivate(1);
 
     $this->assertTrue(is_array($media));
@@ -78,8 +72,6 @@ it('can make a media private', function () {
 });
 
 it('can make a media public', function () {
-    $query = 'michael';
-
     $media = $this->client->media()->makePublic(1);
 
     $this->assertTrue(is_array($media));
@@ -99,7 +91,7 @@ it('can delete a media', function () {
     $media = $this->client->media()->get();
 
     $media = array_reverse($media['data']);
-    $response = $this->client->media()->delete((int) $media[0]['upload_id']);
+    $response = $this->client->media()->delete((int) $media[0]['media_id']);
 
     $this->assertTrue(is_null($response));
 });
