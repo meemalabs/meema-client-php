@@ -23,8 +23,9 @@
 
 ## 🐑 Features
 
-- Thin & minimal low-level HTTP client to interact with Meema's API
-- Supports php `^5.*`.
+- Most simple way to implement a fully-functional media management system
+- Thin & minimal package to interact with Meema's API
+- Supports php `^5.*`
 
 ## 💡 Usage
 
