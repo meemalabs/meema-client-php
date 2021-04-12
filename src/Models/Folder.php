@@ -142,7 +142,7 @@ class Folder
         $ids = is_array($ids) ? $ids : func_get_args();
 
         foreach ($ids as $id) {
-        if (! is_int($id)) {
+            if (! is_int($id)) {
                 throw new InvalidFormatException();
             }
 
