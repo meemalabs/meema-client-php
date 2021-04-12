@@ -118,9 +118,20 @@ class Favorite
      */
     public function delete($id)
     {
-        if (! is_int($id)) {
-            throw new InvalidFormatException();
+        $ids = is_array($id) ? $id : func_get_args();
+
+        foreach ($ids as $id) {
+            if (! is_int($id)) {
+                throw new InvalidFormatException();
+            }
         }
+
+        if (count($ids) > 1) {
+            return $this->client->request('POST', 'bulk/favorites/delete', ['favorite_ids' => $ids]);
+        }
+
+        // If count is equal to 1 get the first element
+        $id = $ids[0];
 
         return $this->client->request('DELETE', "favorites/{$id}");
     }
