@@ -2,9 +2,9 @@
 
 namespace Meema\MeemaApi\Models;
 
+use GuzzleHttp\Client as GuzzleClient;
 use GuzzleHttp\Psr7;
 use GuzzleHttp\Psr7\Request;
-use GuzzleHttp\Client as GuzzleClient;
 use Meema\MeemaApi\Client;
 use Meema\MeemaApi\Exceptions\InvalidFormatException;
 use Meema\MeemaApi\Response\Response;
@@ -215,7 +215,7 @@ class Media
      */
     protected function uploadToS3($signedUrl, $headers, $fileName, $stream)
     {
-        $client  = new GuzzleClient();
+        $client = new GuzzleClient();
         $request = new Request(
             'PUT',
             $signedUrl['url'],
