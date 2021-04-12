@@ -77,6 +77,18 @@ class Media
     }
 
     /**
+     * Search for specific media.
+     *
+     * @param string $query
+     *
+     * @return array
+     */
+    public function search($query)
+    {
+        return $this->client->request('POST', 'media/search', compact('query'));
+    }
+
+    /**
      * Get specific media.
      *
      * @param int $id
@@ -158,18 +170,6 @@ class Media
         $id = $ids[0];
 
         return $this->client->request('DELETE', "media/{$id}", ['media_id' => $id]);
-    }
-
-    /**
-     * Get specific folders.
-     *
-     * @param string $query
-     *
-     * @return array
-     */
-    public function search($query)
-    {
-        return $this->client->request('POST', 'media/search', compact('query'));
     }
 
     /**

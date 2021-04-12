@@ -70,6 +70,18 @@ class Folder
     }
 
     /**
+     * Search for specific folders.
+     *
+     * @param string $query
+     *
+     * @return array
+     */
+    public function search($query)
+    {
+        return $this->client->request('POST', 'folders/search', compact('query'));
+    }
+
+    /**
      * Get specific folders.
      *
      * @param int $id
@@ -159,18 +171,6 @@ class Folder
         $id = $ids[0];
 
         return $this->client->request('DELETE', "folders/{$id}");
-    }
-
-    /**
-     * Get specific folders.
-     *
-     * @param string $query
-     *
-     * @return array
-     */
-    public function search($query)
-    {
-        return $this->client->request('POST', 'folders/search', compact('query'));
     }
 
     /**
