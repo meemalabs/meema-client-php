@@ -49,21 +49,23 @@ class Media
     /**
      * Get specific media.
      *
+     * @param array $ids
+     *
      * @return array
      *
      * @throws InvalidFormatException
      */
-    public function get($id = null)
+    public function get($ids = null)
     {
         if ($this->model) {
             return $this->fetchForModel();
         }
 
-        if (! $id) {
+        if (! $ids) {
             return $this->all();
         }
 
-        $ids = is_array($id) ? $id : func_get_args();
+        $ids = is_array($ids) ? $ids : func_get_args();
 
         foreach ($ids as $id) {
             if (! is_int($id)) {
@@ -132,15 +134,15 @@ class Media
     /**
      * Delete a media.
      *
-     * @param int $id
+     * @param array $ids
      *
      * @return null
      *
      * @throws InvalidFormatException
      */
-    public function delete($id)
+    public function delete($ids)
     {
-        $ids = is_array($id) ? $id : func_get_args();
+        $ids = is_array($ids) ? $ids : func_get_args();
 
         foreach ($ids as $id) {
             if (! is_int($id)) {
@@ -193,7 +195,7 @@ class Media
             $headers = $signedUrl['headers'];
             unset($headers['Host']);
 
-            $this->uploadToS3($signedUrl, $headers, $fileName, $stream);
+            $this->uploadToS3($signedUrl['url'], $headers, $fileName, $stream);
 
             $uploadData = ['key' => $signedUrl['key'], 'file_name' => $fileName];
 
@@ -206,7 +208,7 @@ class Media
     /**
      * Upload the file stream to s3.
      *
-     * @param array $signedUrl
+     * @param string $signedUrl
      * @param array $headers
      * @param string $fileName
      * @param GuzzleHttp\Psr7 $stream
@@ -218,7 +220,7 @@ class Media
         $client = new GuzzleClient();
         $request = new Request(
             'PUT',
-            $signedUrl['url'],
+            $signedUrl,
             ['headers' => json_encode($headers)],
             new Psr7\MultipartStream(
                 [
@@ -236,15 +238,15 @@ class Media
     /**
      * Archive a media.
      *
-     * @param array $id
+     * @param array $ids
      *
      * @return array
      *
      * @throws InvalidFormatException
      */
-    public function archive($id)
+    public function archive($ids)
     {
-        $ids = is_array($id) ? $id : func_get_args();
+        $ids = is_array($ids) ? $ids : func_get_args();
 
         foreach ($ids as $id) {
             if (! is_int($id)) {
@@ -265,15 +267,15 @@ class Media
     /**
      * Unarchive a media.
      *
-     * @param array $id
+     * @param array $ids
      *
      * @return array
      *
      * @throws InvalidFormatException
      */
-    public function unarchive($id)
+    public function unarchive($ids)
     {
-        $ids = is_array($id) ? $id : func_get_args();
+        $ids = is_array($ids) ? $ids : func_get_args();
 
         foreach ($ids as $id) {
             if (! is_int($id)) {
@@ -294,15 +296,15 @@ class Media
     /**
      * Make a media private.
      *
-     * @param array $id
+     * @param array $ids
      *
      * @return array
      *
      * @throws InvalidFormatException
      */
-    public function makePrivate($id)
+    public function makePrivate($ids)
     {
-        $ids = is_array($id) ? $id : func_get_args();
+        $ids = is_array($ids) ? $ids : func_get_args();
 
         foreach ($ids as $id) {
             if (! is_int($id)) {
@@ -323,15 +325,15 @@ class Media
     /**
      * Make a media public.
      *
-     * @param int $id
+     * @param array $ids
      *
      * @return array
      *
      * @throws InvalidFormatException
      */
-    public function makePublic($id)
+    public function makePublic($ids)
     {
-        $ids = is_array($id) ? $id : func_get_args();
+        $ids = is_array($ids) ? $ids : func_get_args();
 
         foreach ($ids as $id) {
             if (! is_int($id)) {
@@ -352,15 +354,15 @@ class Media
     /**
      * Duplicate a media.
      *
-     * @param int $id
+     * @param array $ids
      *
      * @return array
      *
      * @throws InvalidFormatException
      */
-    public function duplicate($id)
+    public function duplicate($ids)
     {
-        $ids = is_array($id) ? $id : func_get_args();
+        $ids = is_array($ids) ? $ids : func_get_args();
 
         foreach ($ids as $id) {
             if (! is_int($id)) {
@@ -405,7 +407,7 @@ class Media
     /**
      * Fetch the media for the folder.
      *
-     * @param int $id
+     * @param Meema\MeemaApi\Models\Folder $folder
      *
      * @return self
      */
@@ -419,7 +421,7 @@ class Media
     /**
      * Initialize media model.
      *
-     * @param Meema\MeemaApi\Models\Folder $folder
+     * @param Meema\MeemaApi\Models\Tag $tag
      *
      * @return self
      */

@@ -131,18 +131,18 @@ class Folder
     /**
      * Delete a folder.
      *
-     * @param int $id
+     * @param array $ids
      *
      * @return null
      *
      * @throws InvalidFormatException
      */
-    public function delete($id)
+    public function delete($ids)
     {
-        $ids = is_array($id) ? $id : func_get_args();
+        $ids = is_array($ids) ? $ids : func_get_args();
 
         foreach ($ids as $id) {
-            if (! is_int($id)) {
+        if (! is_int($id)) {
                 throw new InvalidFormatException();
             }
 
@@ -176,15 +176,15 @@ class Folder
     /**
      * Archive a folder.
      *
-     * @param int $id
+     * @param array $ids
      *
      * @return array
      *
      * @throws InvalidFormatException
      */
-    public function archive($id)
+    public function archive($ids)
     {
-        $ids = is_array($id) ? $id : func_get_args();
+        $ids = is_array($ids) ? $ids : func_get_args();
 
         foreach ($ids as $id) {
             if (! is_int($id)) {
@@ -205,15 +205,15 @@ class Folder
     /**
      * Unarchive a folder.
      *
-     * @param int $id
+     * @param array $ids
      *
      * @return array
      *
      * @throws InvalidFormatException
      */
-    public function unarchive($id)
+    public function unarchive($ids)
     {
-        $ids = is_array($id) ? $id : func_get_args();
+        $ids = is_array($ids) ? $ids : func_get_args();
 
         foreach ($ids as $id) {
             if (! is_int($id)) {
@@ -234,15 +234,15 @@ class Folder
     /**
      * Duplicate a folder.
      *
-     * @param int $id
+     * @param array $ids
      *
      * @return array
      *
      * @throws InvalidFormatException
      */
-    public function duplicate($id): array
+    public function duplicate($ids): array
     {
-        $ids = is_array($id) ? $id : func_get_args();
+        $ids = is_array($ids) ? $ids : func_get_args();
 
         foreach ($ids as $id) {
             if (! is_int($id)) {
@@ -264,6 +264,7 @@ class Folder
      * Add folder to media.
      *
      * @param int $id
+     * @param string $name
      *
      * @return array
      *
@@ -314,7 +315,7 @@ class Folder
     /**
      * Initialize media model.
      *
-     * @param Meema\MeemaApi\Models\Folder $folder
+     * @param Meema\MeemaApi\Models\Tag $tag
      *
      * @return self
      */
@@ -338,6 +339,8 @@ class Folder
     /**
      * Initialize the media model.
      *
+     * @param int $id
+     *
      * @return Meema\MeemaApi\Models\Media
      */
     public function media($id = null): Media
@@ -349,6 +352,8 @@ class Folder
 
     /**
      * Initialize the tags model.
+     *
+     * @param int $id
      *
      * @return Meema\MeemaApi\Models\Tag
      */

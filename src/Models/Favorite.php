@@ -41,17 +41,17 @@ class Favorite
     /**
      * Get specific favorites.
      *
-     * @param int $id
+     * @param array $ids
      *
      * @return array
      */
-    public function get($id = null)
+    public function get($ids = null)
     {
-        if (! $id) {
+        if (! $ids) {
             return $this->all();
         }
 
-        $ids = is_array($id) ? $id : func_get_args();
+        $ids = is_array($ids) ? $ids : func_get_args();
 
         foreach ($ids as $id) {
             if (! is_int($id)) {
@@ -81,9 +81,9 @@ class Favorite
     }
 
     /**
-     * Create folder.
+     * Create favorite.
      *
-     * @param  string $name
+     * @param array $data
      *
      * @return array
      */
@@ -93,10 +93,10 @@ class Favorite
     }
 
     /**
-     * Update folder.
+     * Update favorite.
      *
-     * @param string $name
      * @param int $id
+     * @param string $data
      *
      * @return array
      */
@@ -110,15 +110,15 @@ class Favorite
     }
 
     /**
-     * Delete a folder.
+     * Delete a favorite.
      *
-     * @param int $id
+     * @param array $ids
      *
      * @return null
      */
-    public function delete($id)
+    public function delete($ids)
     {
-        $ids = is_array($id) ? $id : func_get_args();
+        $ids = is_array($ids) ? $ids : func_get_args();
 
         foreach ($ids as $id) {
             if (! is_int($id)) {
