@@ -2,6 +2,9 @@
 
 namespace Meema\MeemaApi\Models;
 
+use GuzzleHttp\Client as GuzzleClient;
+use GuzzleHttp\Psr7;
+use GuzzleHttp\Psr7\Request;
 use Meema\MeemaApi\Client;
 use Meema\MeemaApi\Exceptions\InvalidFormatException;
 use Meema\MeemaApi\Response\Response;
@@ -46,21 +49,23 @@ class Media
     /**
      * Get specific media.
      *
+     * @param array $ids
+     *
      * @return array
      *
      * @throws InvalidFormatException
      */
-    public function get($id = null)
+    public function get($ids = null)
     {
         if ($this->model) {
             return $this->fetchForModel();
         }
 
-        if (! $id) {
+        if (! $ids) {
             return $this->all();
         }
 
-        $ids = is_array($id) ? $id : func_get_args();
+        $ids = is_array($ids) ? $ids : func_get_args();
 
         foreach ($ids as $id) {
             if (! is_int($id)) {
@@ -69,6 +74,18 @@ class Media
         }
 
         return $this->client->request('GET', 'media', ['media_ids' => $ids]);
+    }
+
+    /**
+     * Search for specific media.
+     *
+     * @param string $query
+     *
+     * @return array
+     */
+    public function search($query)
+    {
+        return $this->client->request('POST', 'media/search', compact('query'));
     }
 
     /**
@@ -129,15 +146,15 @@ class Media
     /**
      * Delete a media.
      *
-     * @param int $id
+     * @param array $ids
      *
      * @return null
      *
      * @throws InvalidFormatException
      */
-    public function delete($id)
+    public function delete($ids)
     {
-        $ids = is_array($id) ? $id : func_get_args();
+        $ids = is_array($ids) ? $ids : func_get_args();
 
         foreach ($ids as $id) {
             if (! is_int($id)) {
@@ -156,29 +173,80 @@ class Media
     }
 
     /**
-     * Get specific folders.
+     * Upload a media file.
      *
-     * @param string $query
+     * @param string $path
      *
      * @return array
      */
-    public function search($query)
+    public function upload($path)
     {
-        return $this->client->request('POST', 'media/search', compact('query'));
+        $file = fopen($path, 'r');
+        $stream = Psr7\stream_for($file);
+
+        $fileName = basename($path);
+        $mimeType = mime_content_type($file);
+
+        $vaporParams = ['content_type' => $mimeType];
+
+        $signedUrl = $this->client->request('POST', 'vapor/signed-storage-url', $vaporParams);
+
+        if (is_array($signedUrl) && $signedUrl['url']) {
+            $headers = $signedUrl['headers'];
+            unset($headers['Host']);
+
+            $this->uploadToS3($signedUrl['url'], $headers, $fileName, $stream);
+
+            $uploadData = ['key' => $signedUrl['key'], 'file_name' => $fileName];
+
+            $response = $this->client->request('POST', 'upload', $uploadData);
+        }
+
+        return $response;
+    }
+
+    /**
+     * Upload the file stream to s3.
+     *
+     * @param string $signedUrl
+     * @param array $headers
+     * @param string $fileName
+     * @param GuzzleHttp\Psr7 $stream
+     *
+     * @return void
+     */
+    protected function uploadToS3($signedUrl, $headers, $fileName, $stream)
+    {
+        $client = new GuzzleClient();
+        $request = new Request(
+            'PUT',
+            $signedUrl,
+            ['headers' => json_encode($headers)],
+            new Psr7\MultipartStream(
+                [
+                    [
+                        'name' => $fileName,
+                        'contents' => $stream,
+                    ],
+                ]
+            )
+        );
+
+        $client->send($request);
     }
 
     /**
      * Archive a media.
      *
-     * @param int $id
+     * @param array $ids
      *
      * @return array
      *
      * @throws InvalidFormatException
      */
-    public function archive($id)
+    public function archive($ids)
     {
-        $ids = is_array($id) ? $id : func_get_args();
+        $ids = is_array($ids) ? $ids : func_get_args();
 
         foreach ($ids as $id) {
             if (! is_int($id)) {
@@ -199,15 +267,15 @@ class Media
     /**
      * Unarchive a media.
      *
-     * @param int $id
+     * @param array $ids
      *
      * @return array
      *
      * @throws InvalidFormatException
      */
-    public function unarchive($id)
+    public function unarchive($ids)
     {
-        $ids = is_array($id) ? $id : func_get_args();
+        $ids = is_array($ids) ? $ids : func_get_args();
 
         foreach ($ids as $id) {
             if (! is_int($id)) {
@@ -228,15 +296,15 @@ class Media
     /**
      * Make a media private.
      *
-     * @param int $id
+     * @param array $ids
      *
      * @return array
      *
      * @throws InvalidFormatException
      */
-    public function makePrivate($id)
+    public function makePrivate($ids)
     {
-        $ids = is_array($id) ? $id : func_get_args();
+        $ids = is_array($ids) ? $ids : func_get_args();
 
         foreach ($ids as $id) {
             if (! is_int($id)) {
@@ -257,15 +325,15 @@ class Media
     /**
      * Make a media public.
      *
-     * @param int $id
+     * @param array $ids
      *
      * @return array
      *
      * @throws InvalidFormatException
      */
-    public function makePublic($id)
+    public function makePublic($ids)
     {
-        $ids = is_array($id) ? $id : func_get_args();
+        $ids = is_array($ids) ? $ids : func_get_args();
 
         foreach ($ids as $id) {
             if (! is_int($id)) {
@@ -286,15 +354,15 @@ class Media
     /**
      * Duplicate a media.
      *
-     * @param int $id
+     * @param array $ids
      *
      * @return array
      *
      * @throws InvalidFormatException
      */
-    public function duplicate($id)
+    public function duplicate($ids)
     {
-        $ids = is_array($id) ? $id : func_get_args();
+        $ids = is_array($ids) ? $ids : func_get_args();
 
         foreach ($ids as $id) {
             if (! is_int($id)) {
@@ -339,7 +407,7 @@ class Media
     /**
      * Fetch the media for the folder.
      *
-     * @param int $id
+     * @param Meema\MeemaApi\Models\Folder $folder
      *
      * @return self
      */
@@ -353,7 +421,7 @@ class Media
     /**
      * Initialize media model.
      *
-     * @param Meema\MeemaApi\Models\Folder $folder
+     * @param Meema\MeemaApi\Models\Tag $tag
      *
      * @return self
      */

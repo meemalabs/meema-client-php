@@ -14,6 +14,17 @@ it('can fetch all folders', function () {
     $this->assertTrue(count($folders) > 0);
 });
 
+it('can search a folder', function () {
+    $folder = $this->client->folders()->find(1)->toArray();
+
+    $query = $folder['data']['name'];
+
+    $folders = $this->client->folders()->search($query);
+
+    $this->assertTrue(is_array($folders));
+    $this->assertTrue(str_contains($folders['data'][0]['name'], $query));
+});
+
 it('can fetch specific group of folders', function () {
     $ids = [1, 2, 3];
 
@@ -48,15 +59,6 @@ it('can update a folder', function () {
 
     $this->assertTrue(is_array($folders));
     $this->assertTrue($folders['data']['name'] === $name);
-});
-
-it('can search a folder', function () {
-    $query = 'Invoice';
-
-    $folders = $this->client->folders()->search($query);
-
-    $this->assertTrue(is_array($folders));
-    $this->assertTrue(str_contains($folders['data'][0]['name'], $query));
 });
 
 it('can archive a folder', function () {
