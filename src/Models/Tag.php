@@ -46,21 +46,21 @@ class Tag
     /**
      * Get specific tags.
      *
-     * @param int $id
+     * @param array $ids
      *
      * @return array
      */
-    public function get($id = null): array
+    public function get($ids = null): array
     {
         if ($this->model) {
             return $this->fetchForModel();
         }
 
-        if (! $id) {
+        if (! $ids) {
             return $this->all();
         }
 
-        $ids = is_array($id) ? $id : func_get_args();
+        $ids = is_array($ids) ? $ids : func_get_args();
 
         foreach ($ids as $id) {
             if (! is_int($id)) {
@@ -90,10 +90,10 @@ class Tag
     }
 
     /**
-     * Update folder.
+     * Update a tag color.
      *
-     * @param string $name
      * @param int $id
+     * @param string $color
      *
      * @return array
      */
@@ -106,22 +106,21 @@ class Tag
         $data = [
             'color' => $color,
             'tag_id' => $id,
-            'team_id' => 1,
         ];
 
         return $this->client->request('PATCH', 'tags/color', $data);
     }
 
     /**
-     * Delete a folder.
+     * Delete tags.
      *
-     * @param int $id
+     * @param array $ids
      *
      * @return Response
      */
-    public function delete($id)
+    public function delete($ids)
     {
-        $ids = is_array($id) ? $id : func_get_args();
+        $ids = is_array($ids) ? $ids : func_get_args();
 
         foreach ($ids as $id) {
             if (! is_int($id)) {
@@ -142,6 +141,8 @@ class Tag
     /**
      * Initialize the media model.
      *
+     * @param int $id
+     *
      * @return Meema\MeemaApi\Models\Media
      */
     public function media($id = null): Media
@@ -153,6 +154,8 @@ class Tag
 
     /**
      * Initialize the folder model.
+     *
+     * @param int $id
      *
      * @return Meema\MeemaApi\Models\Folder
      */

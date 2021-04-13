@@ -14,6 +14,16 @@ it('can be fetch all media', function () {
     $this->assertTrue(count($media) > 0);
 });
 
+it('can search a media', function () {
+    $media = $this->client->media()->find(1)->toArray();
+    $query = $media['data']['name'];
+
+    $media = $this->client->media()->search($query);
+
+    $this->assertTrue(is_array($media));
+    $this->assertTrue(str_contains($media['data'][0]['name'], $query));
+});
+
 it('can be fetch all media for a tag', function () {
     // 8 is the tag id for images
     $tag = $this->client->tags()->find(8);
@@ -59,16 +69,6 @@ it('can update a media', function () {
 
     $this->assertTrue(is_array($media));
     $this->assertTrue($media['data']['name'] === $name);
-});
-
-it('can search a media', function () {
-    $mediaName = $this->client->media()->find(1)->toArray();
-    $query = $mediaName['name'];
-
-    $media = $this->client->media()->search($query);
-
-    $this->assertTrue(is_array($media));
-    $this->assertTrue(str_contains($media['data'][0]['name'], $query));
 });
 
 it('can archive a media', function () {
