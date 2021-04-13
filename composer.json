@@ -1,14 +1,16 @@
 {
     "name": "meema/meema-client-php",
-    "description": "A minimal implementation of Meema API",
+    "description": "⚡️ A fully-featured & blazing-fast PHP API client to interact with Meema. 🐑",
     "keywords": [
         "meema",
-        "meema-api",
+        "api",
+        "meema-client",
         "media management",
         "video conversions",
-        "image edits"
+        "image editing",
+        "video converter"
     ],
-    "homepage": "https://github.com/meemalabs/meema-api",
+    "homepage": "https://github.com/meemalabs/meema-client-php",
     "license": "MIT",
     "authors": [
         {
@@ -19,9 +21,13 @@
         }
     ],
     "require": {
+        "php": "^7.0|^8.0",
         "guzzlehttp/guzzle": "^7.2",
         "vlucas/phpdotenv": "^5.3",
-        "illuminate/support": "^8.35",
+        "illuminate/support": "^8.35"
+    },
+    "require-dev": {
+        "pestphp/pest": "^1.0",
         "orchestra/testbench": "^6.17"
     },
     "autoload": {
@@ -33,8 +39,5 @@
         "psr-4": {
             "Meema\\MeemaApi\\Test\\": "tests"
         }
-    },
-    "require-dev": {
-        "pestphp/pest": "^1.0"
     }
 }
