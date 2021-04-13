@@ -1,5 +1,5 @@
 {
-    "name": "meema/meema-api",
+    "name": "meema/meema-client-php",
     "description": "A minimal implementation of Meema API",
     "keywords": [
         "meema",
