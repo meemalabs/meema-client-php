@@ -3,9 +3,10 @@
     "description": "A minimal implementation of Meema API",
     "keywords": [
         "meema",
-        "cion",
-        "api",
-        "meema-api"
+        "meema-api",
+        "media management",
+        "video conversions",
+        "image edits"
     ],
     "homepage": "https://github.com/meemalabs/meema-api",
     "license": "MIT",
