@@ -46,7 +46,7 @@ class Client
      */
     public function initializeEnv()
     {
-          if (! file_exists(dirname(__DIR__)).'.env') {
+        if (! file_exists(dirname(__DIR__)).'.env') {
             return;
         }
 
