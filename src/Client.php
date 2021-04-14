@@ -44,8 +44,12 @@ class Client
      *
      * @return void
      */
-    public function initializeEnv(): void
+    public function initializeEnv()
     {
+        if (! file_exists(dirname(__DIR__))) {
+            return;
+        }
+
         $dotenv = Dotenv::createImmutable(dirname(__DIR__));
         $dotenv->load();
     }
