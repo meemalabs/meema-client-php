@@ -32,7 +32,7 @@ class Client
 
         $this->accessKey = $accessKey;
 
-        $url = $baseUrl ?? $_ENV['BASE_URL'];
+        $url = $baseUrl ?? env('BASE_URL');
 
         $this->client = new GuzzleClient([
             'base_uri' => $url ?? 'https://api.mee.ma',
@@ -46,7 +46,7 @@ class Client
      */
     public function initializeEnv()
     {
-        if (! file_exists(dirname(__DIR__))) {
+          if (! file_exists(dirname(__DIR__)).'.env') {
             return;
         }
 
