@@ -74,7 +74,6 @@ class Client
 
         $body = json_decode($content, true);
 
-
         if ($body && $body['data']) {
             return $body['data'];
         }
