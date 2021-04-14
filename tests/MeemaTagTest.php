@@ -20,7 +20,7 @@ it('can fetch specific group of tags', function () {
     $tags = $this->client->tags()->get($ids);
 
     $this->assertTrue(is_array($tags));
-    $this->assertTrue(count($tags['data']) === count($ids));
+    $this->assertTrue(count($tags) === count($ids));
 });
 
 it('can find a single tag', function () {
@@ -29,7 +29,7 @@ it('can find a single tag', function () {
     $tags = $this->client->tags()->find($id)->toArray();
 
     $this->assertTrue(is_array($tags));
-    $this->assertTrue(count($tags) === 1);
+    $this->assertTrue(array_key_exists('id', $tags));
 });
 
 it('can update a tag', function () {
@@ -38,13 +38,13 @@ it('can update a tag', function () {
     $tags = $this->client->tags()->update(7, $color);
 
     $this->assertTrue(is_array($tags));
-    $this->assertTrue($tags['data']['color'] === $color);
+    $this->assertTrue($tags['color'] === $color);
 });
 
 it('can delete a tag', function () {
     $tags = $this->client->tags()->get();
 
-    $tags = array_reverse($tags['data']);
+    $tags = array_reverse($tags);
     $response = $this->client->tags()->delete($tags[0]['id']);
 
     $this->assertTrue(is_null($response));
@@ -55,7 +55,7 @@ it('can fetch all media tags', function () {
     $tags = $media->tags()->get();
 
     $this->assertTrue(is_array($tags));
-    $this->assertTrue(count($tags['data'][0]) > 0);
+    $this->assertTrue(count($tags[0]) > 0);
 });
 
 it('can fetch all folder tags', function () {
@@ -63,5 +63,5 @@ it('can fetch all folder tags', function () {
     $tags = $folder->tags()->get();
 
     $this->assertTrue(is_array($tags));
-    $this->assertTrue(count($tags['data'][0]) > 0);
+    $this->assertTrue(count($tags[0]) > 0);
 });

@@ -46,7 +46,7 @@ class Client
      */
     public function initializeEnv()
     {
-        if (! file_exists(dirname(__DIR__)).'.env') {
+        if (! file_exists(__DIR__.'/../.env')) {
             return;
         }
 
@@ -72,7 +72,13 @@ class Client
         ->getBody()
         ->getContents();
 
-        return json_decode($content, true);
+        $body = json_decode($content, true);
+
+        if ($body && $body['data']) {
+            return $body['data'];
+        }
+
+        return $body;
     }
 
     /**
