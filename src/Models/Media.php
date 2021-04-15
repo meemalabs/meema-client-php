@@ -8,9 +8,12 @@ use GuzzleHttp\Psr7\Request;
 use Meema\MeemaApi\Client;
 use Meema\MeemaApi\Exceptions\InvalidFormatException;
 use Meema\MeemaApi\Response\Response;
+use Meema\MeemaApi\Traits\CollectionsResponse;
 
 class Media
 {
+    use CollectionsResponse;
+
     /**
      * @var \Meema\MeemaApi\Client
      */
@@ -39,7 +42,7 @@ class Media
     /**
      * List all media.
      *
-     * @return array
+     * @return \Illuminate\Support\Collection|array
      */
     public function all()
     {
@@ -51,18 +54,18 @@ class Media
      *
      * @param array $ids
      *
-     * @return array
+     * @return \Illuminate\Support\Collection|array
      *
      * @throws InvalidFormatException
      */
     public function get($ids = null)
     {
         if ($this->model) {
-            return $this->fetchForModel();
+            return $this->toCollection($this->fetchForModel());
         }
 
         if (! $ids) {
-            return $this->all();
+            return $this->toCollection($this->all());
         }
 
         $ids = is_array($ids) ? $ids : func_get_args();
@@ -73,7 +76,9 @@ class Media
             }
         }
 
-        return $this->client->request('GET', 'media', ['media_ids' => $ids]);
+        $response = $this->client->request('GET', 'media', ['media_ids' => $ids]);
+
+        return $this->toCollection($response);
     }
 
     /**
@@ -81,11 +86,13 @@ class Media
      *
      * @param string $query
      *
-     * @return array
+     * @return \Illuminate\Support\Collection|array
      */
     public function search($query)
     {
-        return $this->client->request('POST', 'media/search', compact('query'));
+        $response = $this->client->request('POST', 'media/search', compact('query'));
+
+        return $this->toCollection($response);
     }
 
     /**

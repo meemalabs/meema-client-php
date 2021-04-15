@@ -5,9 +5,12 @@ namespace Meema\MeemaApi\Models;
 use Meema\MeemaApi\Client;
 use Meema\MeemaApi\Exceptions\InvalidFormatException;
 use Meema\MeemaApi\Response\Response;
+use Meema\MeemaApi\Traits\CollectionsResponse;
 
 class Favorite
 {
+    use CollectionsResponse;
+
     /**
      * @var Meema\MeemaApi\Client
      */
@@ -43,12 +46,12 @@ class Favorite
      *
      * @param array $ids
      *
-     * @return array
+     * @return \Illuminate\Support\Collection|array
      */
     public function get($ids = null)
     {
         if (! $ids) {
-            return $this->all();
+            return $this->toCollection($this->all());
         }
 
         $ids = is_array($ids) ? $ids : func_get_args();
@@ -59,7 +62,9 @@ class Favorite
             }
         }
 
-        return $this->client->request('GET', 'favorites', ['favorite_ids' => $ids]);
+        $response = $this->client->request('GET', 'favorites', ['favorite_ids' => $ids]);
+
+        return $this->toCollection($response);
     }
 
     /**

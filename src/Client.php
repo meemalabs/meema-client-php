@@ -22,9 +22,9 @@ class Client
     protected $accessKey;
 
     /**
-     * @var bool
+     * @var array
      */
-    protected $toCollection;
+    protected $config;
 
     /**
      * Construct Meema client.
@@ -37,7 +37,7 @@ class Client
 
         $this->accessKey = $accessKey;
 
-        $this->toCollection = $config['to_collection'] ?? null;
+        $this->config = $config;
 
         $url = $config['base_url'] ?? env('BASE_URL');
 
@@ -82,10 +82,10 @@ class Client
         $body = json_decode($content, true);
 
         if ($body && array_key_exists('data', $body)) {
-            return $this->toCollection ? collect($body['data']) : $body['data'];
+            return $body['data'];
         }
 
-        return $this->toCollection ? collect($body) : $body;
+        return $body;
     }
 
     /**
@@ -146,5 +146,15 @@ class Client
     public function favorites(): Favorite
     {
         return new Favorite($this);
+    }
+
+    /**
+     * Get the client config
+     *
+     * @return array
+     */
+    public function getConfig()
+    {
+        return $this->config;
     }
 }
