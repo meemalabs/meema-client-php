@@ -139,6 +139,30 @@ class Tag
     }
 
     /**
+     * Associate tags to a model.
+     *
+     * @param array $tag
+     *
+     * @return array
+     */
+    public function associate($tag)
+    {
+        return $this->associateToModel($tag);
+    }
+
+     /**
+     * Associate tags to media.
+     *
+     * @param array $tag
+     *
+     * @return array
+     */
+    public function disassociate($tag)
+    {
+        return $this->disassociateToModel($tag);
+    }
+
+    /**
      * Initialize the media model.
      *
      * @param int $id
@@ -173,7 +197,7 @@ class Tag
      *
      * @return array
      */
-    public function fetchTagsForMedia($id): array
+    protected function fetchTagsForMedia($id): array
     {
         return $this->client->request('GET', "media/{$id}/tags");
     }
@@ -185,7 +209,7 @@ class Tag
      *
      * @return array
      */
-    public function fetchTagsForFolder($id): array
+    protected function fetchTagsForFolder($id): array
     {
         return $this->client->request('GET', "folders/{$id}/tags");
     }
@@ -233,7 +257,7 @@ class Tag
      *
      * @return array
      */
-    public function fetchForModel(): array
+    protected function fetchForModel(): array
     {
         $data = [];
 
@@ -249,5 +273,107 @@ class Tag
         }
 
         return $data;
+    }
+
+    /**
+     * Associate tags to a folder or media.
+     *
+     * @param array $tag
+     *
+     * @return array
+     */
+    protected function associateToModel($tag): array
+    {
+        $data = [];
+
+        switch (get_class($this->model)) {
+            case Folder::class:
+                $data = $this->associateTagToFolder($this->model->getId(), $tag);
+                break;
+            case Media::class:
+                $data = $this->associateTagToMedia($this->model->getId(), $tag);
+                break;
+            default:
+               $data = [];
+        }
+
+        return $data;
+    }
+
+    /**
+     * Associate tags to a folder or media.
+     *
+     * @param array $tag
+     *
+     * @return array
+     */
+    protected function disassociateToModel($tag): array
+    {
+        $data = [];
+
+        switch (get_class($this->model)) {
+            case Folder::class:
+                $data = $this->disassociateTagFromFolder($this->model->getId(), $tag);
+                break;
+            case Media::class:
+                $data = $this->disassociateTagFromMedia($this->model->getId(), $tag);
+                break;
+            default:
+               $data = [];
+        }
+
+        return $data;
+    }
+
+    /**
+     * Associate tag to a folder.
+     *
+     * @param int $id
+     * @param array $tag
+     *
+     * @return array
+     */
+    protected function associateTagToFolder($id, $tag)
+    {
+        return $this->client->request('POST', "folders/{$id}/tag/attach", $tag);
+    }
+
+    /**
+     * Disassociate tag from a folder.
+     *
+     * @param int $id
+     * @param array $tag
+     *
+     * @return array
+     */
+    protected function disassociateTagFromFolder($id, $tag)
+    {
+        return $this->client->request('POST', "folders/{$id}/tag/detach", $tag);
+    }
+
+    /**
+     * Associate tag to a media.
+     *
+     * @param int $id
+     * @param array $tag
+     *
+     * @return array
+     */
+    protected function associateTagToMedia($id, $tag)
+    {
+        return $this->client->request('POST', "media/{$id}/tag/attach", $tag);
+    }
+
+    /**
+     * Disassociate tag from a media.
+     *
+     * @param int $id
+     * @param array $tag
+     *
+     * @return array
+     */
+    protected function disassociateTagFromMedia($id, $tag)
+    {
+        return $this->client->request('POST', "media/{$id}/tag/detach", $tag);
     }
 }

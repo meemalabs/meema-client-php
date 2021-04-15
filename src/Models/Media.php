@@ -449,7 +449,7 @@ class Media
      *
      * @return array
      */
-    public function fetchMediaForFolder($id): array
+    protected function fetchMediaForFolder($id): array
     {
         return $this->client->request('GET', "folders/{$id}/media");
     }
@@ -461,7 +461,7 @@ class Media
      *
      * @return array
      */
-    public function fetchMediaForTag($id): array
+    protected function fetchMediaForTag($id): array
     {
         return $this->client->request('GET', "tags/{$id}/media");
     }
@@ -471,7 +471,7 @@ class Media
      *
      * @return array
      */
-    public function fetchForModel()
+    protected function fetchForModel()
     {
         $data = [];
 
@@ -488,5 +488,31 @@ class Media
         }
 
         return $data;
+    }
+
+    /**
+     * Associate tag to a media.
+     *
+     * @param int $id
+     * @param array $tag
+     *
+     * @return array
+     */
+    public function associateTag($id, $tag)
+    {
+        return $this->client->request('POST', "media/{$id}/tag/attach", $tag);
+    }
+
+    /**
+     * Disassociate tag from a media.
+     *
+     * @param int $id
+     * @param array $tag
+     *
+     * @return array
+     */
+    public function disassociateTag($id, $tag)
+    {
+        return $this->client->request('POST', "media/{$id}/tag/detach", $tag);
     }
 }
