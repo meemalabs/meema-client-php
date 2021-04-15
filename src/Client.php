@@ -74,7 +74,7 @@ class Client
 
         $body = json_decode($content, true);
 
-        if ($body && $body['data']) {
+        if ($body && array_key_exists('data', $body)) {
             return $body['data'];
         }
 

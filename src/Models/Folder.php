@@ -270,7 +270,7 @@ class Folder
      *
      * @throws InvalidFormatException
      */
-    public function addFolderToMedia($id, $name): array
+    protected function addFolderToMedia($id, $name): array
     {
         if (! is_int($id)) {
             throw new InvalidFormatException();
@@ -289,13 +289,39 @@ class Folder
      *
      * @throws InvalidFormatException
      */
-    public function deleteFolderFromMedia($id, $folderId)
+    protected function deleteFolderFromMedia($id, $folderId)
     {
         if (! is_int($id) || ! is_int($folderId)) {
             throw new InvalidFormatException();
         }
 
         return $this->client->request('DELETE', "media/{$id}/folders/{$folderId}");
+    }
+
+    /**
+     * Associate tag to a folder.
+     *
+     * @param int $id
+     * @param array $tag
+     *
+     * @return array
+     */
+    public function associateTag($id, $tag)
+    {
+        return $this->client->request('POST', "folders/{$id}/tag/attach", $tag);
+    }
+
+    /**
+     * Disassociate tag from a folder.
+     *
+     * @param int $id
+     * @param array $tag
+     *
+     * @return array
+     */
+    public function disassociateTag($id, $tag)
+    {
+        return $this->client->request('POST', "folders/{$id}/tag/detach", $tag);
     }
 
     /**
