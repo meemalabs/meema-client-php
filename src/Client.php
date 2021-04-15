@@ -4,7 +4,6 @@ namespace Meema\MeemaApi;
 
 use Dotenv\Dotenv;
 use GuzzleHttp\Client as GuzzleClient;
-use Illuminate\Support\Collection;
 use Meema\MeemaApi\Models\Favorite;
 use Meema\MeemaApi\Models\Folder;
 use Meema\MeemaApi\Models\Media;

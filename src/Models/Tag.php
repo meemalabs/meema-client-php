@@ -150,7 +150,7 @@ class Tag
         return $this->associateToModel($tag);
     }
 
-     /**
+    /**
      * Associate tags to media.
      *
      * @param array $tag
