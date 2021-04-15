@@ -38,7 +38,7 @@ class Folder
      *
      * @return array
      */
-    public function all(): array
+    public function all()
     {
         return $this->client->request('GET', 'folders');
     }
@@ -108,7 +108,7 @@ class Folder
      *
      * @return array
      */
-    public function create($name): array
+    public function create($name)
     {
         $name = is_array($name) ? $name : compact('name');
 
@@ -129,7 +129,7 @@ class Folder
      *
      * @return array
      */
-    public function update($id, $name): array
+    public function update($id, $name)
     {
         if (! is_int($id)) {
             throw new InvalidFormatException();
@@ -240,7 +240,7 @@ class Folder
      *
      * @throws InvalidFormatException
      */
-    public function duplicate($ids): array
+    public function duplicate($ids)
     {
         $ids = is_array($ids) ? $ids : func_get_args();
 
@@ -270,7 +270,7 @@ class Folder
      *
      * @throws InvalidFormatException
      */
-    protected function addFolderToMedia($id, $name): array
+    protected function addFolderToMedia($id, $name)
     {
         if (! is_int($id)) {
             throw new InvalidFormatException();

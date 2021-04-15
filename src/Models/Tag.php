@@ -38,7 +38,7 @@ class Tag
      *
      * @return array
      */
-    public function all(): array
+    public function all()
     {
         return $this->client->request('GET', 'tags');
     }
@@ -50,7 +50,7 @@ class Tag
      *
      * @return array
      */
-    public function get($ids = null): array
+    public function get($ids = null)
     {
         if ($this->model) {
             return $this->fetchForModel();
@@ -97,7 +97,7 @@ class Tag
      *
      * @return array
      */
-    public function update($id, $color): array
+    public function update($id, $color)
     {
         if (! is_int($id)) {
             throw new InvalidFormatException();
@@ -197,7 +197,7 @@ class Tag
      *
      * @return array
      */
-    protected function fetchTagsForMedia($id): array
+    protected function fetchTagsForMedia($id)
     {
         return $this->client->request('GET', "media/{$id}/tags");
     }
@@ -209,7 +209,7 @@ class Tag
      *
      * @return array
      */
-    protected function fetchTagsForFolder($id): array
+    protected function fetchTagsForFolder($id)
     {
         return $this->client->request('GET', "folders/{$id}/tags");
     }
@@ -257,7 +257,7 @@ class Tag
      *
      * @return array
      */
-    protected function fetchForModel(): array
+    protected function fetchForModel()
     {
         $data = [];
 
@@ -282,7 +282,7 @@ class Tag
      *
      * @return array
      */
-    protected function associateToModel($tag): array
+    protected function associateToModel($tag)
     {
         $data = [];
 
@@ -307,7 +307,7 @@ class Tag
      *
      * @return array
      */
-    protected function disassociateToModel($tag): array
+    protected function disassociateToModel($tag)
     {
         $data = [];
 

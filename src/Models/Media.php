@@ -41,7 +41,7 @@ class Media
      *
      * @return array
      */
-    public function all(): array
+    public function all()
     {
         return $this->client->request('GET', 'media');
     }
@@ -115,7 +115,7 @@ class Media
      *
      * @return array
      */
-    public function create($name): array
+    public function create($name)
     {
         $name = is_array($name) ? $name : compact('name');
 
@@ -449,7 +449,7 @@ class Media
      *
      * @return array
      */
-    protected function fetchMediaForFolder($id): array
+    protected function fetchMediaForFolder($id)
     {
         return $this->client->request('GET', "folders/{$id}/media");
     }
@@ -461,7 +461,7 @@ class Media
      *
      * @return array
      */
-    protected function fetchMediaForTag($id): array
+    protected function fetchMediaForTag($id)
     {
         return $this->client->request('GET', "tags/{$id}/media");
     }

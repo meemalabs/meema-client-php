@@ -23,7 +23,7 @@ class ClientTest extends TestCase
     {
         $teamId = env('PUBLISHABLE_KEY');
 
-        $client = new Client($teamId, env('BASE_URL_TEST'));
+        $client = new Client($teamId, ['base_url' => env('BASE_URL_TEST')]);
 
         $this->client = $client;
 

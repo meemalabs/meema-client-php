@@ -33,7 +33,7 @@ class Favorite
      *
      * @return array
      */
-    public function all(): array
+    public function all()
     {
         return $this->client->request('GET', 'favorites');
     }
@@ -100,7 +100,7 @@ class Favorite
      *
      * @return array
      */
-    public function update($id, $data): array
+    public function update($id, $data)
     {
         if (! is_int($id)) {
             throw new InvalidFormatException();

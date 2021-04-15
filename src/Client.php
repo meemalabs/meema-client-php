@@ -4,6 +4,7 @@ namespace Meema\MeemaApi;
 
 use Dotenv\Dotenv;
 use GuzzleHttp\Client as GuzzleClient;
+use Illuminate\Support\Collection;
 use Meema\MeemaApi\Models\Favorite;
 use Meema\MeemaApi\Models\Folder;
 use Meema\MeemaApi\Models\Media;
@@ -22,17 +23,24 @@ class Client
     protected $accessKey;
 
     /**
+     * @var bool
+     */
+    protected $toCollection;
+
+    /**
      * Construct Meema client.
      *
      * @param string $accessKey
      */
-    public function __construct($accessKey, $baseUrl = null)
+    public function __construct($accessKey, $config = [])
     {
         $this->initializeEnv();
 
         $this->accessKey = $accessKey;
 
-        $url = $baseUrl ?? env('BASE_URL');
+        $this->toCollection = $config['to_collection'] ?? null;
+
+        $url = $config['base_url'] ?? env('BASE_URL');
 
         $this->client = new GuzzleClient([
             'base_uri' => $url ?? 'https://api.mee.ma',
@@ -75,10 +83,10 @@ class Client
         $body = json_decode($content, true);
 
         if ($body && array_key_exists('data', $body)) {
-            return $body['data'];
+            return $this->toCollection ? collect($body['data']) : $body['data'];
         }
 
-        return $body;
+        return $this->toCollection ? collect($body) : $body;
     }
 
     /**
