@@ -149,7 +149,7 @@ class Client
     }
 
     /**
-     * Get the client config
+     * Get the client config.
      *
      * @return array
      */
