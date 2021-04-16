@@ -39,5 +39,8 @@
         "psr-4": {
             "Meema\\MeemaApi\\Test\\": "tests"
         }
+    },
+    "suggest": {
+        "illuminate/support": "If you prefer to work with Collections instead of arrays, you need to require this package"
     }
 }

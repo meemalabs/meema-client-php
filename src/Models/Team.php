@@ -28,7 +28,7 @@ class Team
      *
      * @return array
      */
-    public function all(): array
+    public function all()
     {
         return $this->client->request('GET', 'teams');
     }
@@ -85,7 +85,7 @@ class Team
      *
      * @return array
      */
-    public function update($id, $name): array
+    public function update($id, $name)
     {
         $name = is_array($name) ? $name : compact('name');
 

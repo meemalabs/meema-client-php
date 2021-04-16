@@ -5,9 +5,12 @@ namespace Meema\MeemaApi\Models;
 use Meema\MeemaApi\Client;
 use Meema\MeemaApi\Exceptions\InvalidFormatException;
 use Meema\MeemaApi\Response\Response;
+use Meema\MeemaApi\Traits\CollectionsResponse;
 
 class Tag
 {
+    use CollectionsResponse;
+
     /**
      * @var \Meema\MeemaApi\Client
      */
@@ -38,7 +41,7 @@ class Tag
      *
      * @return array
      */
-    public function all(): array
+    public function all()
     {
         return $this->client->request('GET', 'tags');
     }
@@ -48,16 +51,16 @@ class Tag
      *
      * @param array $ids
      *
-     * @return array
+     * @return \Illuminate\Support\Collection|array
      */
-    public function get($ids = null): array
+    public function get($ids = null)
     {
         if ($this->model) {
-            return $this->fetchForModel();
+            return $this->toCollection($this->fetchForModel());
         }
 
         if (! $ids) {
-            return $this->all();
+            return $this->toCollection($this->all());
         }
 
         $ids = is_array($ids) ? $ids : func_get_args();
@@ -68,7 +71,9 @@ class Tag
             }
         }
 
-        return $this->client->request('GET', 'tags', ['tag_ids' => $ids]);
+        $response = $this->client->request('GET', 'tags', ['tag_ids' => $ids]);
+
+        return $this->toCollection($response);
     }
 
     /**
@@ -97,7 +102,7 @@ class Tag
      *
      * @return array
      */
-    public function update($id, $color): array
+    public function update($id, $color)
     {
         if (! is_int($id)) {
             throw new InvalidFormatException();
@@ -197,7 +202,7 @@ class Tag
      *
      * @return array
      */
-    protected function fetchTagsForMedia($id): array
+    protected function fetchTagsForMedia($id)
     {
         return $this->client->request('GET', "media/{$id}/tags");
     }
@@ -209,7 +214,7 @@ class Tag
      *
      * @return array
      */
-    protected function fetchTagsForFolder($id): array
+    protected function fetchTagsForFolder($id)
     {
         return $this->client->request('GET', "folders/{$id}/tags");
     }
@@ -257,7 +262,7 @@ class Tag
      *
      * @return array
      */
-    protected function fetchForModel(): array
+    protected function fetchForModel()
     {
         $data = [];
 
@@ -282,7 +287,7 @@ class Tag
      *
      * @return array
      */
-    protected function associateToModel($tag): array
+    protected function associateToModel($tag)
     {
         $data = [];
 
@@ -307,7 +312,7 @@ class Tag
      *
      * @return array
      */
-    protected function disassociateToModel($tag): array
+    protected function disassociateToModel($tag)
     {
         $data = [];
 

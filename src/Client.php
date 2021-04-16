@@ -22,17 +22,24 @@ class Client
     protected $accessKey;
 
     /**
+     * @var array
+     */
+    protected $config;
+
+    /**
      * Construct Meema client.
      *
      * @param string $accessKey
      */
-    public function __construct($accessKey, $baseUrl = null)
+    public function __construct($accessKey, $config = [])
     {
         $this->initializeEnv();
 
         $this->accessKey = $accessKey;
 
-        $url = $baseUrl ?? env('BASE_URL');
+        $this->config = $config;
+
+        $url = $config['base_url'] ?? env('BASE_URL');
 
         $this->client = new GuzzleClient([
             'base_uri' => $url ?? 'https://api.mee.ma',
@@ -139,5 +146,15 @@ class Client
     public function favorites(): Favorite
     {
         return new Favorite($this);
+    }
+
+    /**
+     * Get the client config.
+     *
+     * @return array
+     */
+    public function getConfig()
+    {
+        return $this->config;
     }
 }
