@@ -32,7 +32,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          composer install
+          composer update
       - name: Make envfile
         uses: SpicyPizza/create-envfile@v1
         with:
