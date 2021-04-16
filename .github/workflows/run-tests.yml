@@ -33,6 +33,7 @@ jobs:
       - name: Install dependencies
         run: |
           composer update
+
       - name: Make envfile
         uses: SpicyPizza/create-envfile@v1
         with:
@@ -40,5 +41,6 @@ jobs:
           envkey_BASE_URL_TEST: "https://test-api.mee.ma/api/"
           envkey_PUBLISHABLE_KEY: ${{ secrets.PUBLISHABLE_KEY }}
           file_name: .env
+
       - name: Execute tests
         run: vendor/bin/pest
