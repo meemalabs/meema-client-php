@@ -51,10 +51,10 @@ it('can update a favorite', function () {
 });
 
 it('can delete a favorite', function () {
-    $favorites = $this->client->tags()->get();
+    $favorites = $this->client->favorites()->get();
 
     $favorites = array_reverse($favorites);
-    $response = $this->client->tags()->delete($favorites[0]['id']);
+    $response = $this->client->favorites()->delete($favorites[0]['id']);
 
     $this->assertTrue(is_null($response));
 });
