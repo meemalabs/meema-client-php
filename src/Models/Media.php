@@ -483,7 +483,7 @@ class Media
      */
     public function setVisibility($path, $visibility)
     {
-        return $this->client->request('POST', 'aws/set-visibility', compact('path', 'visibility'));
+        return $this->client->request('POST', 'storage/set-visibility', compact('path', 'visibility'));
     }
 
     /**
@@ -495,7 +495,7 @@ class Media
      */
     public function has($path)
     {
-        $data = $this->client->request('POST', 'aws/has', compact('path'));
+        $data = $this->client->request('POST', 'storage/has', compact('path'));
 
         return $data['exists'] ?? false;
     }
@@ -509,7 +509,7 @@ class Media
      */
     public function getMetadata($path)
     {
-        return $this->client->request('POST', 'aws/metadata', compact('path'));
+        return $this->client->request('POST', 'storage/metadata', compact('path'));
     }
 
     /**
