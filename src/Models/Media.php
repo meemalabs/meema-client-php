@@ -474,6 +474,45 @@ class Media
     }
 
     /**
+     * Set the visibility for a file.
+     *
+     * @param string $path
+     * @param string $visibility
+     *
+     * @return array|false file meta data
+     */
+    public function setVisibility($path, $visibility)
+    {
+        return $this->client->request('POST', 'aws/set-visibility', compact('path', 'visibility'));
+    }
+
+    /**
+     * Check whether a file exists.
+     *
+     * @param string $path
+     *
+     * @return bool
+     */
+    public function has($path)
+    {
+        $data = $this->client->request('POST', 'aws/has', compact('path'));
+
+        return $data['exists'] ?? false;
+    }
+
+    /**
+     * Get all the meta data of a file or directory.
+     *
+     * @param string $path
+     *
+     * @return false|array
+     */
+    public function getMetadata($path)
+    {
+        return $this->client->request('POST', 'aws/metadata', compact('path'));
+    }
+
+    /**
      * Fetch child relations for this instance.
      *
      * @return array
