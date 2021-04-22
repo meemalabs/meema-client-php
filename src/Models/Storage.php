@@ -137,15 +137,27 @@ class Storage
     }
 
     /**
-     * Destroy the file in storage.
+     * Copy the file in storage.
      *
      * @param string $path
      *
      * @return array
      */
-    public function delete($path)
+    public function copy($path, $newpath)
     {
-        return $this->client->request('POST', 'storage/destroy', compact('path'));
+        return $this->client->request('POST', 'storage/copy', compact('path', 'newpath'));
+    }
+
+    /**
+     * Rename the file in storage.
+     *
+     * @param string $path
+     *
+     * @return array
+     */
+    public function rename($path, $newpath)
+    {
+        return $this->client->request('POST', 'storage/rename', compact('path', 'newpath'));
     }
 
     /**
