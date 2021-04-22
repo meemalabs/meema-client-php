@@ -149,6 +149,42 @@ class Storage
     }
 
     /**
+     * Copy the file in storage.
+     *
+     * @param string $path
+     *
+     * @return array
+     */
+    public function read($path)
+    {
+        return $this->client->request('POST', 'storage/read', compact('path'));
+    }
+
+    /**
+     * Copy the file in storage.
+     *
+     * @param string $path
+     *
+     * @return array
+     */
+    public function readStream($path)
+    {
+        return $this->client->request('POST', 'storage/read-stream', compact('path'));
+    }
+
+    /**
+     * List contents of directory.
+     *
+     * @param string $path
+     *
+     * @return array
+     */
+    public function listContents($directory)
+    {
+        return $this->client->request('POST', 'storage/list-contents', compact('directory'));
+    }
+
+    /**
      * Rename the file in storage.
      *
      * @param string $path
