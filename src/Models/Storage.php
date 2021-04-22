@@ -56,7 +56,6 @@ class Storage
 
                 return $response;
             }
-
         } catch (Exception $e) {
             throw $e;
         }
