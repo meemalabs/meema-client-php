@@ -149,7 +149,7 @@ class Storage
     }
 
     /**
-     * Copy the file in storage.
+     * Read a file in storage.
      *
      * @param string $path
      *
@@ -161,7 +161,7 @@ class Storage
     }
 
     /**
-     * Copy the file in storage.
+     * Read the stream of a file in storage.
      *
      * @param string $path
      *
