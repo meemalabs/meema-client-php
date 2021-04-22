@@ -2,9 +2,6 @@
 
 namespace Meema\MeemaApi\Models;
 
-use GuzzleHttp\Client as GuzzleClient;
-use GuzzleHttp\Psr7;
-use GuzzleHttp\Psr7\Request;
 use Meema\MeemaApi\Client;
 use Meema\MeemaApi\Exceptions\InvalidFormatException;
 use Meema\MeemaApi\Response\Response;
@@ -177,69 +174,6 @@ class Media
         $id = $ids[0];
 
         return $this->client->request('DELETE', "media/{$id}", ['media_id' => $id]);
-    }
-
-    /**
-     * Upload a media file.
-     *
-     * @param string $path
-     *
-     * @return array
-     */
-    public function upload($path)
-    {
-        $file = fopen($path, 'r');
-        $stream = Psr7\stream_for($file);
-
-        $fileName = basename($path);
-        $mimeType = mime_content_type($file);
-
-        $vaporParams = ['content_type' => $mimeType];
-
-        $signedUrl = $this->client->request('POST', 'vapor/signed-storage-url', $vaporParams);
-
-        if (is_array($signedUrl) && $signedUrl['url']) {
-            $headers = $signedUrl['headers'];
-            unset($headers['Host']);
-
-            $this->uploadToS3($signedUrl['url'], $headers, $fileName, $stream);
-
-            $uploadData = ['key' => $signedUrl['key'], 'file_name' => $fileName];
-
-            $response = $this->client->request('POST', 'upload', $uploadData);
-        }
-
-        return $response;
-    }
-
-    /**
-     * Upload the file stream to s3.
-     *
-     * @param string $signedUrl
-     * @param array $headers
-     * @param string $fileName
-     * @param GuzzleHttp\Psr7 $stream
-     *
-     * @return void
-     */
-    protected function uploadToS3($signedUrl, $headers, $fileName, $stream)
-    {
-        $client = new GuzzleClient();
-        $request = new Request(
-            'PUT',
-            $signedUrl,
-            ['headers' => json_encode($headers)],
-            new Psr7\MultipartStream(
-                [
-                    [
-                        'name' => $fileName,
-                        'contents' => $stream,
-                    ],
-                ]
-            )
-        );
-
-        $client->send($request);
     }
 
     /**
@@ -471,45 +405,6 @@ class Media
     protected function fetchMediaForTag($id)
     {
         return $this->client->request('GET', "tags/{$id}/media");
-    }
-
-    /**
-     * Set the visibility for a file.
-     *
-     * @param string $path
-     * @param string $visibility
-     *
-     * @return array|false file meta data
-     */
-    public function setVisibility($path, $visibility)
-    {
-        return $this->client->request('POST', 'storage/set-visibility', compact('path', 'visibility'));
-    }
-
-    /**
-     * Check whether a file exists.
-     *
-     * @param string $path
-     *
-     * @return bool
-     */
-    public function has($path)
-    {
-        $data = $this->client->request('POST', 'storage/has', compact('path'));
-
-        return $data['exists'] ?? false;
-    }
-
-    /**
-     * Get all the meta data of a file or directory.
-     *
-     * @param string $path
-     *
-     * @return false|array
-     */
-    public function getMetadata($path)
-    {
-        return $this->client->request('POST', 'storage/metadata', compact('path'));
     }
 
     /**
