@@ -7,6 +7,7 @@ use GuzzleHttp\Client as GuzzleClient;
 use Meema\MeemaApi\Models\Favorite;
 use Meema\MeemaApi\Models\Folder;
 use Meema\MeemaApi\Models\Media;
+use Meema\MeemaApi\Models\Storage;
 use Meema\MeemaApi\Models\Tag;
 
 class Client
@@ -126,6 +127,16 @@ class Client
     public function media(): Media
     {
         return new Media($this);
+    }
+
+    /**
+     * Initialize the storage model.
+     *
+     * @return Meema\MeemaApi\Models\Storage
+     */
+    public function storage(): Storage
+    {
+        return new Storage($this);
     }
 
     /**
