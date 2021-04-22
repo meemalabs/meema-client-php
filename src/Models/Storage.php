@@ -109,7 +109,7 @@ class Storage
     {
         $data = $this->client->request('POST', 'storage/has', compact('path'));
 
-        return $data['exists'] ?? false;
+        return $data['status'] ?? false;
     }
 
     /**
