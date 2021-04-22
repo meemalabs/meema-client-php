@@ -9,12 +9,12 @@ use Meema\MeemaApi\Client;
 
 class Storage
 {
-	/**
+    /**
      * @var \Meema\MeemaApi\Client
      */
     protected $client;
 
-	/**
+    /**
      * Construct storage model.
      *
      * @param Meema\MeemaApi\Client $client
@@ -24,7 +24,7 @@ class Storage
         $this->client = $client;
     }
 
-	/**
+    /**
      * Upload a media file.
      *
      * @param string $path
@@ -87,7 +87,7 @@ class Storage
         $client->send($request);
     }
 
-	/**
+    /**
      * Set the visibility for a file.
      *
      * @param string $path
