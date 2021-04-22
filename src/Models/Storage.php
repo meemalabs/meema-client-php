@@ -2,9 +2,11 @@
 
 namespace Meema\MeemaApi\Models;
 
+use Exception;
 use GuzzleHttp\Client as GuzzleClient;
 use GuzzleHttp\Psr7;
 use GuzzleHttp\Psr7\Request;
+use GuzzleHttp\Psr7\Utils;
 use Meema\MeemaApi\Client;
 
 class Storage
@@ -33,26 +35,33 @@ class Storage
      */
     public function upload($path)
     {
-        $file = fopen($path, 'r');
-        $fileName = basename($path);
+        try {
+            $file = fopen($path, 'r');
+            $fileName = basename($path);
 
-        $stream = Psr7\stream_for($file);
-        $mimeType = mime_content_type($file);
+            $stream = Utils::streamFor($file);
+            $mimeType = mime_content_type($file);
 
-        $signedUrl = $this->client->request('POST', 'storage/signed-url', ['content_type' => $mimeType]);
+            $signedUrl = $this->client->request('POST', 'storage/signed-url', ['content_type' => $mimeType]);
 
-        if (is_array($signedUrl) && $signedUrl['url']) {
-            $headers = $signedUrl['headers'];
-            unset($headers['Host']);
+            if (is_array($signedUrl) && $signedUrl['url']) {
+                $headers = $signedUrl['headers'];
+                unset($headers['Host']);
 
-            $this->uploadFile($signedUrl['url'], $headers, $fileName, $stream);
+                $this->uploadFile($signedUrl['url'], $headers, $fileName, $stream);
 
-            $uploadData = ['key' => $signedUrl['key'], 'file_name' => $fileName];
+                $uploadData = ['key' => $signedUrl['key'], 'file_name' => $fileName];
 
-            $response = $this->client->request('POST', 'upload', $uploadData);
+                $response = $this->client->request('POST', 'upload', $uploadData);
+
+                return $response;
+            }
+
+        } catch (Exception $e) {
+            throw $e;
         }
 
-        return $response;
+        return ['message' => 'File did not successfully upload.'];
     }
 
     /**
