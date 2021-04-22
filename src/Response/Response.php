@@ -1,9 +1,9 @@
 <?php
 
-namespace Meema\MeemaApi\Response;
+namespace Meema\MeemaClient\Response;
 
 use Illuminate\Support\Arr;
-use Meema\MeemaApi\Traits\ForwardsCalls;
+use Meema\MeemaClient\Traits\ForwardsCalls;
 
 class Response
 {

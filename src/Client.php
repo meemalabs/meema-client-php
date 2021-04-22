@@ -1,14 +1,14 @@
 <?php
 
-namespace Meema\MeemaApi;
+namespace Meema\MeemaClient;
 
 use Dotenv\Dotenv;
 use GuzzleHttp\Client as GuzzleClient;
-use Meema\MeemaApi\Models\Favorite;
-use Meema\MeemaApi\Models\Folder;
-use Meema\MeemaApi\Models\Media;
-use Meema\MeemaApi\Models\Storage;
-use Meema\MeemaApi\Models\Tag;
+use Meema\MeemaClient\Models\Favorite;
+use Meema\MeemaClient\Models\Folder;
+use Meema\MeemaClient\Models\Media;
+use Meema\MeemaClient\Models\Storage;
+use Meema\MeemaClient\Models\Tag;
 
 class Client
 {

@@ -1,11 +1,11 @@
 <?php
 
-namespace Meema\MeemaApi\Models;
+namespace Meema\MeemaClient\Models;
 
-use Meema\MeemaApi\Client;
-use Meema\MeemaApi\Exceptions\InvalidFormatException;
-use Meema\MeemaApi\Response\Response;
-use Meema\MeemaApi\Traits\CollectionsResponse;
+use Meema\MeemaClient\Client;
+use Meema\MeemaClient\Exceptions\InvalidFormatException;
+use Meema\MeemaClient\Response\Response;
+use Meema\MeemaClient\Traits\CollectionsResponse;
 
 class Favorite
 {

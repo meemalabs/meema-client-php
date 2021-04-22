@@ -1,9 +1,9 @@
 <?php
 
-namespace Meema\MeemaApi\Models;
+namespace Meema\MeemaClient\Models;
 
-use Meema\MeemaApi\Client;
-use Meema\MeemaApi\Response\Response;
+use Meema\MeemaClient\Client;
+use Meema\MeemaClient\Response\Response;
 
 class Team
 {
