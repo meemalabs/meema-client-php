@@ -39,7 +39,7 @@ class Storage
         $stream = Psr7\stream_for($file);
         $mimeType = mime_content_type($file);
 
-        $signedUrl = $this->client->request('POST', 'vapor/signed-storage-url', ['content_type' => $mimeType]);
+        $signedUrl = $this->client->request('POST', 'storage/signed-url', ['content_type' => $mimeType]);
 
         if (is_array($signedUrl) && $signedUrl['url']) {
             $headers = $signedUrl['headers'];
