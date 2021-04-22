@@ -1,6 +1,6 @@
 <?php
 
-namespace Meema\MeemaApi\Traits;
+namespace Meema\MeemaClient\Traits;
 
 use BadMethodCallException;
 use Error;

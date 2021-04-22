@@ -32,12 +32,12 @@
     },
     "autoload": {
         "psr-4": {
-            "Meema\\MeemaApi\\": "src"
+            "Meema\\MeemaClient\\": "src"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "Meema\\MeemaApi\\Test\\": "tests"
+            "Meema\\MeemaClient\\Test\\": "tests"
         }
     },
     "suggest": {

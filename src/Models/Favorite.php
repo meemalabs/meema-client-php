@@ -1,18 +1,18 @@
 <?php
 
-namespace Meema\MeemaApi\Models;
+namespace Meema\MeemaClient\Models;
 
-use Meema\MeemaApi\Client;
-use Meema\MeemaApi\Exceptions\InvalidFormatException;
-use Meema\MeemaApi\Response\Response;
-use Meema\MeemaApi\Traits\CollectionsResponse;
+use Meema\MeemaClient\Client;
+use Meema\MeemaClient\Exceptions\InvalidFormatException;
+use Meema\MeemaClient\Response\Response;
+use Meema\MeemaClient\Traits\CollectionsResponse;
 
 class Favorite
 {
     use CollectionsResponse;
 
     /**
-     * @var Meema\MeemaApi\Client
+     * @var Meema\MeemaClient\Client
      */
     protected $client;
 
@@ -24,7 +24,7 @@ class Favorite
     /**
      * Construct Favorite model.
      *
-     * @param Meema\MeemaApi\Client $client
+     * @param Meema\MeemaClient\Client $client
      */
     public function __construct(Client $client)
     {

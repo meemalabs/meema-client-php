@@ -1,14 +1,14 @@
 <?php
 
-namespace Meema\MeemaApi;
+namespace Meema\MeemaClient;
 
 use Dotenv\Dotenv;
 use GuzzleHttp\Client as GuzzleClient;
-use Meema\MeemaApi\Models\Favorite;
-use Meema\MeemaApi\Models\Folder;
-use Meema\MeemaApi\Models\Media;
-use Meema\MeemaApi\Models\Storage;
-use Meema\MeemaApi\Models\Tag;
+use Meema\MeemaClient\Models\Favorite;
+use Meema\MeemaClient\Models\Folder;
+use Meema\MeemaClient\Models\Media;
+use Meema\MeemaClient\Models\Storage;
+use Meema\MeemaClient\Models\Tag;
 
 class Client
 {
@@ -112,7 +112,7 @@ class Client
     /**
      * Initialize the folder model.
      *
-     * @return Meema\MeemaApi\Models\Folder
+     * @return Meema\MeemaClient\Models\Folder
      */
     public function folders(): Folder
     {
@@ -122,7 +122,7 @@ class Client
     /**
      * Initialize the media model.
      *
-     * @return Meema\MeemaApi\Models\Media
+     * @return Meema\MeemaClient\Models\Media
      */
     public function media(): Media
     {
@@ -132,7 +132,7 @@ class Client
     /**
      * Initialize the storage model.
      *
-     * @return Meema\MeemaApi\Models\Storage
+     * @return Meema\MeemaClient\Models\Storage
      */
     public function storage(): Storage
     {
@@ -142,7 +142,7 @@ class Client
     /**
      * Initialize the media model.
      *
-     * @return Meema\MeemaApi\Models\Tag
+     * @return Meema\MeemaClient\Models\Tag
      */
     public function tags(): Tag
     {
@@ -152,7 +152,7 @@ class Client
     /**
      * Initialize the favorite model.
      *
-     * @return Meema\MeemaApi\Models\Favorite
+     * @return Meema\MeemaClient\Models\Favorite
      */
     public function favorites(): Favorite
     {

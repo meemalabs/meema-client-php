@@ -1,18 +1,18 @@
 <?php
 
-namespace Meema\MeemaApi\Models;
+namespace Meema\MeemaClient\Models;
 
-use Meema\MeemaApi\Client;
-use Meema\MeemaApi\Exceptions\InvalidFormatException;
-use Meema\MeemaApi\Response\Response;
-use Meema\MeemaApi\Traits\CollectionsResponse;
+use Meema\MeemaClient\Client;
+use Meema\MeemaClient\Exceptions\InvalidFormatException;
+use Meema\MeemaClient\Response\Response;
+use Meema\MeemaClient\Traits\CollectionsResponse;
 
 class Folder
 {
     use CollectionsResponse;
 
     /**
-     * @var \Meema\MeemaApi\Client
+     * @var \Meema\MeemaClient\Client
      */
     protected $client;
 
@@ -29,7 +29,7 @@ class Folder
     /**
      * Construct Folder model.
      *
-     * @param Meema\MeemaApi\Client $client
+     * @param Meema\MeemaClient\Client $client
      */
     public function __construct(Client $client)
     {
@@ -334,7 +334,7 @@ class Folder
     /**
      * Initialize media model.
      *
-     * @param Meema\MeemaApi\Models\Media $media
+     * @param Meema\MeemaClient\Models\Media $media
      *
      * @return self
      */
@@ -348,7 +348,7 @@ class Folder
     /**
      * Initialize media model.
      *
-     * @param Meema\MeemaApi\Models\Tag $tag
+     * @param Meema\MeemaClient\Models\Tag $tag
      *
      * @return self
      */
@@ -374,7 +374,7 @@ class Folder
      *
      * @param int $id
      *
-     * @return Meema\MeemaApi\Models\Media
+     * @return Meema\MeemaClient\Models\Media
      */
     public function media($id = null): Media
     {
@@ -388,7 +388,7 @@ class Folder
      *
      * @param int $id
      *
-     * @return Meema\MeemaApi\Models\Tag
+     * @return Meema\MeemaClient\Models\Tag
      */
     public function tags($id = null): Tag
     {

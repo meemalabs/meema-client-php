@@ -1,6 +1,6 @@
 <?php
 
-namespace Meema\MeemaApi\Exceptions;
+namespace Meema\MeemaClient\Exceptions;
 
 use Exception;
 

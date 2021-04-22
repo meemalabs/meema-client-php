@@ -1,21 +1,21 @@
 <?php
 
-namespace Meema\MeemaApi\Models;
+namespace Meema\MeemaClient\Models;
 
-use Meema\MeemaApi\Client;
-use Meema\MeemaApi\Response\Response;
+use Meema\MeemaClient\Client;
+use Meema\MeemaClient\Response\Response;
 
 class Team
 {
     /**
-     * @var Meema\MeemaApi\Client
+     * @var Meema\MeemaClient\Client
      */
     protected $client;
 
     /**
      * Construct Folder model.
      *
-     * @param Meema\MeemaApi\Client $client
+     * @param Meema\MeemaClient\Client $client
      * @param int $teamId
      */
     public function __construct(Client $client)

@@ -1,16 +1,16 @@
 <?php
 
-namespace Meema\MeemaApi\Response;
+namespace Meema\MeemaClient\Response;
 
 use Illuminate\Support\Arr;
-use Meema\MeemaApi\Traits\ForwardsCalls;
+use Meema\MeemaClient\Traits\ForwardsCalls;
 
 class Response
 {
     use ForwardsCalls;
 
     /**
-     * @var \Meema\MeemaApi\Client
+     * @var \Meema\MeemaClient\Client
      */
     protected $api;
 
