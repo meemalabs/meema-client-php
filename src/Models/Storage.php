@@ -133,7 +133,19 @@ class Storage
      *
      * @return array
      */
-    public function destroyFile($path)
+    public function delete($path)
+    {
+        return $this->client->request('POST', 'storage/destroy', compact('path'));
+    }
+
+    /**
+     * Destroy the file in storage.
+     *
+     * @param string $path
+     *
+     * @return array
+     */
+    public function delete($path)
     {
         return $this->client->request('POST', 'storage/destroy', compact('path'));
     }
@@ -145,7 +157,7 @@ class Storage
      *
      * @return array
      */
-    public function destroyDirectory($directory)
+    public function deleteDirectory($directory)
     {
         return $this->client->request('POST', 'storage/destroy-directory', compact('directory'));
     }
@@ -157,7 +169,7 @@ class Storage
      *
      * @return array
      */
-    public function createDirectory($directory)
+    public function makeDirectory($directory)
     {
         return $this->client->request('POST', 'storage/create-directory', compact('directory'));
     }
