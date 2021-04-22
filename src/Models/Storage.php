@@ -12,14 +12,14 @@ use Meema\MeemaClient\Client;
 class Storage
 {
     /**
-     * @var \Meema\MeemaApi\Client
+     * @var \Meema\MeemaClient\Client
      */
     protected $client;
 
     /**
      * Construct storage model.
      *
-     * @param Meema\MeemaApi\Client $client
+     * @param Meema\MeemaClient\Client $client
      */
     public function __construct(Client $client)
     {

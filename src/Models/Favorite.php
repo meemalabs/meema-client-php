@@ -12,7 +12,7 @@ class Favorite
     use CollectionsResponse;
 
     /**
-     * @var Meema\MeemaApi\Client
+     * @var Meema\MeemaClient\Client
      */
     protected $client;
 
@@ -24,7 +24,7 @@ class Favorite
     /**
      * Construct Favorite model.
      *
-     * @param Meema\MeemaApi\Client $client
+     * @param Meema\MeemaClient\Client $client
      */
     public function __construct(Client $client)
     {

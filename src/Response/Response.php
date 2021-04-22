@@ -10,7 +10,7 @@ class Response
     use ForwardsCalls;
 
     /**
-     * @var \Meema\MeemaApi\Client
+     * @var \Meema\MeemaClient\Client
      */
     protected $api;
 

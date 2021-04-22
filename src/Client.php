@@ -112,7 +112,7 @@ class Client
     /**
      * Initialize the folder model.
      *
-     * @return Meema\MeemaApi\Models\Folder
+     * @return Meema\MeemaClient\Models\Folder
      */
     public function folders(): Folder
     {
@@ -122,7 +122,7 @@ class Client
     /**
      * Initialize the media model.
      *
-     * @return Meema\MeemaApi\Models\Media
+     * @return Meema\MeemaClient\Models\Media
      */
     public function media(): Media
     {
@@ -132,7 +132,7 @@ class Client
     /**
      * Initialize the storage model.
      *
-     * @return Meema\MeemaApi\Models\Storage
+     * @return Meema\MeemaClient\Models\Storage
      */
     public function storage(): Storage
     {
@@ -142,7 +142,7 @@ class Client
     /**
      * Initialize the media model.
      *
-     * @return Meema\MeemaApi\Models\Tag
+     * @return Meema\MeemaClient\Models\Tag
      */
     public function tags(): Tag
     {
@@ -152,7 +152,7 @@ class Client
     /**
      * Initialize the favorite model.
      *
-     * @return Meema\MeemaApi\Models\Favorite
+     * @return Meema\MeemaClient\Models\Favorite
      */
     public function favorites(): Favorite
     {

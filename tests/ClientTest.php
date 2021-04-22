@@ -2,7 +2,7 @@
 
 namespace Tests;
 
-use Meema\MeemaApi\Client;
+use Meema\MeemaClient\Client;
 use Orchestra\Testbench\TestCase;
 
 class ClientTest extends TestCase

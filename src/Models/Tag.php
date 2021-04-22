@@ -12,7 +12,7 @@ class Tag
     use CollectionsResponse;
 
     /**
-     * @var \Meema\MeemaApi\Client
+     * @var \Meema\MeemaClient\Client
      */
     protected $client;
 
@@ -29,7 +29,7 @@ class Tag
     /**
      * Construct Folder model.
      *
-     * @param Meema\MeemaApi\Client $client
+     * @param Meema\MeemaClient\Client $client
      */
     public function __construct(Client $client)
     {
@@ -172,7 +172,7 @@ class Tag
      *
      * @param int $id
      *
-     * @return Meema\MeemaApi\Models\Media
+     * @return Meema\MeemaClient\Models\Media
      */
     public function media($id = null): Media
     {
@@ -186,7 +186,7 @@ class Tag
      *
      * @param int $id
      *
-     * @return Meema\MeemaApi\Models\Folder
+     * @return Meema\MeemaClient\Models\Folder
      */
     public function folders($id = null): Folder
     {
@@ -222,7 +222,7 @@ class Tag
     /**
      * Initialize media model.
      *
-     * @param Meema\MeemaApi\Models\Folder $folder
+     * @param Meema\MeemaClient\Models\Folder $folder
      *
      * @return self
      */
@@ -236,7 +236,7 @@ class Tag
     /**
      * Initialize media model.
      *
-     * @param Meema\MeemaApi\Models\Media $media
+     * @param Meema\MeemaClient\Models\Media $media
      *
      * @return self
      */
