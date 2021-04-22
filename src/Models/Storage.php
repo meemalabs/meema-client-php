@@ -34,20 +34,18 @@ class Storage
     public function upload($path)
     {
         $file = fopen($path, 'r');
-        $stream = Psr7\stream_for($file);
-
         $fileName = basename($path);
+
+        $stream = Psr7\stream_for($file);
         $mimeType = mime_content_type($file);
 
-        $vaporParams = ['content_type' => $mimeType];
-
-        $signedUrl = $this->client->request('POST', 'vapor/signed-storage-url', $vaporParams);
+        $signedUrl = $this->client->request('POST', 'vapor/signed-storage-url', ['content_type' => $mimeType]);
 
         if (is_array($signedUrl) && $signedUrl['url']) {
             $headers = $signedUrl['headers'];
             unset($headers['Host']);
 
-            $this->uploadToS3($signedUrl['url'], $headers, $fileName, $stream);
+            $this->uploadFile($signedUrl['url'], $headers, $fileName, $stream);
 
             $uploadData = ['key' => $signedUrl['key'], 'file_name' => $fileName];
 
@@ -67,7 +65,7 @@ class Storage
      *
      * @return void
      */
-    protected function uploadToS3($signedUrl, $headers, $fileName, $stream)
+    protected function uploadFile($signedUrl, $headers, $fileName, $stream)
     {
         $client = new GuzzleClient();
         $request = new Request(
