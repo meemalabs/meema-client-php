@@ -187,9 +187,9 @@ class Storage
      *
      * @return array
      */
-    public function listContents($directory)
+    public function listContents($directory, $recursive = false)
     {
-        return $this->client->request('POST', 'storage/list-contents', compact('directory'));
+        return $this->client->request('POST', 'storage/list-contents', compact('directory', 'recursive'));
     }
 
     /**
