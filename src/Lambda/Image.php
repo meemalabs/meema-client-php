@@ -36,7 +36,7 @@ class Image
      *
      * @param int $value
      *
-     * @return this
+     * @return $this
      */
     public function w($value)
     {
@@ -50,7 +50,7 @@ class Image
      *
      * @param int $value
      *
-     * @return this
+     * @return $this
      */
     public function h($value)
     {
@@ -64,7 +64,7 @@ class Image
      *
      * @param int $value
      *
-     * @return this
+     * @return $this
      */
     public function q($value)
     {
@@ -78,7 +78,7 @@ class Image
      *
      * @param int $value
      *
-     * @return this
+     * @return $this
      */
     public function blur($value)
     {
@@ -92,7 +92,7 @@ class Image
      *
      * @param int|string $value
      *
-     * @return this
+     * @return $this
      */
     public function nsfw($value)
     {
@@ -106,7 +106,7 @@ class Image
      *
      * @param int $value
      *
-     * @return this
+     * @return $this
      */
     public function rotate($value)
     {
@@ -120,7 +120,7 @@ class Image
      *
      * @param string $value
      *
-     * @return this
+     * @return $this
      */
     public function bg($value)
     {
@@ -134,7 +134,7 @@ class Image
      *
      * @param int $value
      *
-     * @return this
+     * @return $this
      */
     public function ar($value)
     {
@@ -148,7 +148,7 @@ class Image
      *
      * @param int $value
      *
-     * @return this
+     * @return $this
      */
     public function br($value)
     {
@@ -162,7 +162,7 @@ class Image
      *
      * @param int $value
      *
-     * @return this
+     * @return $this
      */
     public function con($value)
     {
@@ -176,7 +176,7 @@ class Image
      *
      * @param int $value
      *
-     * @return this
+     * @return $this
      */
     public function exp($value)
     {
@@ -190,7 +190,7 @@ class Image
      *
      * @param int $value
      *
-     * @return this
+     * @return $this
      */
     public function gam($value)
     {
@@ -204,7 +204,7 @@ class Image
      *
      * @param int $value
      *
-     * @return this
+     * @return $this
      */
     public function hue($value)
     {
@@ -218,7 +218,7 @@ class Image
      *
      * @param int $value
      *
-     * @return this
+     * @return $this
      */
     public function high($value)
     {
@@ -232,7 +232,7 @@ class Image
      *
      * @param bool $value
      *
-     * @return this
+     * @return $this
      */
     public function invert($value)
     {
@@ -246,7 +246,7 @@ class Image
      *
      * @param int $value
      *
-     * @return this
+     * @return $this
      */
     public function sat($value)
     {
@@ -260,7 +260,7 @@ class Image
      *
      * @param int $value
      *
-     * @return this
+     * @return $this
      */
     public function shad($value)
     {
@@ -274,7 +274,7 @@ class Image
      *
      * @param int $value
      *
-     * @return this
+     * @return $this
      */
     public function sharp($value)
     {
@@ -288,7 +288,7 @@ class Image
      *
      * @param int $value
      *
-     * @return this
+     * @return $this
      */
     public function usm($value)
     {
@@ -302,7 +302,7 @@ class Image
      *
      * @param int $value
      *
-     * @return this
+     * @return $this
      */
     public function usmrad($value)
     {
@@ -316,7 +316,7 @@ class Image
      *
      * @param int $value
      *
-     * @return this
+     * @return $this
      */
     public function vib($value)
     {
@@ -330,7 +330,7 @@ class Image
      *
      * @param string $value
      *
-     * @return this
+     * @return $this
      */
     public function blend($value)
     {
@@ -344,7 +344,7 @@ class Image
      *
      * @param string $value
      *
-     * @return this
+     * @return $this
      */
     public function blendAlign($value)
     {
@@ -358,7 +358,7 @@ class Image
      *
      * @param string $value
      *
-     * @return this
+     * @return $this
      */
     public function blendAlpha($value)
     {
@@ -372,7 +372,7 @@ class Image
      *
      * @param string $value
      *
-     * @return this
+     * @return $this
      */
     public function blendCrop($value)
     {
@@ -386,7 +386,7 @@ class Image
      *
      * @param string $value
      *
-     * @return this
+     * @return $this
      */
     public function blendFit($value)
     {
@@ -400,7 +400,7 @@ class Image
      *
      * @param string $value
      *
-     * @return this
+     * @return $this
      */
     public function blendH($value)
     {
@@ -414,7 +414,7 @@ class Image
      *
      * @param string $value
      *
-     * @return this
+     * @return $this
      */
     public function blendMode($value)
     {
@@ -428,7 +428,7 @@ class Image
      *
      * @param int $value
      *
-     * @return this
+     * @return $this
      */
     public function blendPad($value)
     {
@@ -442,7 +442,7 @@ class Image
      *
      * @param string $value
      *
-     * @return this
+     * @return $this
      */
     public function blendSize($value)
     {
@@ -456,7 +456,7 @@ class Image
      *
      * @param int $value
      *
-     * @return this
+     * @return $this
      */
     public function blendW($value)
     {
@@ -470,7 +470,7 @@ class Image
      *
      * @param int $value
      *
-     * @return this
+     * @return $this
      */
     public function blendX($value)
     {
@@ -484,7 +484,7 @@ class Image
      *
      * @param int $value
      *
-     * @return this
+     * @return $this
      */
     public function blendY($value)
     {
@@ -498,7 +498,7 @@ class Image
      *
      * @param string $value
      *
-     * @return this
+     * @return $this
      */
     public function border($value)
     {
@@ -512,7 +512,7 @@ class Image
      *
      * @param string $value
      *
-     * @return this
+     * @return $this
      */
     public function borderRadiusInner($value)
     {
@@ -526,7 +526,7 @@ class Image
      *
      * @param string $value
      *
-     * @return this
+     * @return $this
      */
     public function borderRadius($value)
     {
@@ -540,7 +540,7 @@ class Image
      *
      * @param string $value
      *
-     * @return this
+     * @return $this
      */
     public function pad($value)
     {
@@ -554,7 +554,7 @@ class Image
      *
      * @param bool $value
      *
-     * @return this
+     * @return $this
      */
     public function greyscale($value)
     {
@@ -568,7 +568,7 @@ class Image
      *
      * @param string $value
      *
-     * @return this
+     * @return $this
      */
     public function trim($value)
     {
@@ -582,7 +582,7 @@ class Image
      *
      * @param int $value
      *
-     * @return this
+     * @return $this
      */
     public function faceindex($value)
     {
@@ -596,7 +596,7 @@ class Image
      *
      * @param int $value
      *
-     * @return this
+     * @return $this
      */
     public function facepad($value)
     {
@@ -610,7 +610,7 @@ class Image
      *
      * @param string $value
      *
-     * @return this
+     * @return $this
      */
     public function fillColor($value)
     {
@@ -624,7 +624,7 @@ class Image
      *
      * @param string $value
      *
-     * @return this
+     * @return $this
      */
     public function fill($value)
     {
@@ -638,7 +638,7 @@ class Image
      *
      * @param string $value
      *
-     * @return this
+     * @return $this
      */
     public function chroma($value)
     {
@@ -652,7 +652,7 @@ class Image
      *
      * @param string $value
      *
-     * @return this
+     * @return $this
      */
     public function ch($value)
     {
@@ -666,7 +666,7 @@ class Image
      *
      * @param int $value
      *
-     * @return this
+     * @return $this
      */
     public function colorquant($value)
     {
@@ -680,7 +680,7 @@ class Image
      *
      * @param string $value
      *
-     * @return this
+     * @return $this
      */
     public function cs($value)
     {
@@ -694,7 +694,7 @@ class Image
      *
      * @param int $value
      *
-     * @return this
+     * @return $this
      */
     public function dpi($value)
     {
@@ -708,7 +708,7 @@ class Image
      *
      * @param bool $value
      *
-     * @return this
+     * @return $this
      */
     public function lossless($value)
     {
@@ -722,7 +722,7 @@ class Image
      *
      * @param bool $value
      *
-     * @return this
+     * @return $this
      */
     public function fm($value)
     {
@@ -736,7 +736,7 @@ class Image
      *
      * @param bool $value
      *
-     * @return this
+     * @return $this
      */
     public function flop($value)
     {
@@ -750,7 +750,7 @@ class Image
      *
      * @param string $value
      *
-     * @return this
+     * @return $this
      */
     public function auto($value)
     {
@@ -764,7 +764,7 @@ class Image
      *
      * @param string $value
      *
-     * @return this
+     * @return $this
      */
     public function expires($value)
     {
@@ -778,7 +778,7 @@ class Image
      *
      * @param string $value
      *
-     * @return this
+     * @return $this
      */
     public function dpr($value)
     {
@@ -792,7 +792,7 @@ class Image
      *
      * @param string $value
      *
-     * @return this
+     * @return $this
      */
     public function cornerRadius($value)
     {
@@ -806,7 +806,7 @@ class Image
      *
      * @param string $value
      *
-     * @return this
+     * @return $this
      */
     public function mask($value)
     {
@@ -820,7 +820,7 @@ class Image
      *
      * @param int $value
      *
-     * @return this
+     * @return $this
      */
     public function nr($value)
     {
@@ -834,7 +834,7 @@ class Image
      *
      * @param int $value
      *
-     * @return this
+     * @return $this
      */
     public function nrs($value)
     {
@@ -848,7 +848,7 @@ class Image
      *
      * @param int $value
      *
-     * @return this
+     * @return $this
      */
     public function extend($value)
     {
@@ -862,7 +862,7 @@ class Image
      *
      * @param string $value
      *
-     * @return this
+     * @return $this
      */
     public function extract($value)
     {
@@ -876,7 +876,7 @@ class Image
      *
      * @param string $value
      *
-     * @return this
+     * @return $this
      */
     public function flip($value)
     {
@@ -890,7 +890,7 @@ class Image
      *
      * @param int $value
      *
-     * @return this
+     * @return $this
      */
     public function orient($value)
     {
@@ -904,7 +904,7 @@ class Image
      *
      * @param string $value
      *
-     * @return this
+     * @return $this
      */
     public function crop($value)
     {
@@ -918,7 +918,7 @@ class Image
      *
      * @param int $value
      *
-     * @return this
+     * @return $this
      */
     public function maxH($value)
     {
@@ -932,7 +932,7 @@ class Image
      *
      * @param int $value
      *
-     * @return this
+     * @return $this
      */
     public function minH($value)
     {
@@ -946,7 +946,7 @@ class Image
      *
      * @param int $value
      *
-     * @return this
+     * @return $this
      */
     public function maxW($value)
     {
@@ -960,7 +960,7 @@ class Image
      *
      * @param int $value
      *
-     * @return this
+     * @return $this
      */
     public function minw($value)
     {
@@ -974,7 +974,7 @@ class Image
      *
      * @param string $value
      *
-     * @return this
+     * @return $this
      */
     public function fit($value)
     {
@@ -988,7 +988,7 @@ class Image
      *
      * @param string $value
      *
-     * @return this
+     * @return $this
      */
     public function rect($value)
     {
@@ -1002,7 +1002,7 @@ class Image
      *
      * @param string $value
      *
-     * @return this
+     * @return $this
      */
     public function duotone($value)
     {
@@ -1016,7 +1016,7 @@ class Image
      *
      * @param int $value
      *
-     * @return this
+     * @return $this
      */
     public function duotoneAlpha($value)
     {
@@ -1030,7 +1030,7 @@ class Image
      *
      * @param int $value
      *
-     * @return this
+     * @return $this
      */
     public function halftone($value)
     {
@@ -1044,7 +1044,7 @@ class Image
      *
      * @param string $value
      *
-     * @return this
+     * @return $this
      */
     public function monochrome($value)
     {
@@ -1058,7 +1058,7 @@ class Image
      *
      * @param int $value
      *
-     * @return this
+     * @return $this
      */
     public function px($value)
     {
@@ -1072,7 +1072,7 @@ class Image
      *
      * @param int $value
      *
-     * @return this
+     * @return $this
      */
     public function sepia($value)
     {
@@ -1086,7 +1086,7 @@ class Image
      *
      * @param string $value
      *
-     * @return this
+     * @return $this
      */
     public function txtAlign($value)
     {
@@ -1100,7 +1100,7 @@ class Image
      *
      * @param string $value
      *
-     * @return this
+     * @return $this
      */
     public function txtClip($value)
     {
@@ -1114,7 +1114,7 @@ class Image
      *
      * @param string $value
      *
-     * @return this
+     * @return $this
      */
     public function txtColor($value)
     {
@@ -1128,7 +1128,7 @@ class Image
      *
      * @param string $value
      *
-     * @return this
+     * @return $this
      */
     public function txtFit($value)
     {
@@ -1142,7 +1142,7 @@ class Image
      *
      * @param string $value
      *
-     * @return this
+     * @return $this
      */
     public function txtFont($value)
     {
@@ -1156,7 +1156,7 @@ class Image
      *
      * @param int $value
      *
-     * @return this
+     * @return $this
      */
     public function txtSize($value)
     {
@@ -1170,7 +1170,7 @@ class Image
      *
      * @param int $value
      *
-     * @return this
+     * @return $this
      */
     public function txtLig($value)
     {
@@ -1184,7 +1184,7 @@ class Image
      *
      * @param int $value
      *
-     * @return this
+     * @return $this
      */
     public function txtLine($value)
     {
@@ -1198,7 +1198,7 @@ class Image
      *
      * @param string $value
      *
-     * @return this
+     * @return $this
      */
     public function txtLineColor($value)
     {
@@ -1212,7 +1212,7 @@ class Image
      *
      * @param int $value
      *
-     * @return this
+     * @return $this
      */
     public function txtPad($value)
     {
@@ -1226,7 +1226,7 @@ class Image
      *
      * @param int $value
      *
-     * @return this
+     * @return $this
      */
     public function txtShad($value)
     {
@@ -1240,7 +1240,7 @@ class Image
      *
      * @param string $value
      *
-     * @return this
+     * @return $this
      */
     public function txt($value)
     {
@@ -1254,7 +1254,7 @@ class Image
      *
      * @param int $value
      *
-     * @return this
+     * @return $this
      */
     public function txtWidth($value)
     {
