@@ -4,6 +4,7 @@ namespace Meema\MeemaClient;
 
 use Dotenv\Dotenv;
 use GuzzleHttp\Client as GuzzleClient;
+use Meema\MeemaClient\Lambda\Image;
 use Meema\MeemaClient\Models\Favorite;
 use Meema\MeemaClient\Models\Folder;
 use Meema\MeemaClient\Models\Media;
@@ -157,6 +158,16 @@ class Client
     public function favorites(): Favorite
     {
         return new Favorite($this);
+    }
+
+    /**
+     * Initialize the image lambda.
+     *
+     * @return Meema\MeemaClient\Lambda\Image
+     */
+    public function image(): Image
+    {
+        return new Image($this);
     }
 
     /**
