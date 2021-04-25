@@ -4,7 +4,7 @@ namespace Meema\MeemaClient;
 
 use Dotenv\Dotenv;
 use GuzzleHttp\Client as GuzzleClient;
-use Meema\MeemaClient\Lambda\Image;
+use Meema\MeemaClient\Function\Image;
 use Meema\MeemaClient\Models\Favorite;
 use Meema\MeemaClient\Models\Folder;
 use Meema\MeemaClient\Models\Media;
@@ -161,9 +161,9 @@ class Client
     }
 
     /**
-     * Initialize the image lambda.
+     * Initialize the on-the-fly image edit operations.
      *
-     * @return Meema\MeemaClient\Lambda\Image
+     * @return Meema\MeemaClient\Functions\Image
      */
     public function image(): Image
     {

@@ -1,6 +1,6 @@
 <?php
 
-namespace Meema\MeemaClient\Lambda;
+namespace Meema\MeemaClient\Functions;
 
 use Meema\MeemaClient\Client;
 
