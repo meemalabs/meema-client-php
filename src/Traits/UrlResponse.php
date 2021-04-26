@@ -6,7 +6,7 @@ use GuzzleHttp\Psr7\Utils;
 
 trait UrlResponse
 {
-     /**
+    /**
      * Convert all parameters to string url.
      *
      * @return string
