@@ -1264,6 +1264,90 @@ class Image
     }
 
     /**
+     * Set the trim color value.
+     *
+     * @param string $value
+     *
+     * @return $this
+     */
+    public function trimColor($value)
+    {
+        $this->args = array_merge($this->args, ['trim-color' => $value]);
+
+        return $this;
+    }
+
+    /**
+     * Set the trim mean difference value.
+     *
+     * @param int $value
+     *
+     * @return $this
+     */
+    public function trimMd($value)
+    {
+        $this->args = array_merge($this->args, ['trim-md' => $value]);
+
+        return $this;
+    }
+
+    /**
+     * Set the trim standard deviation value.
+     *
+     * @param int $value
+     *
+     * @return $this
+     */
+    public function trimSd($value)
+    {
+        $this->args = array_merge($this->args, ['trim-sd' => $value]);
+
+        return $this;
+    }
+
+    /**
+     * Set the trim tolerance value.
+     *
+     * @param int $value
+     *
+     * @return $this
+     */
+    public function trimTol($value)
+    {
+        $this->args = array_merge($this->args, ['trim-tol' => $value]);
+
+        return $this;
+    }
+
+    /**
+     * Set the text leading value.
+     *
+     * @param int $value
+     *
+     * @return $this
+     */
+    public function txtLead($value)
+    {
+        $this->args = array_merge($this->args, ['txt-lead' => $value]);
+
+        return $this;
+    }
+
+    /**
+     * Set the text leading value.
+     *
+     * @param int $value
+     *
+     * @return $this
+     */
+    public function txtTrack($value)
+    {
+        $this->args = array_merge($this->args, ['txt-track' => $value]);
+
+        return $this;
+    }
+
+    /**
      * Convert all parameters to string url.
      *
      * @return string
