@@ -4,7 +4,8 @@ namespace Meema\MeemaClient;
 
 use Dotenv\Dotenv;
 use GuzzleHttp\Client as GuzzleClient;
-use Meema\MeemaClient\Function\Image;
+use Meema\MeemaClient\Functions\Image;
+use Meema\MeemaClient\Functions\Video;
 use Meema\MeemaClient\Models\Favorite;
 use Meema\MeemaClient\Models\Folder;
 use Meema\MeemaClient\Models\Media;
@@ -168,6 +169,16 @@ class Client
     public function image(): Image
     {
         return new Image($this);
+    }
+
+    /**
+     * Initialize the on-the-fly image video operations.
+     *
+     * @return Meema\MeemaClient\Functions\Video
+     */
+    public function videos(): Video
+    {
+        return new Video($this);
     }
 
     /**

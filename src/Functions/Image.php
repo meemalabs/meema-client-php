@@ -3,18 +3,16 @@
 namespace Meema\MeemaClient\Functions;
 
 use Meema\MeemaClient\Client;
+use Meema\MeemaClient\Traits\UrlResponse;
 
 class Image
 {
+    use UrlResponse;
+
     /**
      * @var \Meema\MeemaClient\Client
      */
     protected $client;
-
-    /**
-     * @var int
-     */
-    protected $id;
 
     /**
      * @var array
@@ -1345,31 +1343,5 @@ class Image
         $this->args = array_merge($this->args, ['txt-track' => $value]);
 
         return $this;
-    }
-
-    /**
-     * Convert all parameters to string url.
-     *
-     * @return string
-     */
-    public function toUrl()
-    {
-        $queryParams = '';
-
-        $index = 0;
-
-        foreach ($this->args as $key => $param) {
-            $separator = '?';
-
-            if ($index) {
-                $separator = '&';
-            }
-
-            $queryParams .= "{$separator}{$key}={$param}";
-
-            $index++;
-        }
-
-        return "https://dev-ops.mee.ma/glenn/1/5/people.jpg{$queryParams}";
     }
 }
