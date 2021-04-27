@@ -176,7 +176,7 @@ class Client
      *
      * @return Meema\MeemaClient\Functions\Video
      */
-    public function videos(): Video
+    public function video(): Video
     {
         return new Video($this);
     }

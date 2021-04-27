@@ -4,10 +4,11 @@ namespace Meema\MeemaClient\Functions;
 
 use Meema\MeemaClient\Client;
 use Meema\MeemaClient\Traits\UrlResponse;
+use Meema\MeemaClient\Traits\DetectsFeature;
 
 class Image
 {
-    use UrlResponse;
+    use UrlResponse, DetectsFeature;
 
     /**
      * @var \Meema\MeemaClient\Client
