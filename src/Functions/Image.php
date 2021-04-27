@@ -3,8 +3,8 @@
 namespace Meema\MeemaClient\Functions;
 
 use Meema\MeemaClient\Client;
-use Meema\MeemaClient\Traits\UrlResponse;
 use Meema\MeemaClient\Traits\DetectsFeature;
+use Meema\MeemaClient\Traits\UrlResponse;
 
 class Image
 {
