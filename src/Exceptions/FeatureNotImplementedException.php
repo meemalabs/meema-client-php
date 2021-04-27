@@ -14,6 +14,6 @@ class FeatureNotImplementedException extends Exception
     public function __construct(string $message = null)
     {
         parent::__construct($message ?? 'Error on line '.$this->getLine().' in '.$this->getFile()
-        .' ID is not a valid integer');
+        .' Feature not yet implemented. Please contact us if this is something you would like to see rather sooner than later.');
     }
 }
