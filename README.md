@@ -35,7 +35,13 @@ First, install Meema PHP API Client via the [composer](https://getcomposer.org/)
 composer require meema/meema-client-php
 ```
 
-Then, wip
+Then initialize the Client
+
+```php
+use Meema\MeemaClient\Client
+
+$client = new Client($meemaApiKey);
+```
 
 ```php
 $client->folders()->get([1, 2, 3]);
@@ -56,7 +62,11 @@ $client->media()->search($q);
 $client->media()->metadata()->get();
 
 $client->folders()->get(); 
-$client->folders()->search($q); 
+$client->folders()->search($q);
+
+$client->storage()->upload($path); 
+$client->storage()->getMetadata($path);
+$client->storage()->setVisibility($path, $visibility);
 ```
 
 For the full documentation, visit the **[Meema PHP API Client](https://meema.io/docs/)**.
