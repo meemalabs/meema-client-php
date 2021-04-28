@@ -7,6 +7,14 @@ use Meema\MeemaClient\Exceptions\FeatureNotImplementedException;
 
 trait DetectsFeature
 {
+    /**
+     * Detect if the function called doesn't exist or a missing feature.
+     *
+     * @return void
+     * 
+     * @throws BadMethodCallException
+     * @throws FeatureNotImplementedException
+     */
     public function __call($name, $arguments)
     {
         $data = file_get_contents(dirname(dirname(__DIR__)).'/data/params.json');
