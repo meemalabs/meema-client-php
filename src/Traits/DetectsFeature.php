@@ -11,7 +11,7 @@ trait DetectsFeature
      * Detect if the function called doesn't exist or a missing feature.
      *
      * @return void
-     * 
+     *
      * @throws BadMethodCallException
      * @throws FeatureNotImplementedException
      */
