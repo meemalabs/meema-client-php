@@ -8,7 +8,7 @@ use Meema\MeemaClient\Exceptions\FeatureNotImplementedException;
 trait DetectsFeature
 {
     /**
-     * Detect if the function called doesn't exist or a missing feature.
+     * Detect if the function called doesn't exist or whether it is a missing feature.
      *
      * @return void
      *
