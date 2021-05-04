@@ -53,7 +53,10 @@ it('can delete a tag', function () {
 });
 
 it('can fetch all media tags', function () {
-    $media = $this->client->media()->find(1);
+    $allMedia = $this->client->media()->get();
+
+    $media = $this->client->media()->find($allMedia[0]['id']);
+
     $tags = $media->tags()->get();
 
     $this->assertTrue(is_array($tags));
@@ -61,7 +64,9 @@ it('can fetch all media tags', function () {
 });
 
 it('can fetch all folder tags', function () {
-    $folder = $this->client->folders()->find(1);
+    $folders = $this->client->folders()->get();
+
+    $folder = $this->client->folders()->find($folders[0]['id']);
     $tags = $folder->tags()->get();
 
     $this->assertTrue(is_array($tags));
