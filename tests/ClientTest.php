@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests;
+namespace Meema\MeemaClient\Tests;
 
 use Meema\MeemaClient\Client;
 use Orchestra\Testbench\TestCase;
