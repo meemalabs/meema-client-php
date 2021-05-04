@@ -1,6 +1,8 @@
 <?php
 
-uses(Tests\ClientTest::class);
+use Tests\ClientTest;
+
+uses(ClientTest::class);
 
 beforeEach(function () {
     $this->initializeDotEnv();

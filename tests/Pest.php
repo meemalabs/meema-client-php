@@ -1,3 +1,5 @@
 <?php
 
-uses(Tests\ClientTest::class);
+use Tests\ClientTest;
+
+uses(ClientTest::class);
