@@ -16,6 +16,6 @@ class InvalidFormatException extends Exception
         $customMessage = $message ? " {$message}" : ' ID is not a valid integer';
 
         parent::__construct('Error on line '.$this->getLine().' in '.$this->getFile()
-        . $customMessage);
+        .$customMessage);
     }
 }
