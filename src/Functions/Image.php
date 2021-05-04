@@ -135,9 +135,9 @@ class Image
      *
      * @return $this
      */
-    public function br($value)
+    public function bri($value)
     {
-        $this->args = array_merge($this->args, ['br' => $value]);
+        $this->args = array_merge($this->args, ['bri' => $value]);
 
         return $this;
     }

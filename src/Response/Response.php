@@ -73,7 +73,7 @@ class Response
     /**
      * Get response content.
      *
-     * @param  mixed $key
+     * @param mixed $key
      *
      * @return array
      */
@@ -88,8 +88,6 @@ class Response
 
     /**
      * Get response content to array.
-     *
-     * @param  mixed $key
      *
      * @return array
      */

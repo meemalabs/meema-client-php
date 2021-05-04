@@ -6,10 +6,11 @@ use Meema\MeemaClient\Client;
 use Meema\MeemaClient\Exceptions\InvalidFormatException;
 use Meema\MeemaClient\Response\Response;
 use Meema\MeemaClient\Traits\CollectionsResponse;
+use Meema\MeemaClient\Traits\ValidsUuid;
 
 class Media
 {
-    use CollectionsResponse;
+    use CollectionsResponse, ValidsUuid;
 
     /**
      * @var \Meema\MeemaClient\Client
@@ -68,8 +69,8 @@ class Media
         $ids = is_array($ids) ? $ids : func_get_args();
 
         foreach ($ids as $id) {
-            if (! is_int($id)) {
-                throw new InvalidFormatException();
+            if (! $this->isValidUuid($id)) {
+                throw new InvalidFormatException('ID is not a valid UUID');
             }
         }
 
@@ -103,8 +104,8 @@ class Media
      */
     public function find($id)
     {
-        if (! is_int($id)) {
-            throw new InvalidFormatException();
+        if (! $this->isValidUuid($id)) {
+            throw new InvalidFormatException('ID is not a valid UUID');
         }
 
         $response = $this->client->request('GET', "media/${id}");
@@ -138,8 +139,8 @@ class Media
      */
     public function update($id, $name)
     {
-        if (! is_int($id)) {
-            throw new InvalidFormatException();
+        if (! $this->isValidUuid($id)) {
+            throw new InvalidFormatException('ID is not a valid UUID');
         }
 
         $name = is_array($name) ? $name : compact('name');
@@ -161,8 +162,8 @@ class Media
         $ids = is_array($ids) ? $ids : func_get_args();
 
         foreach ($ids as $id) {
-            if (! is_int($id)) {
-                throw new InvalidFormatException();
+            if (! $this->isValidUuid($id)) {
+                throw new InvalidFormatException('ID is not a valid UUID');
             }
         }
 
@@ -190,8 +191,8 @@ class Media
         $ids = is_array($ids) ? $ids : func_get_args();
 
         foreach ($ids as $id) {
-            if (! is_int($id)) {
-                throw new InvalidFormatException();
+            if (! $this->isValidUuid($id)) {
+                throw new InvalidFormatException('ID is not a valid UUID');
             }
         }
 
@@ -219,8 +220,8 @@ class Media
         $ids = is_array($ids) ? $ids : func_get_args();
 
         foreach ($ids as $id) {
-            if (! is_int($id)) {
-                throw new InvalidFormatException();
+            if (! $this->isValidUuid($id)) {
+                throw new InvalidFormatException('ID is not a valid UUID');
             }
         }
 
@@ -248,8 +249,8 @@ class Media
         $ids = is_array($ids) ? $ids : func_get_args();
 
         foreach ($ids as $id) {
-            if (! is_int($id)) {
-                throw new InvalidFormatException();
+            if (! $this->isValidUuid($id)) {
+                throw new InvalidFormatException('ID is not a valid UUID');
             }
         }
 
@@ -277,8 +278,8 @@ class Media
         $ids = is_array($ids) ? $ids : func_get_args();
 
         foreach ($ids as $id) {
-            if (! is_int($id)) {
-                throw new InvalidFormatException();
+            if (! $this->isValidUuid($id)) {
+                throw new InvalidFormatException('ID is not a valid UUID');
             }
         }
 
@@ -306,8 +307,8 @@ class Media
         $ids = is_array($ids) ? $ids : func_get_args();
 
         foreach ($ids as $id) {
-            if (! is_int($id)) {
-                throw new InvalidFormatException();
+            if (! $this->isValidUuid($id)) {
+                throw new InvalidFormatException('ID is not a valid UUID');
             }
         }
 
