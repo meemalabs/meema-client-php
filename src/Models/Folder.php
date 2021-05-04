@@ -6,10 +6,11 @@ use Meema\MeemaClient\Client;
 use Meema\MeemaClient\Exceptions\InvalidFormatException;
 use Meema\MeemaClient\Response\Response;
 use Meema\MeemaClient\Traits\CollectionsResponse;
+use Meema\MeemaClient\Traits\ValidsUuid;
 
 class Folder
 {
-    use CollectionsResponse;
+    use CollectionsResponse, ValidsUuid;
 
     /**
      * @var \Meema\MeemaClient\Client
@@ -64,8 +65,8 @@ class Folder
         $ids = is_array($id) ? $id : func_get_args();
 
         foreach ($ids as $id) {
-            if (! is_int($id)) {
-                throw new InvalidFormatException();
+            if (! $this->isValidUuid($id)) {
+                throw new InvalidFormatException('ID is not a valid UUID');
             }
         }
 
@@ -99,8 +100,8 @@ class Folder
      */
     public function find($id)
     {
-        if (! is_int($id)) {
-            throw new InvalidFormatException();
+        if (! $this->isValidUuid($id)) {
+            throw new InvalidFormatException('ID is not a valid UUID');
         }
 
         $response = $this->client->request('GET', "folders/${id}");
@@ -138,8 +139,8 @@ class Folder
      */
     public function update($id, $name)
     {
-        if (! is_int($id)) {
-            throw new InvalidFormatException();
+        if (! $this->isValidUuid($id)) {
+            throw new InvalidFormatException('ID is not a valid UUID');
         }
 
         $name = is_array($name) ? $name : compact('name');
@@ -161,8 +162,8 @@ class Folder
         $ids = is_array($ids) ? $ids : func_get_args();
 
         foreach ($ids as $id) {
-            if (! is_int($id)) {
-                throw new InvalidFormatException();
+            if (! $this->isValidUuid($id)) {
+                throw new InvalidFormatException('ID is not a valid UUID');
             }
 
             if ($this->model) {
@@ -194,8 +195,8 @@ class Folder
         $ids = is_array($ids) ? $ids : func_get_args();
 
         foreach ($ids as $id) {
-            if (! is_int($id)) {
-                throw new InvalidFormatException();
+            if (! $this->isValidUuid($id)) {
+                throw new InvalidFormatException('ID is not a valid UUID');
             }
         }
 
@@ -223,8 +224,8 @@ class Folder
         $ids = is_array($ids) ? $ids : func_get_args();
 
         foreach ($ids as $id) {
-            if (! is_int($id)) {
-                throw new InvalidFormatException();
+            if (! $this->isValidUuid($id)) {
+                throw new InvalidFormatException('ID is not a valid UUID');
             }
         }
 
@@ -252,8 +253,8 @@ class Folder
         $ids = is_array($ids) ? $ids : func_get_args();
 
         foreach ($ids as $id) {
-            if (! is_int($id)) {
-                throw new InvalidFormatException();
+            if (! $this->isValidUuid($id)) {
+                throw new InvalidFormatException('ID is not a valid UUID');
             }
         }
 
@@ -279,8 +280,8 @@ class Folder
      */
     protected function addFolderToMedia($id, $name)
     {
-        if (! is_int($id)) {
-            throw new InvalidFormatException();
+        if (! $this->isValidUuid($id)) {
+            throw new InvalidFormatException('ID is not a valid UUID');
         }
 
         return $this->client->request('POST', "media/{$id}/folders", $name);
@@ -298,8 +299,8 @@ class Folder
      */
     protected function deleteFolderFromMedia($id, $folderId)
     {
-        if (! is_int($id) || ! is_int($folderId)) {
-            throw new InvalidFormatException();
+        if (! $this->isValidUuid($id) || ! $this->isValidUuid($folderId)) {
+            throw new InvalidFormatException('ID is not a valid UUID');
         }
 
         return $this->client->request('DELETE', "media/{$id}/folders/{$folderId}");
@@ -362,9 +363,9 @@ class Folder
     /**
      * Get the protected id.
      *
-     * @return int
+     * @return string
      */
-    public function getId(): int
+    public function getId()
     {
         return $this->id;
     }

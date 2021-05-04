@@ -1,6 +1,6 @@
 <?php
 
-use Tests\ClientTest;
+use Meema\MeemaClient\Tests\ClientTest;
 
 uses(ClientTest::class);
 
@@ -17,7 +17,9 @@ it('can be fetch all media', function () {
 });
 
 it('can search a media', function () {
-    $media = $this->client->media()->find(1)->toArray();
+    $allMedia = $this->client->media()->get();
+
+    $media = $this->client->media()->find($allMedia[0]['id'])->toArray();
     $query = $media['name'];
 
     $media = $this->client->media()->search($query);
@@ -27,6 +29,7 @@ it('can search a media', function () {
 });
 
 it('can be fetch all media for a tag', function () {
+
     // 8 is the tag id for images
     $tag = $this->client->tags()->find(8);
 
@@ -37,8 +40,10 @@ it('can be fetch all media for a tag', function () {
 });
 
 it('can be fetch all media for a folder', function () {
+    $allFolders = $this->client->folders()->get();
+
     // 8 is the tag id for images
-    $folder = $this->client->folders()->find(1);
+    $folder = $this->client->folders()->find($allFolders[0]['id']);
 
     $media = $folder->media()->get();
 
@@ -47,7 +52,9 @@ it('can be fetch all media for a folder', function () {
 });
 
 it('can be fetch specific group of media', function () {
-    $ids = [1, 2, 3];
+    $allMedia = $this->client->media()->get();
+
+    $ids = [$allMedia[0]['id'], $allMedia[1]['id'], $allMedia[2]['id']];
 
     $media = $this->client->media()->get($ids);
 
@@ -56,7 +63,9 @@ it('can be fetch specific group of media', function () {
 });
 
 it('can find a single media', function () {
-    $id = 1;
+    $allMedia = $this->client->media()->get();
+
+    $id = $allMedia[0]['id'];
 
     $media = $this->client->media()->find($id)->toArray();
 
@@ -65,46 +74,58 @@ it('can find a single media', function () {
 });
 
 it('can update a media', function () {
+    $allMedia = $this->client->media()->get();
+
     $name = 'test media';
 
-    $media = $this->client->media()->update(1, $name);
+    $media = $this->client->media()->update($allMedia[0]['id'], $name);
 
     $this->assertTrue(is_array($media));
     $this->assertTrue($media['name'] === $name);
 });
 
 it('can archive a media', function () {
-    $media = $this->client->media()->archive(1);
+    $allMedia = $this->client->media()->get();
+
+    $media = $this->client->media()->archive($allMedia[0]['id']);
 
     $this->assertTrue(is_array($media));
     $this->assertTrue((bool) $media['is_archived']);
 });
 
 it('can unarchive a media', function () {
-    $media = $this->client->media()->unarchive(1);
+    $allMedia = $this->client->media()->get();
+
+    $media = $this->client->media()->unarchive($allMedia[0]['id']);
 
     $this->assertTrue(is_array($media));
     $this->assertFalse((bool) $media['is_archived']);
 });
 
 it('can make a media private', function () {
-    $media = $this->client->media()->makePrivate(1);
+    $allMedia = $this->client->media()->get();
+
+    $media = $this->client->media()->makePrivate($allMedia[0]['id']);
 
     $this->assertTrue(is_array($media));
     $this->assertFalse((bool) $media['is_public']);
 });
 
 it('can make a media public', function () {
-    $media = $this->client->media()->makePublic(1);
+    $allMedia = $this->client->media()->get();
+
+    $media = $this->client->media()->makePublic($allMedia[0]['id']);
 
     $this->assertTrue(is_array($media));
     $this->assertTrue((bool) $media['is_public']);
 });
 
 it('can duplicate a media', function () {
-    $media = $this->client->media()->find(1);
+    $allMedia = $this->client->media()->get();
 
-    $duplicated = $this->client->media()->duplicate(1);
+    $media = $this->client->media()->find($allMedia[0]['id']);
+
+    $duplicated = $this->client->media()->duplicate($allMedia[0]['id']);
 
     $this->assertTrue(is_array($duplicated));
     $this->assertTrue($duplicated['name'] === $media->toArray()['name']);
@@ -114,7 +135,7 @@ it('can delete a media', function () {
     $media = $this->client->media()->get();
 
     $media = array_reverse($media);
-    $response = $this->client->media()->delete((int) $media[0]['media_id']);
+    $response = $this->client->media()->delete($media[0]['id']);
 
     $this->assertTrue(is_null($response));
 });

@@ -1,5 +1,5 @@
 <?php
 
-use Tests\ClientTest;
+use Meema\MeemaClient\Tests\ClientTest;
 
 uses(ClientTest::class);

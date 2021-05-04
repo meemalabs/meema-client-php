@@ -34,6 +34,10 @@ jobs:
         run: |
           composer update --${{ matrix.dependency-version }} --prefer-dist --no-interaction
 
+      - name: Dump composer
+        run: |
+          composer dumpautoload
+
       - name: Make envfile
         uses: SpicyPizza/create-envfile@v1
         with:
@@ -43,4 +47,4 @@ jobs:
           file_name: .env
 
       - name: Execute tests
-        run: vendor/bin/pest
+        run: ./vendor/bin/pest

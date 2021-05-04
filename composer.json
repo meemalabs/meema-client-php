@@ -37,7 +37,7 @@
     },
     "autoload-dev": {
         "psr-4": {
-            "Meema\\MeemaClient\\Test\\": "tests"
+            "Meema\\MeemaClient\\Tests\\": "tests"
         }
     },
     "suggest": {

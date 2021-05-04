@@ -377,7 +377,7 @@ class Media
     /**
      * Get the protected id.
      *
-     * @return int
+     * @return string
      */
     public function getId()
     {
