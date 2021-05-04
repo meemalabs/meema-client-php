@@ -42,24 +42,73 @@ use Meema\MeemaClient\Client
 
 $client = new Client($meemaApiKey);
 ```
+Using the Media model.
+```php
+$client->media()->create('New media name');
+$client->media()->get();
+
+// Specific uuids
+$client->media()->get('11a283ed-a64e-424a-aefc-6aa98971d529', '1556fcb8-693e-4431-8b16-3b2b7bb8fcc7');
+$client->media()->search('media-name');
+
+// This will return a Response instance
+$media = $client->media()->find('11a283ed-a64e-424a-aefc-6aa98971d529');
+
+// So that you can chain other methods that require an id.
+$media->update('updated-media-name')
+$media->delete();
+$media->archive();
+$media->unarchive();
+$media->makePrivate();
+$media->makePublic();
+$media->duplicate();
+
+// Relationships with other models.
+// Continuing with the chaining methods we used earlier.
+$media->folders()->get();
+$media->folders()->create('New folder name');
+$media->folders()->delete('11a283ed-a64e-424a-aefc-6aa98971d529');
+$media->tags()->get();
+$media->tags()->associate(['name' => 'Tag Name']);
+$media->tags()->disassociate(['name' => 'Tag Name']);
+```
+
+Using the Folder model.
 
 ```php
-$client->folders()->get([1, 2, 3]);
-$client->folders()->delete(1, 2, 3);
-$client->folders(1)->update(['name' = 'New Folder Name']);
-$client->folders([1, 2, 3])->media()->get();
+$client->folders()->create('New folder name');
+$client->folders()->get();
+
+// Specific uuids
+$client->folders()->get('11a283ed-a64e-424a-aefc-6aa98971d529', '1556fcb8-693e-4431-8b16-3b2b7bb8fcc7');
+$client->folders()->search('folder-name');
+
+// This will return a Response instance
+$folder = $client->folders()->find('11a283ed-a64e-424a-aefc-6aa98971d529');
+
+// So that you can chain other methods that require an id.
+$folder->update('updated-folder-name')
+$folder->delete();
+$folder->archive();
+$folder->unarchive();
+$folder->duplicate();
+
+// Relationships with other models.
+// Continuing with the chaining methods we used earlier.
+$folder->media()->get();
+$folder->tags()->get();
+$folder->tags()->associate(['tag_id' => 7]);
+$folder->tags()->disassociate(['tag_id' => 7]);
+```
+
+```php
+$client->teams()->get();
 $client->tags()->get();
 $client->tags()->delete(1, 2, 3);
 $client->tags(1)->update(['name' = 'New Tag Name']);
 $client->tags([1, 2, 3])->media()->get();
 // need to the same for following resources
 $client->favorites()->get();
-$client->media()->get();
-$client->teams()->get();
-
-$client->media()->get(); 
-$client->media()->search($q);
-$client->media()->metadata()->get();
 
 $client->folders()->get(); 
 $client->folders()->search($q);
