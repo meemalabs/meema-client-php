@@ -101,22 +101,57 @@ $folder->tags()->associate(['tag_id' => 7]);
 $folder->tags()->disassociate(['tag_id' => 7]);
 ```
 
+Using the Tag model.
+
 ```php
-$client->teams()->get();
 $client->tags()->get();
-$client->tags()->delete(1, 2, 3);
-$client->tags(1)->update(['name' = 'New Tag Name']);
-$client->tags([1, 2, 3])->media()->get();
-// need to the same for following resources
+
+// Specific ids
+$client->tags()->get(1, 2, 3);
+
+// This will return a Response instance
+$tag = $client->tags()->find(1);
+
+// So that you can chain other methods that require an id.
+$tag->update('red-500'); // You will have to use tailwind CSS color palletes.
+$tag->delete();
+$tag->media()->get();
+```
+
+Using the favorite model. 
+
+```php
+$client->favorites()->create(['name' => 'New Favorite Name', 'icon' => 'favorite-icon']);
 $client->favorites()->get();
 
-$client->folders()->get(); 
-$client->folders()->search($q);
+// Specific ids
+$client->favorites()->get(1,2,3);
 
-$client->storage()->upload($path); 
-$client->storage()->getMetadata($path);
-$client->storage()->setVisibility($path, $visibility);
+// This will return a Response instance
+$favorite = $client->favorites()->find(1);
+
+// So that you can chain other methods that require an id.
+$favorite->update(['name' => 'Updated Favorite Name', 'icon' => 'updated-favorite-icon']);
+$favorite->delete();
 ```
+
+Using the storage model.
+
+```php
+$client->storage()->upload('path/to/local/media/file'); 
+$client->storage()->getMetadata('meema/directory/to/file.jpg');
+
+$client->storage()->setVisibility('meema/directory/to/file.jpg', 'private'); // Or 'public'
+$client->storage()->has('meema/directory/to/file.jpg');
+$client->storage()->delete('meema/directory/to/file.jpg');
+$client->storage()->copy('meema/directory/to/file.jpg', 'meema/directory/to/copied-file.jpg');
+$client->storage()->rename('meema/directory/to/file.jpg', 'meema/directory/to/renamed-file.jpg');
+
+$client->storage()->listContents('meema/directory');
+$client->storage()->makeDirectory('meema/directory/newDirectory');
+```
+
+For using the lamdba functions for sharp or imgix image manipulations, read more **[here](https://meema.io/docs/)**
 
 For the full documentation, visit the **[Meema PHP API Client](https://meema.io/docs/)**.
 
