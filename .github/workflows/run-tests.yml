@@ -34,9 +34,9 @@ jobs:
         run: |
           composer update --${{ matrix.dependency-version }} --prefer-dist --no-interaction
 
-      - name: Dump composer
+      - name: Dump composer's autoload
         run: |
-          composer dumpautoload
+          composer dump-autoload
 
       - name: Make envfile
         uses: SpicyPizza/create-envfile@v1
