@@ -42,7 +42,8 @@ use Meema\MeemaClient\Client
 
 $client = new Client($meemaApiKey);
 ```
-Using the Media model.
+Using the `Media` model
+
 ```php
 $client->media()->create('New media name');
 $client->media()->get();
@@ -73,7 +74,7 @@ $media->tags()->associate(['name' => 'Tag Name']);
 $media->tags()->disassociate(['name' => 'Tag Name']);
 ```
 
-Using the Folder model.
+Using the `Folder` model
 
 ```php
 $client->folders()->create('New folder name');
@@ -101,7 +102,7 @@ $folder->tags()->associate(['tag_id' => 7]);
 $folder->tags()->disassociate(['tag_id' => 7]);
 ```
 
-Using the Tag model.
+Using the `Tag` model
 
 ```php
 $client->tags()->get();
@@ -118,7 +119,7 @@ $tag->delete();
 $tag->media()->get();
 ```
 
-Using the favorite model. 
+Using the `Favorite` model
 
 ```php
 $client->favorites()->create(['name' => 'New Favorite Name', 'icon' => 'favorite-icon']);
@@ -135,7 +136,7 @@ $favorite->update(['name' => 'Updated Favorite Name', 'icon' => 'updated-favorit
 $favorite->delete();
 ```
 
-Using the storage model.
+Using the `Storage` model
 
 ```php
 $client->storage()->upload('path/to/local/media/file'); 
