@@ -14,9 +14,9 @@
 
 <p align="center">
     <a href="https://www.meema.com/doc/api-client/getting-started/install/php/" target="_blank">Documentation</a>  •
-    <a href="https://github.com/meema/laravel-meema" target="_blank">Laravel</a>  •
+    <a href="https://github.com/meemalabs/laravel-meema" target="_blank">Laravel</a>  •
     <a href="http://stackoverflow.com/questions/tagged/meema" target="_blank">Stack Overflow</a>  •
-    <a href="https://github.com/meema/meema-client-php/issues" target="_blank">Report a bug</a>  •
+    <a href="https://github.com/meemalabs/meema-client-php/issues" target="_blank">Report a bug</a>  •
     <a href="https://docs.meema.io" target="_blank">FAQ</a>  •
     <a href="https://discord.meema.io" target="_blank">Discord</a>
 </p>
