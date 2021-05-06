@@ -2,11 +2,6 @@
 
 namespace Meema\MeemaClient\Models;
 
-use Exception;
-use GuzzleHttp\Client as GuzzleClient;
-use GuzzleHttp\Psr7;
-use GuzzleHttp\Psr7\Request;
-use GuzzleHttp\Psr7\Utils;
 use Meema\MeemaClient\Client;
 
 class Storage
@@ -33,64 +28,9 @@ class Storage
      *
      * @return array
      */
-    public function upload($path)
+    public function upload($path, $contents = null, $config = [])
     {
-        try {
-            $file = fopen($path, 'r');
-            $fileName = basename($path);
-
-            $stream = Utils::streamFor($file);
-            $mimeType = mime_content_type($file);
-
-            $signedUrl = $this->client->request('POST', 'storage/signed-url', ['content_type' => $mimeType]);
-
-            if (is_array($signedUrl) && $signedUrl['url']) {
-                $headers = $signedUrl['headers'];
-                unset($headers['Host']);
-
-                $this->uploadFile($signedUrl['url'], $headers, $fileName, $stream);
-
-                $uploadData = ['key' => $signedUrl['key'], 'file_name' => $fileName];
-
-                $response = $this->client->request('POST', 'upload', $uploadData);
-
-                return $response;
-            }
-        } catch (Exception $e) {
-            throw $e;
-        }
-
-        return ['message' => 'File did not successfully upload.'];
-    }
-
-    /**
-     * Upload the file stream to s3.
-     *
-     * @param string $signedUrl
-     * @param array $headers
-     * @param string $fileName
-     * @param GuzzleHttp\Psr7 $stream
-     *
-     * @return void
-     */
-    protected function uploadFile($signedUrl, $headers, $fileName, $stream)
-    {
-        $client = new GuzzleClient();
-        $request = new Request(
-            'PUT',
-            $signedUrl,
-            ['headers' => json_encode($headers)],
-            new Psr7\MultipartStream(
-                [
-                    [
-                        'name' => $fileName,
-                        'contents' => $stream,
-                    ],
-                ]
-            )
-        );
-
-        $client->send($request);
+        return $this->client->request('POST', 'storage/upload', compact('path', 'contents', 'config'));
     }
 
     /**
