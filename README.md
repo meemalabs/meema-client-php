@@ -156,10 +156,27 @@ In order to use any of our "On-The-Fly" image & video operations, read more **[h
 
 For the full documentation, visit the **[Meema PHP API Client](https://docs.meema.io/open-source/)**.
 
+## 📈 Changelog
+
+Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
+
+## 💪🏼 Contributing
+
+Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
+
 ## ❓ Troubleshooting
 
-Encountering an issue? Before reaching out to support, we recommend heading to our [FAQ](https://docs.meema.io/) where you will find answers for the most commonly asked about questions/issues and gotchas with this Meema client.
+Encountering an issue? Before reaching out to support, we recommend heading to our [FAQ](https://docs.meema.io/) where you will find answers for the most commonly asked about questions/issues and gotchas with this Meema client. Feel free to join our Discord channel, we & the community can help this way as well.
+
+## 🚨 Security
+
+If you discover any security related issues, please email chris@cion.agency instead of using the issue tracker.
+
+## 🙏🏼 Credits
+
+- [Chris Breuer](https://github.com/Chris1904)
+- [All Contributors](../../contributors)
 
 ## 📄 License
 
-Meema PHP API Client is an open-sourced software licensed under the [MIT license](LICENSE.md).
+The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
