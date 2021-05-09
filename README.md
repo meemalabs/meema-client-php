@@ -170,7 +170,7 @@ Encountering an issue? Before reaching out to support, we recommend heading to o
 
 ## 🚨 Security
 
-If you discover any security related issues, please email chris@cion.agency instead of using the issue tracker.
+If you discover any security related issues, please email [security@meema.io](security@meema.io) instead of using the issue tracker.
 
 ## 🙏🏼 Credits
 
