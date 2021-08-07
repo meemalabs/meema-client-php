@@ -164,7 +164,7 @@ composer test
 
 ## 📈 Changelog
 
-Please see our [releases](https://github.com/meemalabs/laravel-cloudfront/releases) page for more information on what has changed recently.
+Please see our [releases](https://github.com/meemalabs/meema-client-php/releases) page for more information on what has changed recently.
 
 ## 💪🏼 Contributing
 
@@ -174,7 +174,7 @@ Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
 
 For help, discussion about best practices, or any other conversation that would benefit from being searchable:
 
-[Laravel File Preview on GitHub](https://github.com/meemalabs/laravel-cloudfront/discussions)
+[Meema PHP on GitHub](https://github.com/meemalabs/meema-client-php/discussions)
 
 For casual chit-chat with others using this package:
 
@@ -182,7 +182,7 @@ For casual chit-chat with others using this package:
 
 ## 🚨 Security
 
-Please review [our security policy](https://github.com/meemalabs/laravel-cloudfront/security/policy) on how to report security vulnerabilities.
+Please review [our security policy](https://github.com/meemalabs/meema-client-php/security/policy) on how to report security vulnerabilities.
 
 ## 🙏🏼 Credits
 
