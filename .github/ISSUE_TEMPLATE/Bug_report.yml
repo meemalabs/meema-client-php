@@ -1,7 +1,6 @@
 name: "\U0001F41B Bug Report"
 description: Report a general library issue.
 labels: [bug]
-issue_body: false
 body:
 - type: input
   attributes:
@@ -14,7 +13,7 @@ body:
   attributes:
     label: PHP version
     description: "Please provide the full version of PHP that you're experiencing the bug with."
-    placeholder: "v1.2.3"
+    placeholder: "v8.0.3"
   validations:
     required: true
 - type: textarea
