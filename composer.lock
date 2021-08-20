@@ -5640,16 +5640,16 @@
         },
         {
             "name": "pestphp/pest",
-            "version": "v1.15.0",
+            "version": "v1.16.0",
             "source": {
                 "type": "git",
                 "url": "https://github.com/pestphp/pest.git",
-                "reference": "d1a9e0bbe31dcb266690dc4e7517e2cb73d5827a"
+                "reference": "eca5f89e595884e26860b8aec5cfc7d892e9f942"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/pestphp/pest/zipball/d1a9e0bbe31dcb266690dc4e7517e2cb73d5827a",
-                "reference": "d1a9e0bbe31dcb266690dc4e7517e2cb73d5827a",
+                "url": "https://api.github.com/repos/pestphp/pest/zipball/eca5f89e595884e26860b8aec5cfc7d892e9f942",
+                "reference": "eca5f89e595884e26860b8aec5cfc7d892e9f942",
                 "shasum": ""
             },
             "require": {
@@ -5662,7 +5662,8 @@
                 "illuminate/console": "^8.47.0",
                 "illuminate/support": "^8.47.0",
                 "laravel/dusk": "^6.15.0",
-                "pestphp/pest-dev-tools": "dev-master"
+                "pestphp/pest-dev-tools": "dev-master",
+                "pestphp/pest-plugin-parallel": "^1.0"
             },
             "bin": [
                 "bin/pest"
@@ -5715,7 +5716,7 @@
             ],
             "support": {
                 "issues": "https://github.com/pestphp/pest/issues",
-                "source": "https://github.com/pestphp/pest/tree/v1.15.0"
+                "source": "https://github.com/pestphp/pest/tree/v1.16.0"
             },
             "funding": [
                 {
@@ -5743,7 +5744,7 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2021-08-04T22:02:18+00:00"
+            "time": "2021-08-19T16:07:45+00:00"
         },
         {
             "name": "pestphp/pest-plugin",
