@@ -9,7 +9,7 @@ class InvalidFormatException extends Exception
     /**
      * Construct exception.
      *
-     * @param string $message
+     * @param  string  $message
      */
     public function __construct(string $message = null)
     {

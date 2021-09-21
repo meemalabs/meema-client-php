@@ -29,7 +29,7 @@ class Tag
     /**
      * Construct Folder model.
      *
-     * @param Meema\MeemaClient\Client $client
+     * @param  Meema\MeemaClient\Client  $client
      */
     public function __construct(Client $client)
     {
@@ -49,8 +49,7 @@ class Tag
     /**
      * Get specific tags.
      *
-     * @param array $ids
-     *
+     * @param  array  $ids
      * @return \Illuminate\Support\Collection|array
      */
     public function get($ids = null)
@@ -79,8 +78,7 @@ class Tag
     /**
      * Get specific tags.
      *
-     * @param int $id
-     *
+     * @param  int  $id
      * @return Response
      */
     public function find($id): Response
@@ -97,9 +95,8 @@ class Tag
     /**
      * Update a tag color.
      *
-     * @param int $id
-     * @param string $color
-     *
+     * @param  int  $id
+     * @param  string  $color
      * @return array
      */
     public function update($id, $color)
@@ -119,8 +116,7 @@ class Tag
     /**
      * Delete tags.
      *
-     * @param array $ids
-     *
+     * @param  array  $ids
      * @return Response
      */
     public function delete($ids)
@@ -146,8 +142,7 @@ class Tag
     /**
      * Associate tags to a model.
      *
-     * @param array $tag
-     *
+     * @param  array  $tag
      * @return array
      */
     public function associate($tag)
@@ -158,8 +153,7 @@ class Tag
     /**
      * Associate tags to media.
      *
-     * @param array $tag
-     *
+     * @param  array  $tag
      * @return array
      */
     public function disassociate($tag)
@@ -170,8 +164,7 @@ class Tag
     /**
      * Initialize the media model.
      *
-     * @param int $id
-     *
+     * @param  int  $id
      * @return Meema\MeemaClient\Models\Media
      */
     public function media($id = null): Media
@@ -184,8 +177,7 @@ class Tag
     /**
      * Initialize the folder model.
      *
-     * @param int $id
-     *
+     * @param  int  $id
      * @return Meema\MeemaClient\Models\Folder
      */
     public function folders($id = null): Folder
@@ -198,8 +190,7 @@ class Tag
     /**
      * Fetch the tags for media.
      *
-     * @param int $id
-     *
+     * @param  int  $id
      * @return array
      */
     protected function fetchTagsForMedia($id)
@@ -210,8 +201,7 @@ class Tag
     /**
      * Fetch the tags for folders.
      *
-     * @param int $id
-     *
+     * @param  int  $id
      * @return array
      */
     protected function fetchTagsForFolder($id)
@@ -222,8 +212,7 @@ class Tag
     /**
      * Initialize media model.
      *
-     * @param Meema\MeemaClient\Models\Folder $folder
-     *
+     * @param  Meema\MeemaClient\Models\Folder  $folder
      * @return self
      */
     public function setFolder($folder): self
@@ -236,8 +225,7 @@ class Tag
     /**
      * Initialize media model.
      *
-     * @param Meema\MeemaClient\Models\Media $media
-     *
+     * @param  Meema\MeemaClient\Models\Media  $media
      * @return self
      */
     public function setMedia($media): self
@@ -283,8 +271,7 @@ class Tag
     /**
      * Associate tags to a folder or media.
      *
-     * @param array $tag
-     *
+     * @param  array  $tag
      * @return array
      */
     protected function associateToModel($tag)
@@ -308,8 +295,7 @@ class Tag
     /**
      * Associate tags to a folder or media.
      *
-     * @param array $tag
-     *
+     * @param  array  $tag
      * @return array
      */
     protected function disassociateToModel($tag)
@@ -333,9 +319,8 @@ class Tag
     /**
      * Associate tag to a folder.
      *
-     * @param int $id
-     * @param array $tag
-     *
+     * @param  int  $id
+     * @param  array  $tag
      * @return array
      */
     protected function associateTagToFolder($id, $tag)
@@ -346,9 +331,8 @@ class Tag
     /**
      * Disassociate tag from a folder.
      *
-     * @param int $id
-     * @param array $tag
-     *
+     * @param  int  $id
+     * @param  array  $tag
      * @return array
      */
     protected function disassociateTagFromFolder($id, $tag)
@@ -359,9 +343,8 @@ class Tag
     /**
      * Associate tag to a media.
      *
-     * @param int $id
-     * @param array $tag
-     *
+     * @param  int  $id
+     * @param  array  $tag
      * @return array
      */
     protected function associateTagToMedia($id, $tag)
@@ -372,9 +355,8 @@ class Tag
     /**
      * Disassociate tag from a media.
      *
-     * @param int $id
-     * @param array $tag
-     *
+     * @param  int  $id
+     * @param  array  $tag
      * @return array
      */
     protected function disassociateTagFromMedia($id, $tag)
