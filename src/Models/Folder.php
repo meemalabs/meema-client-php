@@ -30,7 +30,7 @@ class Folder
     /**
      * Construct Folder model.
      *
-     * @param Meema\MeemaClient\Client $client
+     * @param  Meema\MeemaClient\Client  $client
      */
     public function __construct(Client $client)
     {
@@ -50,8 +50,7 @@ class Folder
     /**
      * Get specific folders.
      *
-     * @param int $id
-     *
+     * @param  int  $id
      * @return \Illuminate\Support\Collection|array
      *
      * @throws InvalidFormatException
@@ -78,8 +77,7 @@ class Folder
     /**
      * Search for specific folders.
      *
-     * @param string $query
-     *
+     * @param  string  $query
      * @return array
      */
     public function search($query)
@@ -92,8 +90,7 @@ class Folder
     /**
      * Get specific folders.
      *
-     * @param int $id
-     *
+     * @param  int  $id
      * @return Response
      *
      * @throws InvalidFormatException
@@ -112,8 +109,7 @@ class Folder
     /**
      * Create folder.
      *
-     * @param  string $name
-     *
+     * @param  string  $name
      * @return array
      */
     public function create($name)
@@ -132,9 +128,8 @@ class Folder
     /**
      * Update folder.
      *
-     * @param int $id
-     * @param string $name
-     *
+     * @param  int  $id
+     * @param  string  $name
      * @return array
      */
     public function update($id, $name)
@@ -151,8 +146,7 @@ class Folder
     /**
      * Delete a folder.
      *
-     * @param array $ids
-     *
+     * @param  array  $ids
      * @return null
      *
      * @throws InvalidFormatException
@@ -184,8 +178,7 @@ class Folder
     /**
      * Archive a folder.
      *
-     * @param array $ids
-     *
+     * @param  array  $ids
      * @return array
      *
      * @throws InvalidFormatException
@@ -213,8 +206,7 @@ class Folder
     /**
      * Unarchive a folder.
      *
-     * @param array $ids
-     *
+     * @param  array  $ids
      * @return array
      *
      * @throws InvalidFormatException
@@ -242,8 +234,7 @@ class Folder
     /**
      * Duplicate a folder.
      *
-     * @param array $ids
-     *
+     * @param  array  $ids
      * @return array
      *
      * @throws InvalidFormatException
@@ -271,9 +262,8 @@ class Folder
     /**
      * Add folder to media.
      *
-     * @param int $id
-     * @param string $name
-     *
+     * @param  int  $id
+     * @param  string  $name
      * @return array
      *
      * @throws InvalidFormatException
@@ -290,9 +280,8 @@ class Folder
     /**
      * Delete folder from media.
      *
-     * @param int $id
-     * @param int $folderId
-     *
+     * @param  int  $id
+     * @param  int  $folderId
      * @return null
      *
      * @throws InvalidFormatException
@@ -309,9 +298,8 @@ class Folder
     /**
      * Associate tag to a folder.
      *
-     * @param int $id
-     * @param array $tag
-     *
+     * @param  int  $id
+     * @param  array  $tag
      * @return array
      */
     public function associateTag($id, $tag)
@@ -322,9 +310,8 @@ class Folder
     /**
      * Disassociate tag from a folder.
      *
-     * @param int $id
-     * @param array $tag
-     *
+     * @param  int  $id
+     * @param  array  $tag
      * @return array
      */
     public function disassociateTag($id, $tag)
@@ -335,8 +322,7 @@ class Folder
     /**
      * Initialize media model.
      *
-     * @param Meema\MeemaClient\Models\Media $media
-     *
+     * @param  Meema\MeemaClient\Models\Media  $media
      * @return self
      */
     public function setMedia($media): self
@@ -349,8 +335,7 @@ class Folder
     /**
      * Initialize media model.
      *
-     * @param Meema\MeemaClient\Models\Tag $tag
-     *
+     * @param  Meema\MeemaClient\Models\Tag  $tag
      * @return self
      */
     public function setTag($tag): self
@@ -373,8 +358,7 @@ class Folder
     /**
      * Initialize the media model.
      *
-     * @param int $id
-     *
+     * @param  int  $id
      * @return Meema\MeemaClient\Models\Media
      */
     public function media($id = null): Media
@@ -387,8 +371,7 @@ class Folder
     /**
      * Initialize the tags model.
      *
-     * @param int $id
-     *
+     * @param  int  $id
      * @return Meema\MeemaClient\Models\Tag
      */
     public function tags($id = null): Tag

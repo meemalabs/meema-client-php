@@ -32,7 +32,7 @@ class Client
     /**
      * Construct Meema client.
      *
-     * @param string $accessKey
+     * @param  string  $accessKey
      */
     public function __construct($accessKey, $config = [])
     {
@@ -67,8 +67,8 @@ class Client
     /**
      * Handle the API request.
      *
-     * @param string $method
-     * @param string $path
+     * @param  string  $method
+     * @param  string  $path
      */
     public function request($method, $path, $data = null)
     {
