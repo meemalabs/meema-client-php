@@ -23,7 +23,7 @@ class Image
     /**
      * Construct media model.
      *
-     * @param Meema\MeemaClient\Client $client
+     * @param  Meema\MeemaClient\Client  $client
      */
     public function __construct(Client $client)
     {
@@ -33,8 +33,7 @@ class Image
     /**
      * Set the image width.
      *
-     * @param int $value
-     *
+     * @param  int  $value
      * @return $this
      */
     public function w($value)
@@ -47,8 +46,7 @@ class Image
     /**
      * Set the image height value.
      *
-     * @param int $value
-     *
+     * @param  int  $value
      * @return $this
      */
     public function h($value)
@@ -61,8 +59,7 @@ class Image
     /**
      * Set the image quality value.
      *
-     * @param int $value
-     *
+     * @param  int  $value
      * @return $this
      */
     public function q($value)
@@ -75,8 +72,7 @@ class Image
     /**
      * Set the image blur value.
      *
-     * @param int $value
-     *
+     * @param  int  $value
      * @return $this
      */
     public function blur($value)
@@ -89,8 +85,7 @@ class Image
     /**
      * Determine if image is nsfw.
      *
-     * @param int|string $value
-     *
+     * @param  int|string  $value
      * @return $this
      */
     public function nsfw($value)
@@ -103,8 +98,7 @@ class Image
     /**
      * Set image background value.
      *
-     * @param string $value
-     *
+     * @param  string  $value
      * @return $this
      */
     public function bg($value)
@@ -117,8 +111,7 @@ class Image
     /**
      * Set the aspect ratio value.
      *
-     * @param int $value
-     *
+     * @param  int  $value
      * @return $this
      */
     public function ar($value)
@@ -131,8 +124,7 @@ class Image
     /**
      * Set the brightness value.
      *
-     * @param int $value
-     *
+     * @param  int  $value
      * @return $this
      */
     public function bri($value)
@@ -145,8 +137,7 @@ class Image
     /**
      * Set the hue shift value.
      *
-     * @param int $value
-     *
+     * @param  int  $value
      * @return $this
      */
     public function hue($value)
@@ -159,8 +150,7 @@ class Image
     /**
      * Set the saturation value.
      *
-     * @param int $value
-     *
+     * @param  int  $value
      * @return $this
      */
     public function sat($value)
@@ -173,8 +163,7 @@ class Image
     /**
      * Set the sharpen value.
      *
-     * @param int $value
-     *
+     * @param  int  $value
      * @return $this
      */
     public function sharp($value)
@@ -187,8 +176,7 @@ class Image
     /**
      * Set the border radius outer value.
      *
-     * @param string $value
-     *
+     * @param  string  $value
      * @return $this
      */
     public function pad($value)
@@ -201,8 +189,7 @@ class Image
     /**
      * Set the greyscale value.
      *
-     * @param bool $value
-     *
+     * @param  bool  $value
      * @return $this
      */
     public function greyscale($value)
@@ -215,8 +202,7 @@ class Image
     /**
      * Set the trim value.
      *
-     * @param string $value
-     *
+     * @param  string  $value
      * @return $this
      */
     public function trim($value)
@@ -229,8 +215,7 @@ class Image
     /**
      * Set the face index value.
      *
-     * @param int $value
-     *
+     * @param  int  $value
      * @return $this
      */
     public function faceindex($value)
@@ -243,8 +228,7 @@ class Image
     /**
      * Set the fill color value.
      *
-     * @param string $value
-     *
+     * @param  string  $value
      * @return $this
      */
     public function fillColor($value)
@@ -257,8 +241,7 @@ class Image
     /**
      * Set the fill value.
      *
-     * @param string $value
-     *
+     * @param  string  $value
      * @return $this
      */
     public function fill($value)
@@ -271,8 +254,7 @@ class Image
     /**
      * Set the color space value.
      *
-     * @param string $value
-     *
+     * @param  string  $value
      * @return $this
      */
     public function cs($value)
@@ -285,8 +267,7 @@ class Image
     /**
      * Set the device pixel ration value.
      *
-     * @param string $value
-     *
+     * @param  string  $value
      * @return $this
      */
     public function dpr($value)
@@ -299,8 +280,7 @@ class Image
     /**
      * Set the extend value.
      *
-     * @param int $value
-     *
+     * @param  int  $value
      * @return $this
      */
     public function extend($value)
@@ -313,8 +293,7 @@ class Image
     /**
      * Set the extract value.
      *
-     * @param string $value
-     *
+     * @param  string  $value
      * @return $this
      */
     public function extract($value)
@@ -327,8 +306,7 @@ class Image
     /**
      * Set the crop value.
      *
-     * @param string $value
-     *
+     * @param  string  $value
      * @return $this
      */
     public function crop($value)
@@ -341,8 +319,7 @@ class Image
     /**
      * Set the max height value.
      *
-     * @param int $value
-     *
+     * @param  int  $value
      * @return $this
      */
     public function maxH($value)
@@ -355,8 +332,7 @@ class Image
     /**
      * Set the min height value.
      *
-     * @param int $value
-     *
+     * @param  int  $value
      * @return $this
      */
     public function minH($value)
@@ -369,8 +345,7 @@ class Image
     /**
      * Set the max width value.
      *
-     * @param int $value
-     *
+     * @param  int  $value
      * @return $this
      */
     public function maxW($value)
@@ -383,8 +358,7 @@ class Image
     /**
      * Set the min width value.
      *
-     * @param int $value
-     *
+     * @param  int  $value
      * @return $this
      */
     public function minW($value)
@@ -397,8 +371,7 @@ class Image
     /**
      * Set the resize fit mode value.
      *
-     * @param string $value
-     *
+     * @param  string  $value
      * @return $this
      */
     public function fit($value)
@@ -411,8 +384,7 @@ class Image
     /**
      * Set the pixellate value.
      *
-     * @param int $value
-     *
+     * @param  int  $value
      * @return $this
      */
     public function px($value)
