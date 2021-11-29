@@ -24,7 +24,7 @@ class Favorite
     /**
      * Construct Favorite model.
      *
-     * @param Meema\MeemaClient\Client $client
+     * @param  Meema\MeemaClient\Client  $client
      */
     public function __construct(Client $client)
     {
@@ -44,8 +44,7 @@ class Favorite
     /**
      * Get specific favorites.
      *
-     * @param array $ids
-     *
+     * @param  array  $ids
      * @return \Illuminate\Support\Collection|array
      */
     public function get($ids = null)
@@ -70,8 +69,7 @@ class Favorite
     /**
      * Get specific favorites.
      *
-     * @param int $id
-     *
+     * @param  int  $id
      * @return array
      */
     public function find($id)
@@ -88,8 +86,7 @@ class Favorite
     /**
      * Create favorite.
      *
-     * @param array $data
-     *
+     * @param  array  $data
      * @return array
      */
     public function create($data)
@@ -100,9 +97,8 @@ class Favorite
     /**
      * Update favorite.
      *
-     * @param int $id
-     * @param string $data
-     *
+     * @param  int  $id
+     * @param  string  $data
      * @return array
      */
     public function update($id, $data)
@@ -117,8 +113,7 @@ class Favorite
     /**
      * Delete a favorite.
      *
-     * @param array $ids
-     *
+     * @param  array  $ids
      * @return null
      */
     public function delete($ids)

@@ -30,7 +30,6 @@ class Response
      *
      * @param  string  $method
      * @param  array  $parameters
-     *
      * @return mixed
      */
     public function __call($method, $parameters)
@@ -73,8 +72,7 @@ class Response
     /**
      * Get response content.
      *
-     * @param mixed $key
-     *
+     * @param  mixed  $key
      * @return array
      */
     public function getContent($key = null)

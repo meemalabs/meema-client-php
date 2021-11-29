@@ -15,8 +15,8 @@ class Team
     /**
      * Construct Folder model.
      *
-     * @param Meema\MeemaClient\Client $client
-     * @param int $teamId
+     * @param  Meema\MeemaClient\Client  $client
+     * @param  int  $teamId
      */
     public function __construct(Client $client)
     {
@@ -36,8 +36,7 @@ class Team
     /**
      * Get specific teams.
      *
-     * @param int $id
-     *
+     * @param  int  $id
      * @return array
      */
     public function get($id = null)
@@ -54,8 +53,7 @@ class Team
     /**
      * Get specific teams.
      *
-     * @param int $id
-     *
+     * @param  int  $id
      * @return array
      */
     public function find($id)
@@ -68,8 +66,7 @@ class Team
     /**
      * Create folder.
      *
-     * @param  string $name
-     *
+     * @param  string  $name
      * @return array
      */
     public function create($data)
@@ -80,9 +77,8 @@ class Team
     /**
      * Update folder.
      *
-     * @param string $name
-     * @param int $id
-     *
+     * @param  string  $name
+     * @param  int  $id
      * @return array
      */
     public function update($id, $name)
@@ -95,8 +91,7 @@ class Team
     /**
      * Delete a folder.
      *
-     * @param int $id
-     *
+     * @param  int  $id
      * @return null
      */
     public function delete($id)
@@ -107,8 +102,7 @@ class Team
     /**
      * Delete a folder.
      *
-     * @param int $id
-     *
+     * @param  int  $id
      * @return null
      */
     public function toggleMediaRecognition($id, $status)
