@@ -14,7 +14,7 @@ class Storage
     /**
      * Construct storage model.
      *
-     * @param Meema\MeemaClient\Client $client
+     * @param  Meema\MeemaClient\Client  $client
      */
     public function __construct(Client $client)
     {
@@ -24,8 +24,7 @@ class Storage
     /**
      * Upload a media file.
      *
-     * @param string $path
-     *
+     * @param  string  $path
      * @return array
      */
     public function upload($path, $contents = null, $config = [])
@@ -36,9 +35,8 @@ class Storage
     /**
      * Set the visibility for a file.
      *
-     * @param string $path
-     * @param string $visibility
-     *
+     * @param  string  $path
+     * @param  string  $visibility
      * @return array|false file meta data
      */
     public function setVisibility($path, $visibility)
@@ -49,8 +47,7 @@ class Storage
     /**
      * Check whether a file exists.
      *
-     * @param string $path
-     *
+     * @param  string  $path
      * @return bool
      */
     public function has($path)
@@ -63,8 +60,7 @@ class Storage
     /**
      * Get all the meta data of a file or directory.
      *
-     * @param string $path
-     *
+     * @param  string  $path
      * @return false|array
      */
     public function getMetadata($path)
@@ -75,8 +71,7 @@ class Storage
     /**
      * Destroy the file in storage.
      *
-     * @param string $path
-     *
+     * @param  string  $path
      * @return array
      */
     public function delete($path)
@@ -87,8 +82,7 @@ class Storage
     /**
      * Copy the file in storage.
      *
-     * @param string $path
-     *
+     * @param  string  $path
      * @return array
      */
     public function copy($path, $newpath)
@@ -99,8 +93,7 @@ class Storage
     /**
      * Read a file in storage.
      *
-     * @param string $path
-     *
+     * @param  string  $path
      * @return array
      */
     public function read($path)
@@ -111,8 +104,7 @@ class Storage
     /**
      * Read the stream of a file in storage.
      *
-     * @param string $path
-     *
+     * @param  string  $path
      * @return array
      */
     public function readStream($path)
@@ -123,8 +115,7 @@ class Storage
     /**
      * List contents of directory.
      *
-     * @param string $path
-     *
+     * @param  string  $path
      * @return array
      */
     public function listContents($directory, $recursive = false)
@@ -135,8 +126,7 @@ class Storage
     /**
      * Rename the file in storage.
      *
-     * @param string $path
-     *
+     * @param  string  $path
      * @return array
      */
     public function rename($path, $newpath)
@@ -147,8 +137,7 @@ class Storage
     /**
      * Destroy the directory in storage.
      *
-     * @param string $directory
-     *
+     * @param  string  $directory
      * @return array
      */
     public function deleteDirectory($directory)
@@ -159,8 +148,7 @@ class Storage
     /**
      * Create a directory in storage.
      *
-     * @param string $directory
-     *
+     * @param  string  $directory
      * @return array
      */
     public function makeDirectory($directory)
