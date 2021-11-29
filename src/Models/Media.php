@@ -30,7 +30,7 @@ class Media
     /**
      * Construct media model.
      *
-     * @param Meema\MeemaClient\Client $client
+     * @param  Meema\MeemaClient\Client  $client
      */
     public function __construct(Client $client)
     {
@@ -50,8 +50,7 @@ class Media
     /**
      * Get specific media.
      *
-     * @param array $ids
-     *
+     * @param  array  $ids
      * @return \Illuminate\Support\Collection|array
      *
      * @throws InvalidFormatException
@@ -82,8 +81,7 @@ class Media
     /**
      * Search for specific media.
      *
-     * @param string $query
-     *
+     * @param  string  $query
      * @return \Illuminate\Support\Collection|array
      */
     public function search($query)
@@ -96,8 +94,7 @@ class Media
     /**
      * Get specific media.
      *
-     * @param int $id
-     *
+     * @param  int  $id
      * @return array
      *
      * @throws InvalidFormatException
@@ -116,8 +113,7 @@ class Media
     /**
      * Create media.
      *
-     * @param string $name
-     *
+     * @param  string  $name
      * @return array
      */
     public function create($name)
@@ -130,9 +126,8 @@ class Media
     /**
      * Update media.
      *
-     * @param int $id
-     * @param string $name
-     *
+     * @param  int  $id
+     * @param  string  $name
      * @return array
      *
      * @throws InvalidFormatException
@@ -151,8 +146,7 @@ class Media
     /**
      * Delete a media.
      *
-     * @param array $ids
-     *
+     * @param  array  $ids
      * @return null
      *
      * @throws InvalidFormatException
@@ -180,8 +174,7 @@ class Media
     /**
      * Archive a media.
      *
-     * @param array $ids
-     *
+     * @param  array  $ids
      * @return array
      *
      * @throws InvalidFormatException
@@ -209,8 +202,7 @@ class Media
     /**
      * Unarchive a media.
      *
-     * @param array $ids
-     *
+     * @param  array  $ids
      * @return array
      *
      * @throws InvalidFormatException
@@ -238,8 +230,7 @@ class Media
     /**
      * Make a media private.
      *
-     * @param array $ids
-     *
+     * @param  array  $ids
      * @return array
      *
      * @throws InvalidFormatException
@@ -267,8 +258,7 @@ class Media
     /**
      * Make a media public.
      *
-     * @param array $ids
-     *
+     * @param  array  $ids
      * @return array
      *
      * @throws InvalidFormatException
@@ -296,8 +286,7 @@ class Media
     /**
      * Duplicate a media.
      *
-     * @param array $ids
-     *
+     * @param  array  $ids
      * @return array
      *
      * @throws InvalidFormatException
@@ -349,8 +338,7 @@ class Media
     /**
      * Fetch the media for the folder.
      *
-     * @param Meema\MeemaClient\Models\Folder $folder
-     *
+     * @param  Meema\MeemaClient\Models\Folder  $folder
      * @return self
      */
     public function setFolder($folder): self
@@ -363,8 +351,7 @@ class Media
     /**
      * Initialize media model.
      *
-     * @param Meema\MeemaClient\Models\Tag $tag
-     *
+     * @param  Meema\MeemaClient\Models\Tag  $tag
      * @return self
      */
     public function setTag($tag): self
@@ -387,8 +374,7 @@ class Media
     /**
      * Fetch the media for the folder.
      *
-     * @param int $id
-     *
+     * @param  int  $id
      * @return array
      */
     protected function fetchMediaForFolder($id)
@@ -399,8 +385,7 @@ class Media
     /**
      * Fetch the media for tags.
      *
-     * @param int $id
-     *
+     * @param  int  $id
      * @return array
      */
     protected function fetchMediaForTag($id)
@@ -435,9 +420,8 @@ class Media
     /**
      * Associate tag to a media.
      *
-     * @param int $id
-     * @param array $tag
-     *
+     * @param  int  $id
+     * @param  array  $tag
      * @return array
      */
     public function associateTag($id, $tag)
@@ -448,9 +432,8 @@ class Media
     /**
      * Disassociate tag from a media.
      *
-     * @param int $id
-     * @param array $tag
-     *
+     * @param  int  $id
+     * @param  array  $tag
      * @return array
      */
     public function disassociateTag($id, $tag)

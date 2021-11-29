@@ -7,8 +7,7 @@ trait ValidsUuid
     /**
      * Check if a given string is a valid UUID.
      *
-     * @param string $uuid
-     *
+     * @param  string  $uuid
      * @return bool
      */
     public function isValidUuid($uuid)

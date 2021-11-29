@@ -23,7 +23,7 @@ class Video
     /**
      * Construct media model.
      *
-     * @param Meema\MeemaClient\Client $client
+     * @param  Meema\MeemaClient\Client  $client
      */
     public function __construct(Client $client)
     {
@@ -33,8 +33,7 @@ class Video
     /**
      * Set the video thumbnail value.
      *
-     * @param string|bool $value
-     *
+     * @param  string|bool  $value
      * @return $this
      */
     public function thumbnails($value)
@@ -47,8 +46,7 @@ class Video
     /**
      * Set the video hls value.
      *
-     * @param bool $value
-     *
+     * @param  bool  $value
      * @return $this
      */
     public function hls($value)
@@ -61,8 +59,7 @@ class Video
     /**
      * Set the video dash value.
      *
-     * @param bool $value
-     *
+     * @param  bool  $value
      * @return $this
      */
     public function dash($value)
@@ -75,8 +72,7 @@ class Video
     /**
      * Set the video poster value.
      *
-     * @param int $value
-     *
+     * @param  int  $value
      * @return $this
      */
     public function poster($value)
@@ -89,8 +85,7 @@ class Video
     /**
      * Set the video webvtt value.
      *
-     * @param bool $value
-     *
+     * @param  bool  $value
      * @return $this
      */
     public function webvtt($value)
@@ -103,8 +98,7 @@ class Video
     /**
      * Set the video format value.
      *
-     * @param string $value
-     *
+     * @param  string  $value
      * @return $this
      */
     public function format($value)
@@ -117,8 +111,7 @@ class Video
     /**
      * Set the video web optimized value.
      *
-     * @param bool $value
-     *
+     * @param  bool  $value
      * @return $this
      */
     public function webOptimized($value)
